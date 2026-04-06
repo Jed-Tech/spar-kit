@@ -1,0 +1,91 @@
+# Tool registry for spar-kit and repos that adopt it.
+#
+# Order of reading: core_cli → pick forge_cli for your Git host → installers
+#   only where you need them → repo_dependent when this repository uses that stack.
+# Linux: use your distro or preferred stack; paths here are not prescribed.
+
+core_cli:
+  - name: git
+    purpose: version control
+    check: "git --version"
+
+  - name: just
+    purpose: task runner (see repo justfile)
+    check: "just --version"
+
+  - name: rg
+    purpose: fast code search
+    check: "rg --version"
+
+  - name: jq
+    purpose: JSON parsing
+    check: "jq --version"
+
+  - name: fd
+    purpose: file discovery
+    check: "fd --version"
+
+forge_cli:
+  github:
+    - name: gh
+      purpose: GitHub CLI (issues, PRs, Actions)
+      check: "gh --version"
+
+  gitlab:
+    - name: glab
+      purpose: GitLab CLI (issues, MRs, pipelines)
+      check: "glab version"
+
+installers:
+  windows:
+    - name: winget
+      purpose: install and update packages on Windows
+      check: "winget --version"
+
+    - name: choco
+      purpose: Chocolatey package manager for Windows
+      check: "choco --version"
+
+  macos:
+    - name: brew
+      purpose: Homebrew — install CLI tools on macOS
+      check: "brew --version"
+
+repo_dependent:
+  - name: node
+    purpose: JavaScript runtime
+    check: "node --version"
+    when: "repos with Node (e.g. package.json, pnpm-lock.yaml)"
+
+  - name: npm
+    purpose: Node package manager
+    check: "npm --version"
+    when: "Node.js projects using npm"
+
+  - name: python
+    purpose: Python interpreter
+    check: "python --version"
+    when: "repos with Python (e.g. pyproject.toml, requirements.txt)"
+
+  - name: uv
+    purpose: fast Python package and env manager
+    check: "uv --version"
+    when: "Python projects standardizing on uv"
+
+  - name: java
+    purpose: JVM (builds, Android, Kotlin, etc.)
+    check: "java --version"
+    when: "repos with Java/Kotlin/JVM (e.g. Gradle, Maven)"
+
+skills:
+  - name: spar.specify
+    path: "skills/spar.specify/SKILL.md"
+
+  - name: spar.plan
+    path: "skills/spar.plan/SKILL.md"
+
+  - name: spar.act
+    path: "skills/spar.act/SKILL.md"
+
+  - name: spar.retain
+    path: "skills/spar.retain/SKILL.md"
