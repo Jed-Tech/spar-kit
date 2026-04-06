@@ -1,22 +1,24 @@
 ---
 name: spar.specify
 description: >-
-  Understand and define a change at specs/active/<change-name>/. Clarify intent, goals,
-  constraints, and scope; explore the codebase; resolve the change name; surface unknowns;
-  create initial spec.md with only Summary, Problem, Goal, and Scope. Use when starting a
-  feature or refactor before executable tasks exist. Does not create the change folder or
-  spec.md until the change name and intent are confirmed. After this phase, continue with
-  spar.plan. Do not use for execution (spar.act) or closing
-  out a change (spar.retain).
+  Use when starting a feature or refactor before executable planning: conversation first,
+  then investigate the repo and outside sources as needed; only after the change name and
+  high-level intent are confirmed, create specifications. Clarify problem, goals, constraints, and scope; resolve the change
+  name; surface unknowns; produce an initial spec with Summary, Problem, Goal, and Scope
+  only.
 ---
 
 # Specify
 
 **Run the steps below in order.** Each step is a gate: finish it before starting the next.
 
-**Until Step 3 explicitly tells you to:** do **not** create `specs/active/<change-name>/`, do **not** write `spec.md`, and do **not** add optional files under that path. Read-only exploration of the repo is allowed in Step 2 while clarifying intent.
+**Until Step 3 explicitly tells you to:** do **not** create `specs/active/<change-name>/`, and do **not** write `spec.md` (or any other files) under that path. You **may** read and search the repository, use web or documentation research, MCP or other tools, and share findings in the thread.
 
 Repository root = `<root>`. Active work will eventually live in `specs/active/<change-name>/`; optional artifacts (e.g. `research.md`, notes) may sit in that folder once it exists and move with the folder later.
+
+## Voice
+
+Be **concise**, **cheerful**, and **inquisitive** — like a helpful teammate, not a form read aloud.
 
 ---
 
@@ -42,7 +44,7 @@ Stop after sending that prompt (and at most one short acknowledge). **Do not** a
 
 - Clarify the goal from discussion; refine `<change-name>` (folder-safe, descriptive).
 - Resolve scope in plain language (what is in / out at a high level); ask only what is missing.
-- **Do not** create `specs/active/<change-name>/` or any file under it yet — even if you think you know the name.
+- Investigate as needed: repository reads, web search, vendor docs, MCP, or other research—inform the conversation; **do not** create `specs/active/<change-name>/` or any file under it yet, even if you think you know the name.
 
 **Stay in Step 2** until the change name and high-level intent are confirmed or clearly settled with the user. If either is still ambiguous, keep conversing; do **not** go to Step 3.
 
@@ -89,12 +91,6 @@ Ensure **Summary**, **Problem**, **Goal**, and **Scope** are coherent and aligne
 
 ---
 
-## Voice
-
-Be **concise**, **cheerful**, and **inquisitive** — like a helpful teammate, not a form read aloud.
-
----
-
 ## Stop conditions
 
 Stop and ask if:
@@ -113,9 +109,9 @@ This phase is complete when:
 
 Then:
 
-1. Summarize: change name, scope, key risks or unknowns.
+1. Summarize concisely: change name, scope, key risks or unknowns.
 2. Ask: **Proceed to spar.plan** to complete the spec?
-3. If yes: begin **spar.plan**.
+3. If yes: begin skill: **spar.plan**.
 
 ---
 

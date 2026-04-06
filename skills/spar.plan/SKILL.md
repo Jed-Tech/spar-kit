@@ -1,14 +1,15 @@
 ---
 name: spar.plan
 description: >-
-  Turn a defined change under specs/active/<change-name>/ into a complete spec.md and an
-  actionable plan.md. Completes all remaining spec sections including required Success
-  Criteria; sequences work; captures risks and validation ideas. Use after spar.specify
-  when the initial spec exists. Does not implement code (spar.act). Does not archive
-  the change (spar.retain). Do not create plan.md until spec.md is stable.
+  Use after spar.specify when Summary through Scope already exist: finish the spec
+  (including required Success Criteria), then add an ordered, checkable task list with
+  risks and validation ideas. Stabilize the spec before defining executable tasks.
+  Proceed to spar.act only after the user explicitly approves implementation.
 ---
 
 # Plan
+
+**Run the sections below in order.** Finish the **Full `spec.md` structure** and **`plan.md` structure** references before executing the numbered steps.
 
 **Change location:** `specs/active/<change-name>/` (repository root = `<root>`).
 
@@ -17,6 +18,12 @@ description: >-
 Turn the partial spec into a **complete, stable** `spec.md`, then add `plan.md` (implementation plan with ordered tasks).
 
 Optional files (`research.md`, notes, etc.) may already exist in the folder; preserve them.
+
+## Voice
+
+Be **concise**, **cheerful**, and **inquisitive**, but also **knowledgeable** and **professional**. You are the **lead engineer** on this change.
+
+---
 
 ## Inputs
 
@@ -83,32 +90,42 @@ Create **only after** `spec.md` is stable:
 
 ---
 
-## Workflow
+## Execution order
 
-### 1. Load context
+### Step 1 — Load context
 
 - Read `spec.md` (and optional `research.md` / notes)
 - Confirm `specs/active/<change-name>/`
 
-### 2. Complete `spec.md`
+---
+
+### Step 2 — Complete `spec.md`
 
 - Preserve and refine the four initial sections as needed
 - Add **Non-Goals**, **Constraints**, **Success Criteria**, **Open Questions**, **Decisions**, **Documentation Impact**
 - Incorporate user input until intent and scope are clear
 
-### 3. Surface unknowns
+---
+
+### Step 3 — Surface unknowns
 
 List gaps; ask the user where needed. Critical ambiguity blocks a real plan.
 
-### 4. Finalize `spec.md`
+---
+
+### Step 4 — Finalize `spec.md`
 
 **Treat the spec as stable after this step.** Do not start `plan.md` before then.
 
-### 5. Create `plan.md`
+---
+
+### Step 5 — Create `plan.md`
 
 Derive tasks from the stable spec. Every task should be something you could verify as done.
 
-### 6. Alignment check
+---
+
+### Step 6 — Alignment check
 
 - Tasks support **Success Criteria**
 - Ordering and constraints make sense
@@ -135,9 +152,9 @@ Planning is complete when:
 
 Then:
 
-1. Summarize: spec status, task outline, remaining questions.
+1. Summarize concisely: spec status, task outline, remaining questions.
 2. Ask: **Proceed to implementation?**
-3. If yes: begin **spar.act**. If not, wait for the user.
+3. If yes: begin skill: **spar.act**. If not, wait for the user.
 
 ---
 
