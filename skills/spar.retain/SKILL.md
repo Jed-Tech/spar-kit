@@ -11,9 +11,7 @@ description: >-
 
 **Run the steps below in order.**
 
-Turn completed implementation into clean, accurate, durable knowledge: `spec.md` matches reality, broader doc updates only with approval, then archive by **moving** the whole change folder — **no duplicate** trees.
-
-**Paths (repository root = `<root>`):**
+Turn completed implementation into clean, accurate, durable knowledge: `spec.md` matches reality, broader repo doc updates only with approval, then archive by **moving** the whole change folder.
 
 - **Active:** `specs/active/<change-name>/`
 - **Completed:** `specs/completed/<change-name>/`
@@ -78,9 +76,9 @@ All optional artifacts in the folder (`research.md`, notes, attachments) move to
 
 ### Step 6 — Final cleanup in the change folder
 
-- `spec.md`: clear and complete
-- `plan.md`: final state (all done or explained); trim temporary noise
-- Leave optional notes/research in place unless the user wants them removed
+- **`spec.md` — last pass:** Read it end-to-end. Fix typos, stale phrasing, or inconsistencies **introduced while editing**; ensure nothing contradicts the shipped behavior you captured in Step 2.
+- **`plan.md` — last pass:** Every task is checked **or** explicitly explained (won’t do, superseded, follow-up elsewhere). Remove only **scratch** or **duplicate** lines that would confuse someone later; keep useful context.
+- **Optional files (`research.md`, notes, attachments):** **Keep** unless the user asked to drop something or a file is clearly obsolete after Steps 2–5. When in doubt, keep.
 
 ---
 
@@ -99,7 +97,6 @@ Create `specs/completed/` if missing. Do **not** leave a copy under `specs/activ
 - Spec describes **final** behavior; it is not a build log
 - No silent edits to repo-wide documentation — approval first
 - Stay concise
-- Never duplicate the change folder in both `active` and `completed`
 
 ---
 
