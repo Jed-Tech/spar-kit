@@ -2,6 +2,8 @@
 
 **spar-kit** is a lightweight AI workflow system for building software with clarity, speed, and consistency.
 
+**Released version (SemVer 2.0.0):** see the root [`VERSION`](VERSION) file. Canonical `main` for checks (e.g. `spar.init`): `https://raw.githubusercontent.com/Jed-Tech/spar-kit/main/VERSION`.
+
 It uses a simple four-phase model:
 
 > **Specify → Plan → Act → Retain**
@@ -32,10 +34,11 @@ Each active change folder usually contains `spec.md` and `plan.md`, side by side
 
 ## Skills
 
-Phases are implemented as agent skills under `skills/`:
+Core workflow and initialization are implemented as agent skills under `skills/`:
 
-| Phase | Skill |
+| Stage | Skill |
 |-------|--------|
+| Init | `spar.init` |
 | Specify | `spar.specify` |
 | Plan | `spar.plan` |
 | Act | `spar.act` |

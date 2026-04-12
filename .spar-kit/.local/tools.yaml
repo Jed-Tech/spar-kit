@@ -76,16 +76,3 @@ repo_dependent:
     purpose: JVM (builds, Android, Kotlin, etc.)
     check: "java --version"
     when: "repos with Java/Kotlin/JVM (e.g. Gradle, Maven)"
-
-skills:
-  - name: spar.specify
-    path: "skills/spar.specify/SKILL.md"
-
-  - name: spar.plan
-    path: "skills/spar.plan/SKILL.md"
-
-  - name: spar.act
-    path: "skills/spar.act/SKILL.md"
-
-  - name: spar.retain
-    path: "skills/spar.retain/SKILL.md"

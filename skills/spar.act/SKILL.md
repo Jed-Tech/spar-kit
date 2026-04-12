@@ -3,7 +3,8 @@ name: spar.act
 description: >-
   Use when implementation is approved after spar.plan: run tasks in order, validate with
   the project's usual checks, retry obvious failures once, stop and ask if blocked, and
-  do not change spec intent without approval.
+  do not change spec intent without approval. Progress and completion stay brief but tied
+  to the plan and user outcome.
 ---
 
 # Act
@@ -124,9 +125,13 @@ Implementation is complete when:
 
 Then:
 
-1. **Summarize concisely:** tasks completed, deviations or notes, validation results.
+1. **Summarize concisely** — brief, but **connected** to what you shipped and **why it matters** (thread + **Goal** / **Success Criteria**). Include, without turning it into a long report:
+   - **What was built** (plain language)
+   - **How it maps to the plan** (e.g. tasks or phases covered — not a full audit)
+   - **Validation results**, **deviations** (if any), and **notable learnings** (e.g. constraints discovered or assumptions overturned)
+   **Exact wording is optional**; stay natural.
 
-2. **State wrap-up intent.** Use the gist below as a guide; **exact wording is optional.**
+2. **State wrap-up intent.** Sound aware of what just landed; use the gist below as a guide — **exact wording is optional.**
 
    > We’re done with the planned work—want me to close this out? I’d sync the spec with what we shipped, tidy the change folder, and move it to **completed** so the docs stay the **source of truth**.
 

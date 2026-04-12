@@ -4,7 +4,8 @@ description: >-
   Use after implementation when the user wants cleanup and durable documentation:
   reconcile the spec with actual behavior, propose broader documentation edits for
   approval only, tidy notes in the change folder, then archive the change folder as a
-  unit so nothing remains in active work.
+  unit so nothing remains in active work. Closeout should convey why the retained spec
+  matters as the durable record of what shipped.
 ---
 
 # Retain
@@ -65,6 +66,7 @@ All optional artifacts in the folder (`research.md`, notes, attachments) move to
 
 - List suggested edits clearly. Be concise.
 - **Do not apply** until the user approves
+- If **no** broader repo documentation changes are warranted after Step 3, say so **briefly** in your user-facing summary later (**Completion**) — so the user knows the question was considered, not skipped.
 
 ---
 
@@ -96,7 +98,7 @@ Create `specs/completed/` if missing. Do **not** leave a copy under `specs/activ
 
 - Spec describes **final** behavior; it is not a build log
 - No silent edits to repo-wide documentation — approval first
-- Stay concise
+- Stay concise — closeout is **not** a long retrospective by default (unless the user asks for one)
 
 ---
 
@@ -110,5 +112,6 @@ Done when:
 
 Then:
 
-1. Summarize concisely: key outcomes, doc updates made, final path.
-2. Confirm to the user that implementation and retention are complete.
+1. **Summarize concisely** — key outcomes, **doc updates made** (or **none** — state that briefly if Step 4 had nothing to apply), **final path** under `specs/completed/`. Tie the closeout to **why retention exists**: the archived **`spec.md`** (and folder) are the **durable source of truth** for what shipped — not administrative noise. **Exact wording is optional**; sound natural.
+2. Keep the summary **short**; at most **one line** of notable learning if useful — not a full postmortem unless the user wants depth.
+3. Confirm to the user that implementation and retention are complete.

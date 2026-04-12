@@ -82,7 +82,7 @@ Order reflects your stated priority: **skills → templates → `AGENTS.md` → 
 | 1 | **Skills** | Specify, Plan, Act, Retain—behavior, boundaries, and cross-references between phases. |
 | 2 | **Templates** | Ensure spec and plan templates match what the skills expect and make the workflow legible to adopters. |
 | 3 | **`AGENTS.md`** | Single source of truth for “how to work in this repo” and how SPAR fits; keep in sync as skills and templates change. |
-| 4 | **Tooling** | `justfile`, `tools/index.yaml`, checks or helpers—only what reduces friction for you and adopters. |
+| 4 | **Tooling** | `justfile`, `.spar-kit/.local/tools.yaml`, checks or helpers—only what reduces friction for you and adopters. |
 | 5 | **Install / copy path** | Define one clear way to bring SPAR into a project for the supported agents, with as little guesswork as possible. |
 | 6 | **Beta README / docs** | Friendly onboarding for invited adopters using Codex and Cursor; links to docs and install steps. |
 | 7 | **v1 docs / GitHub Pages** | Public-facing value prop, getting started, and compatibility notes once broader invitation begins. |

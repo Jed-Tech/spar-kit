@@ -1,123 +1,83 @@
 ---
 name: spar.specify
 description: >-
-  Use when starting a feature or refactor before executable planning: conversation first,
-  then investigate the repo and outside sources as needed; only after the change name and
-  high-level intent are confirmed, create specifications. Clarify problem, goals, constraints, and scope; resolve the change
-  name; surface unknowns; produce an initial spec with Summary, Problem, Goal, and Scope
-  only.
+  Use when the user requests to start a new feature or significant change. You are the product
+  manager; the user is the domain expert. Keep turns short (especially the first). This is a
+  discovery phase: ask, scope, define the problem, and brainstorm. Do not switch into implementation-mode (drafting
+  solution details, tasks, page structure/copy, or build steps) until the change name + high-level
+  intent are settled. Collaborate until an initial spec exists (Summary, Problem, Goal, Scope only),
+  then hand off to spar.plan.
 ---
 
 # Specify
 
-**Run the steps below in order.** Each step is a gate: finish it before starting the next.
+## Goal
 
-**Until Step 3 explicitly tells you to:** do **not** create `specs/active/<change-name>/`, and do **not** write `spec.md` (or any other files) under that path. You **may** read and search the repository, use web or documentation research, MCP or other tools, and share findings in the thread.
+Turn a rough or emerging idea into a **clear enough** picture that **spar.plan** can extend the spec and produce an executable plan.
 
-Repository root = `<root>`. Active work will eventually live in `specs/active/<change-name>/`; optional artifacts (e.g. `research.md`, notes) may sit in that folder once it exists and move with the folder later.
+This phase is about **discovery**: ask, scope, define the problem, and brainstorm with the user. Even if the user requests a concrete artifact (e.g. “build a landing page”), treat that as input to specify what it should be — **not** permission to start building it.
+
+Do not enter **implementation-mode** (drafting solution details, tasks, page structure/copy, or build steps) until `<change-name>` and the **high-level intent** are settled.
+
+Never transition to **spar.plan** on first contact. The first exchange must stay in **spar.specify** so intent can be clarified and pressure-tested with the user.
+
+## Roles
+
+- **The user** is a builder using agents to ship changes — they bring the context that matters (why this matters, constraints, what “done” means), even if they’re not deeply technical.
+- **You** are their product manager partner: you turn that context into a crisp, testable change definition, using short questions and concrete options.
+
+You decide **how** to run the conversation (what to ask, when to research the repo or external sources, how to structure a turn). Stay within the **outcomes and boundaries** below — and treat **brevity** as part of the job: users should not have to read a wall of text.
+
+This phase is about **asking**, **scoping**, and **brainstorming**. Do not be hasty to move on: if the intent, scope, or success picture is still fuzzy, keep working it with the user before moving to spar.plan
+
+## Outcomes
+
+When this phase is done:
+
+1. There is a change folder: `specs/active/<change-name>/` with a **folder-safe, descriptive** `<change-name>` aligned with the user.
+2. There is `spec.md` with **only** the four sections in **Reference: initial `spec.md` shape** — filled from what you learned together.
+3. Open questions and unknowns are visible enough that **spar.plan** can pick them up (in conversation and/or notes; you do not need the full spec template here).
+
+## Boundaries
+
+- **Wait to create** `specs/active/<change-name>/` and `spec.md` until you and the user have **settled the name and high-level intent**—but you may read, search, and research anywhere anytime and share what you find in the thread.
+- **`spec.md` in this phase** is **Summary, Problem, Goal, Scope only.** Do not add Non-Goals, Constraints, Success Criteria, or Decisions here (**spar.plan** owns those).
+- Optional notes (e.g. `research.md`) in the change folder are fine once the folder exists.
+ 
+## Guardrails (prevent “rushing to build”)
+
+- **Hard gate**: before `<change-name>` + high-level intent are settled, do **not** draft implementation steps, tasks, page structure/copy, components, or “how we’ll build it.” Stay in discovery.
+- **Interpretation rule**: “User requested X” means “help define X,” not “start building X.”
+- **Self-check** (before you send each message): if anything is unclear, ask at least **one** clarifying question; and remove any implementation-mode content.
 
 ## Voice
 
-Be **concise**, **cheerful**, and **inquisitive** — like a helpful teammate, not a form read aloud.
+- Sound like a **person**, not a checklist: do **not** narrate internal steps, skill names, section titles (**Summary** / **Problem** / etc.), or file paths unless the user asks how the repo is organized.
+- Use **thread context**: if the topic is obvious from recent messages, acknowledge it and confirm; if not, ask openly.
 
----
+## Brevity (especially turn one)
 
-## Execution order
+Users skim; **default to short replies.**
 
-### Step 1 — Opening turn only
-
-**Start by asking — use this wording (or trivially equivalent):**
-
-> I see you would like to start ideation and planning for a change. Can you provide me with some context or your goals for the change?
-
-If the user already gave hints in the same thread (e.g. a working title), add at most **one short** acknowledging clause, then still use the prompt above so goals stay explicit.
-
-**In this step:** do **not** create files, do **not** draft `spec.md`, and do **not** interrogate for every section up front — save deeper structuring for after they reply.
-
-Stop after sending that prompt (and at most one short acknowledge). **Do not** advance to Step 2 until the user has responded.
-
----
-
-### Step 2 — Understand intent and name (still no files under `specs/`)
-
-**Do this only after the user has replied to Step 1.**
-
-- Clarify the goal from discussion; refine `<change-name>` (folder-safe, descriptive).
-- Resolve scope in plain language (what is in / out at a high level); ask only what is missing.
-- Investigate as needed: repository reads, web search, vendor docs, MCP, or other research—inform the conversation; **do not** create `specs/active/<change-name>/` or any file under it yet, even if you think you know the name.
-
-**Stay in Step 2** until the change name and high-level intent are confirmed or clearly settled with the user. If either is still ambiguous, keep conversing; do **not** go to Step 3.
-
----
-
-### Step 3 — Create the change folder and initial `spec.md`
-
-**Do this only when Step 2’s gate is satisfied (name + intent settled).**
-
-1. Create `specs/active/<change-name>/`.
-2. Create `spec.md` in that folder using **only** the four sections in **Reference: initial `spec.md` shape** (later in this skill), filled from the conversation so far.
-3. Optionally add `research.md`, brief notes, or other small artifacts in the same folder if they help.
-
-If the name or intent is no longer right after Step 3, align with the user first (including renaming the folder and retitling `spec.md` if needed) before continuing.
-
----
-
-### Step 4 — Context gathering and ideation
-
-**Do this only after Step 3.**
-
-- Review relevant code and repository documentation (now you may also capture notes in the change folder if helpful).
-- Explore approaches; note risks and unknowns in the conversation and, if useful, in optional files next to `spec.md`.
-
----
-
-### Step 5 — Surface unknowns and refine the opening spec
-
-**Do this after Step 4.**
-
-- List gaps; ask the user where needed.
-- Unknowns will carry into **spar.plan** via **Open Questions** and iteration; you do **not** need the full spec template in this phase.
-- Adjust the four sections in `spec.md` for clarity if needed.
-
----
-
-### Step 6 — Stabilize the initial spec
-
-**Do this last, before completion.**
-
-Ensure **Summary**, **Problem**, **Goal**, and **Scope** are coherent and aligned with the user.
-
-**Do not** add Non-Goals, Constraints, **Success Criteria**, or Decisions in this phase (that is **spar.plan**).
-
----
-
-## Stop conditions
-
-Stop and ask if:
-
-- The change name or intent is still ambiguous after reasonable dialogue
-- Scope cannot be stated clearly enough for **spar.plan** to succeed later
-
----
+- **First reply** when the change is unclear: **roughly 5–10 lines** of prose total — not a lecture. **One** primary question (what we’re building / what should be different). No preamble like “You’ve opened Specify…” or how phases connect to planning or code.
+- **Extra prompts** (“who benefits,” “what’s done,” tradeoffs): save for **later turns** unless the user already volunteered that much.
+- **Numbered suggestions**: optional; use only when the user is stuck. **At most 3** short options — never a long menu from roadmap, docs, or repo reconnaissance **on the first reply**. If you need inventory from the codebase, do it **after** you have a seed idea from the user.
+- **Do not** close turn one with promises about `specs/…`, `spec.md`, or **spar.plan** — handle files when the time comes.
 
 ## Completion
 
-This phase is complete when:
-
-- `specs/active/<change-name>/` exists
-- `spec.md` contains the four initial sections and matches the user’s intent at a high level
-
-Then:
-
-1. Summarize concisely: change name, scope, key risks or unknowns.
-2. Ask: **Proceed to spar.plan** to complete the spec?
-3. If yes: begin skill: **spar.plan**.
+1. Briefly recap: change name, scope, main risks or unknowns.
+2. **Never** move to **spar.plan** on first contact, the user invoked this skill because they need to talk through the probem space and desired outcomes.
+3. Only move on once the **Outcomes** above are satisfied (the folder exists and `spec.md` has **Summary / Problem / Goal / 
+Scope**).
+4. When outcomes are satisfied, **immediately run `spar.plan`** in the same flow.
+5. If any outcome is not satisfied yet, stay in **spar.specify**: ask the next best questions and/or offer a couple of concrete directions to help the user converge.
 
 ---
 
 ## Reference: initial `spec.md` shape
 
-Use this **only in Step 3** when first creating `spec.md`; refine the same four sections through **Step 6**. Heading text only — fill in body content from the conversation:
+Use when first writing `spec.md`; refine these four sections through the rest of this phase. Heading text only — body from the conversation:
 
 ```markdown
 # <change-name>
@@ -130,9 +90,9 @@ Use this **only in Step 3** when first creating `spec.md`; refine the same four 
 
 ---
 
-## Rules (summary)
+## Artifact recap
 
-| Artifact | This phase |
-|----------|------------|
-| `spec.md` | **Summary, Problem, Goal, Scope only** |
-| Optional files | Allowed **from Step 3 onward**; keep them in the change folder |
+| Artifact | In this phase |
+|----------|----------------|
+| `spec.md` | **Summary, Problem, Goal, Scope** only |
+| Other files in the change folder | Optional, once the folder exists |

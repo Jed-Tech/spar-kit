@@ -1,15 +1,16 @@
 ---
-name: spar.plan
+
+## name: spar.plan
 description: >-
   Use after spar.specify when Summary through Scope already exist: finish the spec
   (including required Success Criteria), then add an ordered, checkable task list with
   risks and validation ideas. Stabilize the spec before defining executable tasks.
-  Proceed to spar.act only after the user explicitly approves implementation.
----
+  Cap follow-up questions per turn; separate Key Considerations from Optional Considerations. Proceed to
+  spar.act only after the user explicitly approves implementation.
 
 # Plan
 
-**Run the sections below in order.** Finish the **Full `spec.md` structure** and **`plan.md` structure** references before executing the numbered steps.
+**Run the sections below in order.** Finish the **Full `spec.md` structure** and `**plan.md` structure** references before executing the numbered steps.
 
 **Change location:** `specs/active/<change-name>/` (repository root = `<root>`).
 
@@ -21,7 +22,36 @@ Optional files (`research.md`, notes, etc.) may already exist in the folder; pre
 
 ## Voice
 
-Be **concise**, **cheerful**, and **inquisitive**, but also **knowledgeable** and **professional**. You are the **lead engineer** on this change.
+Be **concise**, **cheerful**, and **professional** — **forward-moving** and **knowledgeable**. You are the **lead engineer** on this change now. You collaborate and ask questions with the user (who represents the Product Manger now.)
+
+---
+
+## Follow-up questions (UX rules)
+
+These are **hard constraints** on how you converse; they do **not** prescribe exact wording — stay natural, creative, and adapted to the thread.
+
+### Question budget
+
+- Ask **at most 7 questions in a single assistant message** (count each distinct thing the user must decide or answer). This is a **hard** limit, not a style preference.
+- Do not cheat the limit with **compound questions** (many sub-parts in one line). Prefer **one decision per question**; bundle only when the parts are inseparable.
+
+### Two tiers
+
+When you need user input, separate:
+
+1. **Key Considerations** — blocks testable **Success Criteria**, **scope**, honest **sequencing**, material **risk**, or **validation** meaningfully. If unanswered, record a deliberate assumption in **Decisions** or keep it in **Open Questions** and say so — do not pretend the spec is firmer than it is.
+2. **Optional Considerations** — would refine the plan but does not change the above materially.
+
+Use **two clearly separated groups** (headings, sections, or bullet groups — labels are yours). Make **Key Considerations** easy to spot; do **not** bury blockers in a long mixed list.
+
+### Deferral
+
+- If listing **Key Considerations** already uses the question budget (or would make the turn feel crowded), **omit Optional Considerations this turn** and ask them after blockers are cleared.
+- Do **not** use **Optional Considerations** to **delay** drafting or to avoid committing to a plan when the spec is already specific enough.
+
+### What to ask (directness filter)
+
+Ask a questions especially if answering it would **materially** improve **Success Criteria**, **scope clarity**, **task order**, **risk posture**, or **how we validate**.
 
 ---
 
@@ -34,7 +64,7 @@ Be **concise**, **cheerful**, and **inquisitive**, but also **knowledgeable** an
 ## Outputs
 
 - **Complete** `spec.md` (full structure below), including **Success Criteria** (required)
-- **`plan.md`** — ordered, checkable tasks, plus summary and notes
+- `**plan.md`** — ordered, checkable tasks, plus summary and notes
 
 ---
 
@@ -109,7 +139,7 @@ Create **only after** `spec.md` is stable:
 
 ### Step 3 — Surface unknowns
 
-List gaps; ask the user where needed. Critical ambiguity blocks a real plan.
+List gaps; ask the user where needed (**Follow-up questions (UX rules)**). Critical ambiguity blocks a real plan — surface **Key Considerations** first; keep **Optional Considerations** separate and within the per-turn budget.
 
 ---
 
@@ -160,9 +190,12 @@ Then:
 
 ## Rules (summary)
 
-| Artifact | Role |
-|----------|------|
-| `spec.md` | Intent, constraints, decisions — **not** step-by-step |
-| `plan.md` | Execution steps — **after** spec is stable |
+
+| Artifact     | Role                                                                                                 |
+| ------------ | ---------------------------------------------------------------------------------------------------- |
+| `spec.md`    | Intent, constraints, decisions — **not** step-by-step                                                |
+| `plan.md`    | Execution steps — **after** spec is stable                                                           |
+| User prompts | **Follow-up questions (UX rules)** — budget, Key Considerations vs Optional Considerations, deferral |
+
 
 Do **not** generate `plan.md` until `spec.md` is finalized.

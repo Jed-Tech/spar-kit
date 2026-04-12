@@ -1,3 +1,7 @@
+# spar-kit machine-local state (tool install checks; never commit)
+.spar-kit/.local/*
+!.spar-kit/.local/tools.yaml
+
 # Logs
 logs
 *.log
