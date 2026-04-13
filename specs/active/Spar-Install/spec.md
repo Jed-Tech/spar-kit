@@ -2,46 +2,128 @@
 
 ## Summary
 
-Define **spar-kit installation** for consumer projects: how the **npm** path and **non-npm** paths lay out files under `**.spar-kit/`**, ensure `**.spar-kit/VERSION`** always exists after install (so `**spar.init**` can compare to canonical `**main/VERSION**`), and keep the host app’s root `package.json` untouched. Cross-reference `**spar-versioning**`: upstream root `VERSION` is the only SemVer source of truth in git; `**package.json` `version**` matches `**VERSION**` via sync for npm only.
+Define the Beta1 installation contract for `spar-kit` in consumer repositories. Beta1 uses a single primary install path, `npx spar-kit install`, which bootstraps SPAR into a target repo from the canonical `install-root/` source, creates the expected repo-local structure, and preserves machine-local state under `.spar-kit/.local/`.
+
+The install must leave the repo in a recoverable state. In Beta1, repo-local SPAR assets are the required outcome and the shipped install-root layout is Codex-default. Explicit multi-platform target installation is deferred to Beta2.
+
+This spec is the umbrella Beta install contract. If implementation detail grows further, follow-on specs should split out packaging/build, repo bootstrap behavior, and future agent-target installation behavior while staying aligned with this contract.
 
 ## Problem
 
-Install behavior is split across **Node/npm**, **manual/curl**, and future scripts, but `**spar.init`** needs **one reliable local path** for SemVer (`**.spar-kit/VERSION`**) and a clear rule for refresh when stale. Without an install spec, packaging choices ( `**postinstall`**, what gets copied where) drift from the versioning spec and confuse users and agents.
+`spar-kit` needs one clear install story for Beta1. Without a defined contract, installation can drift across packaging ideas, agent platforms, and future tooling, which makes onboarding inconsistent and weakens the core SPAR promise of a lightweight, obvious workflow.
+
+The repo also needs install behavior that matches how SPAR is actually used. `spar-kit` is not just a package dependency; it installs workflow assets into a repo, adds agent guidance, seeds the SPAR working structure, and needs a predictable source for shipped content over time. Those responsibilities need explicit rules for ownership, overwrite behavior, and packaging from source.
 
 ## Goal
 
-**v1 install outline (aligned with current versioning decisions):**
+Beta1 installation must make SPAR easy to adopt in a real project with one memorable entry point and predictable local outcomes.
 
-- **Single local version file for agents:** After **any supported install**, the consumer repo has `**<project>/.spar-kit/VERSION`** containing the same SemVer string as upstream `**VERSION`** on `**main**` (one line, SemVer 2.0.0). `**spar.init**` reads **only** this path for local version (plus fetch of canonical `**main/VERSION`** for comparison)—not the host project’s root `**package.json`**.
-- **npm:** The published package uses `**package.json`** as usual under `**node_modules`**. `**npm install**` must **also** ensure `**.spar-kit/VERSION`** is written (e.g. `**postinstall`** or equivalent)—so npm users get the same `**.spar-kit/VERSION**` contract as copy-based installs.
-- **Non-npm:** Installers/copy flows write `**.spar-kit/`** (including `**VERSION`**, skills placement per later **“C”** / init spec) without modifying unrelated project files.
-- **`.gitignore`:** When the installer first creates or updates **`.spar-kit/`**, it must ensure **`.spar-kit/.local/`** is ignored by git (append **`.spar-kit/.local/`** to **`.gitignore`** idempotently if missing, or rely on an existing pattern that already covers that path). Machine-local tool state under **`.spar-kit/.local/`** must not be committed by default. **`spar.init`** **verifies** this: if the path is not ignored, it **warns** with the exact line and may append to **`.gitignore`** only with **explicit user consent**—never silently.
-- **Upstream repo:** Root `**VERSION`** is canonical; `**package.json` `version`** follows via sync (see **spar-versioning**). **v1:** no CI enforcement—contributors use docs + local sync.
-- **Isolation:** Do **not** change or depend on the **application** root `**package.json` `version`** for spar-kit.
+The primary Beta1 install command is:
 
-**Dependencies:** **`specs/completed/spar-versioning/spec.md`** is authoritative for SemVer rules, canonical remote, stale/offline behavior, and **`VERSION`** as source of truth (with **`package.json`** sync for npm when npm packaging exists).
+`npx spar-kit install`
 
-**Tools state:** **`spar.init`** uses a **single** file **`.spar-kit/.local/tools.yaml`** (`registry` + `installed`). In **consumer** projects it is **gitignored** (machine-local); the **spar-kit** repository commits the **default registry** at this path—not a separate tracked **`.spar-kit/tools/index.yaml`**.
+This command runs at the consumer repo root and must:
 
-**`spar.init` must know how to run install (reinstall):** When the version check says **stale** (or **`VERSION`** is missing/invalid), **`spar.init`** is responsible for **refreshing** spar-kit using a **supported install path**—not ad-hoc file copies. Requirements:
+- materialize the contents of `install-root/` into the target repository, subject to preserve/update rules
+- create the expected repo-local SPAR structure from `install-root/`
+- preserve machine-local files under `.spar-kit/.local/`
+- succeed when repo-local installation completed
 
-- **Documented commands (primary + secondary):** This spec (and consumer-facing **README** when published) must name **exact** reinstall commands for **(1) primary**—published **npm** package, **`npm install` / `pnpm` / `yarn`** at **project root**—and **(2) secondary**—**non-npm** script, archive, or copy flow with the same **`.spar-kit/`** outcome. **`spar.init`** does **not** infer how the repo was first installed; it always tries **primary** first, then **secondary** if the install is still stale or **primary** could not complete (or prints both in order when the agent cannot run them).
-- **Privileges:** Network, package managers, and **`sudo`** stay user-controlled; **`spar.init`** does not bypass consent or elevate silently.
-- **After reinstall:** Re-read **`.spar-kit/VERSION`** and continue the rest of the init flow (skills, tools, **`AGENTS.md`**, closeout).
+After a successful Beta1 install, the consumer repo must contain a durable repo-local SPAR payload that agents can rely on. Later agent setup flows may use the installed repo-local content to help complete platform-specific setup.
 
-Until exact package names and scripts are shipped, **`spar.init`** should point at the **current** published install instructions rather than inventing package identifiers.
+The installed content must come from `install-root/` as it exists in the repo for the shipped build so packaged installs always use the intended installable content for that release.
 
 ## Scope
 
-**In scope for this spec (outline → full spec in plan phase):**
+In scope:
 
-- Package layout under `**node_modules`** vs `**.spar-kit/`** contents.
-- `**postinstall**` (or alternative) contract: must create/update `**.spar-kit/VERSION**` idempotently where possible.
-- Skill and asset copy targets (high level; per-agent paths may stay in **spar-initialization-skill** / “C”).
-- Uninstall or upgrade story at a high level (how `**.spar-kit/`** is updated on reinstall).
-- **Init-facing reinstall commands:** npm package identifier(s), lockfile-aware notes, and non-npm upgrade steps so **`spar.init`** can run or quote them verbatim.
-- **`.gitignore`:** idempotent append of **`.spar-kit/.local/`** (or equivalent pattern) when bootstrap creates **`.spar-kit/`**; aligns with **`spar.init`** verify / warn / consent-to-patch behavior.
+- the Beta1 primary install path: `npx spar-kit install`
+- install prerequisites for Beta1, including Node/npm availability
+- `install-root/` as the canonical authored source for installed content
+- the repo-local file and folder contract created by install
+- the requirement that `.spar-kit/VERSION` exists after install and reflects the packaged `spar-kit` version
+- creating the shipped repo-local SPAR layout from `install-root/`
+- preserving `.spar-kit/.local/` when files already exist
+- Beta1 reporting expectations
+- install outcome states as defined in `install-report_spec.md`
+- packaging/build behavior for shipping the current `install-root/`
+- a decomposition plan for splitting implementation detail into follow-on install specs
 
-**Out of scope until linked specs are ready:**
+## Non-Goals
 
-- Full `**spar.init`** behavior (see **spar-initialization-skill**).
+- defining the full behavior of `spar.init` beyond its dependency on the installed repo-local payload
+- designing every future install path beyond Beta1
+- supporting a no-Node install path in Beta1
+- silently overwriting user-owned or machine-local files
+- implementing explicit non-default platform setup in Beta1
+- mutating the host application’s root `package.json` version or using it as SPAR’s version source of truth
+
+## Constraints
+
+- Beta1 has one primary install path to reduce onboarding ambiguity.
+- The installer must be cross-platform for Windows, macOS, and Linux through the supported `npx` path.
+- The installer runs as an explicit script command; there is no per-file approval flow after the user starts it.
+- `install-root/` is the canonical authored source of installed content.
+- Files under `.spar-kit/.local/` are machine-local and must not be overwritten if already present.
+- The installer may create missing files in `.spar-kit/.local/`, but once present they are treated as user- or machine-owned.
+- Managed SPAR files outside `.spar-kit/.local/` may be created or updated on reinstall.
+- `.spar-kit/VERSION` is a managed SPAR file and may be overwritten on reinstall or upgrade.
+- The packaged installer assets must be built from `install-root/`.
+- In Beta1, `AGENTS.md` is created from `install-root/AGENTS.md` when missing and prepended when already present.
+- Existing `justfile` content must be preserved; install only creates a skeleton when no `justfile` exists.
+- In Beta1, no additional platform detection is required beyond installing the shipped Codex-default layout.
+- On `success`, install should clearly tell the user the outcome and recommend asking their agent to use `spar.init`.
+- Detailed bootstrap rules live in `repo-bootstrap_spec.md`.
+- Detailed reporting rules live in `install-report_spec.md`.
+- The host repo’s root `package.json` must remain untouched except for the normal effects of the chosen `npx` invocation path; SPAR must not depend on the app package version.
+
+## Success Criteria
+
+- A user can run `npx spar-kit install` from a supported repo and get a usable Beta1 SPAR setup without guessing the next step.
+- Install produces `.spar-kit/VERSION` on every successful repo-local install.
+- Install materializes the current `install-root/` content into the target repo according to the bootstrap rules.
+- Install creates `.spar-kit/.local/tools.yaml` when absent and does not overwrite it when already present.
+- Install creates a skeleton `justfile` only when the repo does not already have one.
+- Install creates the expected shipped repo-local SPAR structure from `install-root/`.
+- Install uses the `install-root/` content that shipped with the current build of `spar-kit`.
+- Install creates `AGENTS.md` when missing from `install-root/AGENTS.md`.
+- Re-running install is idempotent for managed files and preserves user-owned content.
+- The installed repo-local state is sufficient for later `spar.init`-guided setup.
+- Beta1 install reports the outcome states defined in `install-report_spec.md`.
+- On `success`, install prints a next-step recommendation to ask the active agent to use `spar.init`.
+
+## Open Questions
+
+- Should future secondary install paths reuse the same installer engine through a published package, archive, or another wrapper?
+- How should a later Beta version handle repos that already contain a non-SPAR `AGENTS.md`?
+
+## Decisions
+
+- Beta1 uses one primary install path: `npx spar-kit install`.
+- Beta1 accepts Node/npm as an install prerequisite.
+- Beta1 installs from `install-root/` as the canonical authored install source.
+- Beta1 ships a Codex-default layout, including `.agents/skills/`.
+- Repo-local installation is the required success condition.
+- `.spar-kit/.local/` is seedable when absent and preserved when present.
+- Packaged installs use the current `install-root/` content that ships with the build.
+- `AGENTS.md` is created if missing from `install-root/AGENTS.md` and prepended if it already exists.
+- The installer creates a skeleton `justfile` only when one is not already present.
+- The installer must not overwrite existing files in `.spar-kit/.local/`.
+- Managed SPAR files outside `.spar-kit/.local/` may be updated on reinstall.
+- Beta1 install reporting follows `install-report_spec.md`.
+- On `success`, install recommends that the user ask their agent to use `spar.init`.
+- `install-root/` itself is the Beta1 packaging contract; no separate asset manifest is required.
+- `install` is the only required Beta1 installer command.
+- Installed `specs/README.md` content comes directly from `install-root/specs/README.md` at build time.
+- Future install paths should reuse one installer engine where practical, but this remains undecided beyond Beta1.
+- This spec remains the umbrella install contract; detailed follow-on specs may split out build packaging, repo bootstrap behavior, and future agent-target installation behavior.
+
+## Documentation Impact
+
+- `README.md` must document `npx spar-kit install` as the single primary Beta1 install command.
+- Beta onboarding docs should describe Node/npm as a prerequisite.
+- Installation docs must explain that Beta1 installs the Codex-default layout from `install-root/`.
+- Docs must describe the installed repo-local payload and later `spar.init` guidance.
+- Docs must explain the installer’s non-overwrite rule for `.spar-kit/.local/`.
+- Build and packaging docs must ensure the shipped installer assets include the current `install-root/`.
+- Future `spar.init` documentation should assume the installed repo-local content can be used to guide later setup.

@@ -1,6 +1,6 @@
 # <change-name>
 
-<!-- While in progress: specs/active/<change-name>/spec.md. After Retain, this file moves with the folder to specs/completed/<change-name>/spec.md. -->
+<!-- Copy this template to specs/<stage>/<change-name>/<change-name>_spec.md (name matches the folder). After Retain: specs/completed/<change-name>/<change-name>_spec.md. Optional queues: specs/next/ or specs/later/ until moved to active/. -->
 
 ## Summary
 ## Problem

@@ -12,10 +12,10 @@ It uses a simple four-phase model:
 
 ## How it works
 
-1. **Specify** — clarify goals, scope, and constraints; seed the initial `spec.md` (Summary through Scope).
-2. **Plan** — complete `spec.md` (including **Success Criteria**), then create `plan.md` with ordered tasks.
+1. **Specify** — clarify goals, scope, and constraints; seed the initial `<change-name>_spec.md` (Summary through Scope).
+2. **Plan** — complete `<change-name>_spec.md` (including **Success Criteria**), then create `plan.md` with ordered tasks.
 3. **Act** — implement with validation against the spec and plan.
-4. **Retain** — align `spec.md` with what shipped, update broader docs with approval, then archive the change folder.
+4. **Retain** — align `<change-name>_spec.md` with what shipped, update broader docs with approval, then archive the change folder.
 
 ---
 
@@ -25,10 +25,16 @@ Repository root = `<root>`.
 
 | Stage | Path |
 |--------|------|
-| Active change | `specs/active/<change-name>/` |
-| Completed change | `specs/completed/<change-name>/` |
+| Active (SPAR pipeline) | `specs/active/<change-name>/` |
+| Completed (archived) | `specs/completed/<change-name>/` |
+| Next (queued soon) | `specs/next/<change-name>/` |
+| Later (backlog / horizon) | `specs/later/<change-name>/` |
 
-Each active change folder usually contains `spec.md` and `plan.md`, side by side. Optional files (`research.md`, notes, small artifacts) may live in the same folder; **Retain** moves the **whole** directory to `specs/completed/<change-name>/` with no duplicate left under `active`.
+**Specify**, **Plan**, and **Act** run against **`specs/active/`**. **Retain** moves the **whole** directory from **`active/`** to **`completed/`** with no duplicate left under **`active`**. Use **`next/`** and **`later/`** to prioritize or park work that is not in the active pipeline yet; move a folder into **`active/`** when you start planning or implementation.
+
+Each change folder usually contains `<change-name>_spec.md` (same spelling as the folder name) and `plan.md`, side by side. Optional files (`research.md`, notes, small artifacts) may live in the same folder.
+
+See [`specs/README.md`](specs/README.md) for a concise overview of the four folders.
 
 ---
 
@@ -50,4 +56,4 @@ Copy or symlink each skill directory into your agent’s skills location (for ex
 
 ## Templates
 
-`templates/spec.md` and `templates/plan.md` match the structure the skills expect. The spec template lists every heading; **spar.specify** only fills **Summary** through **Scope** at first, and **spar.plan** completes the rest. Both templates include HTML comments noting paths under `specs/active/` and `specs/completed/`.
+`templates/spec.md` is copied per change to `<change-name>_spec.md`; `templates/plan.md` becomes `plan.md`. The spec template lists every heading; **spar.specify** only fills **Summary** through **Scope** at first, and **spar.plan** completes the rest. Both templates include HTML comments noting paths under `specs/active/` through completion under `specs/completed/`, and optional `specs/next/` and `specs/later/`.

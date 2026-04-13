@@ -1,10 +1,15 @@
 # Implementation Plan - <change-name>
 
-<!-- While in progress: specs/active/<change-name>/plan.md. After Retain, this file moves with the folder to specs/completed/<change-name>/plan.md. -->
+<!-- Plan/act use specs/active/<change-name>/plan.md. After Retain: specs/completed/<change-name>/plan.md. Optional queues: specs/next/ or specs/later/ until moved to active/. -->
 
-## Summary
+## Project Summary
 
-## Tasks
+## Phase <phase-name>
+### Phase Summary
+
+### Related Documents
+
+### Tasks
 - [ ]
 
-## Notes
+### Notes

@@ -10,7 +10,7 @@
 
 - [x] Add **`VERSION`** at repository root with an initial SemVer (e.g. `0.1.0`).
 - [x] Document canonical fetch URL in a short, discoverable place (e.g. **README** one-liner or pointer to this spec’s **Decisions** table)—`https://raw.githubusercontent.com/Jed-Tech/spar-kit/main/VERSION`.
-- [x] Confirm **`specs/active/spar-install/spec.md`** references **`VERSION`** as SoT and carries **`package.json`** / install mechanics forward (cross-check only).
+- [x] Confirm **`specs/active/Spar-Install/Spar-Install_spec.md`** references **`VERSION`** as SoT and carries **`package.json`** / install mechanics forward (cross-check only).
 
 ## Notes
 
@@ -19,4 +19,4 @@
 
 ## Retention
 
-- **Completed:** all tasks done; **`spec.md`** reconciled with shipped **`VERSION`** + **README** in **Retain**.
+- **Completed:** all tasks done; **`spar-versioning_spec.md`** reconciled with shipped **`VERSION`** + **README** in **Retain**.

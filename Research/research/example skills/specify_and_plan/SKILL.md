@@ -1,11 +1,11 @@
 ---
 name: plan-change
 description: >-
-  Turns a change idea into a stable spec.md and actionable plan.md under
+  Turns a change idea into a stable <change-name>_spec.md and actionable plan.md under
   Docs/<scope>/Specs/<change-name>/. Opens with a fixed prompt for goals/context,
   then conversationally resolves scope and naming; proceeds through workflow
   steps in order. Tone: concise, cheerful, inquisitive. Does not create the Specs
-  folder, spec.md, or plan.md until scope and change-name are confirmed. Use
+  folder, <change-name>_spec.md, or plan.md until scope and change-name are confirmed. Use
   when planning a feature or refactor, defining scope before coding, producing a
   written spec and task list, or running the plan phase before implementation.
 ---
@@ -20,9 +20,9 @@ description: >-
 
 If the user already dropped hints in the same thread (e.g. a working title), add at most **one short** acknowledging clause, then still use the prompt above so goals stay explicit.
 
-**Do not** create files, **do not** draft `spec.md` or `plan.md`, and **do not** interrogate for scope, folder name, or success criteria in full — save that for after they reply.
+**Do not** create files, **do not** draft `<change-name>_spec.md` or `plan.md`, and **do not** interrogate for scope, folder name, or success criteria in full — save that for after they reply.
 
-Until scope and change name are confirmed or clearly settled: **do not** create `Docs/<scope>/Specs/<change-name>/` or write `spec.md` / `plan.md`. A response that creates files or fabricates spec or Implementation Plan content before that **does not** follow this skill.
+Until scope and change name are confirmed or clearly settled: **do not** create `Docs/<scope>/Specs/<change-name>/` or write `<change-name>_spec.md` / `plan.md`. A response that creates files or fabricates spec or Implementation Plan content before that **does not** follow this skill.
 
 ## Voice
 
@@ -36,7 +36,7 @@ Convert discussion into durable context and a clear execution plan.
 
 1. **Clarify intent and naming** (workflow §1): refine `<change-name>` as needed through dialogue.
 2. **Resolve scope** (workflow §2): conversationally confirm `xp_stream` | `saturation_regen` | `_Repo` if still unclear; only ask what is missing.
-3. **Then proceed sequentially** through workflow §3 onward (create folder → context → ideate → spec → …). Do not skip ahead (e.g. no `plan.md` before `spec.md` is stable).
+3. **Then proceed sequentially** through workflow §3 onward (create folder → context → ideate → spec → …). Do not skip ahead (e.g. no `plan.md` before `<change-name>_spec.md` is stable).
 
 ## Outputs
 
@@ -44,7 +44,7 @@ Create:
 
 `Docs/<scope>/Specs/<change-name>/`
 
-- `spec.md` — intent, constraints, decisions (not step-by-step)
+- `<change-name>_spec.md` — intent, constraints, decisions (not step-by-step)
 - `plan.md` (Implementation Plan) — ordered, concrete, verifiable execution steps
 
 **Scope** must be one of: `xp_stream`, `saturation_regen`, `_Repo`. If unclear, stop and ask.
@@ -67,7 +67,7 @@ Target: `xp_stream` | `saturation_regen` | `_Repo`. If ambiguous after the user�
 When scope and name are fixed:
 
 1. Create `Docs/<scope>/Specs/<change-name>/`
-2. Create empty `spec.md` and `plan.md`, then populate in later steps.
+2. Create empty `<change-name>_spec.md` and `plan.md`, then populate in later steps.
 
 ### 4. Context gathering
 
@@ -77,7 +77,7 @@ Review relevant code and docs; use Context7 MCP (preferred) or web research when
 
 Explore approaches, pick a direction, note risks and unknowns.
 
-### 6. Draft `spec.md`
+### 6. Draft `<change-name>_spec.md`
 
 Use this structure:
 
@@ -100,13 +100,13 @@ Use this structure:
 
 List gaps; ask the user where needed.
 
-### 8. Finalize `spec.md`
+### 8. Finalize `<change-name>_spec.md`
 
 Incorporate user input. Ensure intent is clear, scope is correct, and success criteria are testable. **Treat the spec as stable after this step.**
 
 ### 9. Create `plan.md` (Implementation Plan)
 
-Only after `spec.md` is stable. Use:
+Only after `<change-name>_spec.md` is stable. Use:
 
 ```markdown
 # Implementation Plan - <change-name>
@@ -144,7 +144,7 @@ Stop and ask if:
 
 Plan phase is complete when:
 
-- `spec.md` is stable
+- `<change-name>_spec.md` is stable
 - `plan.md` is actionable
 - No critical unknowns remain
 
@@ -160,7 +160,7 @@ Then:
 
 | Artifact | Contains |
 |----------|----------|
-| `spec.md` | Intent, constraints, decisions — **not** step-by-step |
+| `<change-name>_spec.md` | Intent, constraints, decisions — **not** step-by-step |
 | `plan.md` (Implementation Plan) | Execution steps only — **after** spec is stable |
 
-Do not generate `plan.md` until `spec.md` is finalized.
+Do not generate `plan.md` until `<change-name>_spec.md` is finalized.

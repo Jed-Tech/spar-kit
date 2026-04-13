@@ -36,7 +36,7 @@ Beta means:
 
 Define the exact checklist yourself; Beta should mean **“an invited early adopter can follow the repo and complete one real change using SPAR without guessing.”** Candidate pillars (edit freely):
 
-1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/`.
+1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/` (with optional `specs/next/` and `specs/later/` for queuing).
 2. **Templates** — Spec and plan templates match what the skills expect.
 3. **Guidance for agents** — `AGENTS.md` (and related pointers) make the workflow and folder layout unavoidable for tools that read repo instructions.
 4. **Install / copy path** — One documented way to get skills (and any required files) into a project for at least your Beta target agents.
@@ -62,7 +62,7 @@ v1 should build on the Beta foundation with stronger onboarding, clearer public-
 ## Beta foundations
 These remain the highest-priority foundations because both Beta and v1 depend on them:
 
-1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/`.
+1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/` (with optional `specs/next/` and `specs/later/` for queuing).
 2. **Templates** — Spec and plan templates match what the skills expect.
 3. **Guidance for agents** — `AGENTS.md` (and related pointers) make the workflow and folder layout unavoidable for tools that read repo instructions.
 4. **Install / copy path** — One documented way to get skills (and any required files) into a project for at least the currently supported agents.

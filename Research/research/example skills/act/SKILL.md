@@ -9,25 +9,25 @@ description: >-
 
 # Implement change
 
-Execute the plan in `plan.md` while strictly preserving the intent in `spec.md`. Work sequentially, validate each step, keep progress updated. Refine or reorder tasks only for correctness; do not change underlying intent without approval. No silent workarounds, no drifting from the spec.
+Execute the plan in `plan.md` while strictly preserving the intent in `<change-name>_spec.md`. Work sequentially, validate each step, keep progress updated. Refine or reorder tasks only for correctness; do not change underlying intent without approval. No silent workarounds, no drifting from the spec.
 
 ## Inputs
 
-- `Docs/<scope>/Specs/<change-name>/spec.md`
+- `Docs/<scope>/Specs/<change-name>/<change-name>_spec.md`
 - `Docs/<scope>/Specs/<change-name>/plan.md`
 - Repository code and docs
 
 ## Outputs
 
-- Code changes that satisfy `spec.md`
+- Code changes that satisfy `<change-name>_spec.md`
 - Updated `plan.md` with progress
-- Proposed `spec.md` updates (for approval only—do not apply without approval)
+- Proposed `<change-name>_spec.md` updates (for approval only—do not apply without approval)
 
 ## Workflow
 
 ### 1. Load context
 
-- Read `spec.md` and `plan.md`
+- Read `<change-name>_spec.md` and `plan.md`
 - Confirm scope and change folder
 - Identify current progress (checked tasks)
 
@@ -45,7 +45,7 @@ Proceed sequentially unless reordering is clearly required for correctness.
 ### 3. Validation
 
 - Prefer targeted checks when a full build is unnecessary
-- Ensure changes align with **Success Criteria** in `spec.md`
+- Ensure changes align with **Success Criteria** in `<change-name>_spec.md`
 - Ask the user to test or validate only if the agent cannot run the needed checks
 
 ### 4. Failure handling
@@ -72,7 +72,7 @@ If implementation reveals incorrect assumptions, missing constraints, or a bette
 1. Propose the spec update clearly
 2. **Do not** implement that divergent path yet
 3. Wait for user approval
-4. Update `spec.md` only after approval
+4. Update `<change-name>_spec.md` only after approval
 
 ### 7. Keep context accurate
 
@@ -92,7 +92,7 @@ Stop and ask if:
 Implementation is complete when:
 
 - All tasks are completed or explicitly resolved
-- Code satisfies **Success Criteria** in `spec.md`
+- Code satisfies **Success Criteria** in `<change-name>_spec.md`
 - No unresolved blockers remain
 
 Then:

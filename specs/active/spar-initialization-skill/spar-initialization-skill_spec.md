@@ -28,7 +28,7 @@ Define **exact responsibilities and boundaries** for **spar.init** so implementa
 5. **Install tools**: Attempt to install missing recommended tools; if not permitted, **ask the user** to help (commands / elevation).
 6. **Closeout**: Summarize what was done and what was not; state that **SPAR initialization is complete**; suggest using `**spar.specify`** when beginning a new feature or project (naming TBD if a shorter alias is introduced).
 
-**Dependency:** The **version comparison** rules in (1) follow `**specs/completed/spar-versioning/spec.md`** (canonical `**main/VERSION**` vs `**.spar-kit/VERSION**`).
+**Dependency:** The **version comparison** rules in (1) follow `**specs/completed/spar-versioning/spar-versioning_spec.md`** (canonical `**main/VERSION**` vs `**.spar-kit/VERSION**`).
 
 ## Scope
 
