@@ -83,6 +83,7 @@ In scope:
 - `specs/README.md`, `specs/active/`, and `specs/completed/` must be installed from `install-root/specs/`.
 - `AGENTS.md` must be created when missing from `install-root/AGENTS.md`.
 - If a consumer repo already contains `AGENTS.md`, Beta1 prepends the install-root SPAR `AGENTS.md` content rather than overwriting the existing file.
+- If existing `AGENTS.md` contains malformed SPAR markers that cannot be safely normalized, Beta1 warns and leaves the file unchanged rather than duplicating SPAR content.
 - On reinstall, `.agents/skills/` entries managed by SPAR may be replaced from `install-root/.agents/skills/`; non-SPAR directories under `.agents/skills/` must be preserved.
 - Existing `justfile` content must be preserved; install only seeds a skeleton when `justfile` is missing.
 - Repo bootstrap must not depend on the host repo’s root `package.json` version.
@@ -95,6 +96,7 @@ In scope:
 - `.spar-kit/.local/tools.yaml` is created when absent and preserved when present.
 - `specs/README.md`, `specs/active/`, and `specs/completed/` exist after bootstrap.
 - If `AGENTS.md` already existed before install, the installer prepends the install-root SPAR `AGENTS.md` content without overwriting the existing file body.
+- If `AGENTS.md` contains malformed SPAR markers, the installer warns and leaves the file unchanged.
 - Existing `justfile` content is never overwritten.
 - Re-running bootstrap updates SPAR-managed files outside `.spar-kit/.local/` as needed while preserving user-owned content.
 
@@ -112,6 +114,7 @@ In scope:
 - `specs/` content is installed from `install-root/specs/`.
 - `AGENTS.md` is created from `install-root/AGENTS.md` when missing and prepended when already present.
 - If `AGENTS.md` already exists, Beta1 prepends the install-root SPAR `AGENTS.md` content.
+- If `AGENTS.md` contains malformed SPAR markers that are not safely repairable, Beta1 warns and leaves it unchanged.
 - `justfile` is seeded only when missing.
 - SPAR-managed directories under `.agents/skills/` may be replaced on reinstall; non-SPAR directories there are preserved.
 - Reinstall may update SPAR-managed files outside `.spar-kit/.local/`.

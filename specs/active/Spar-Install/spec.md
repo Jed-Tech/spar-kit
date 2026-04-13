@@ -70,6 +70,7 @@ In scope:
 - `.spar-kit/VERSION` is a managed SPAR file and may be overwritten on reinstall or upgrade.
 - The packaged installer assets must be built from `install-root/`.
 - In Beta1, `AGENTS.md` is created from `install-root/AGENTS.md` when missing and prepended when already present.
+- If `AGENTS.md` contains malformed SPAR markers that are not safely repairable, Beta1 warns and leaves it unchanged rather than duplicating SPAR content.
 - Existing `justfile` content must be preserved; install only creates a skeleton when no `justfile` exists.
 - In Beta1, no additional platform detection is required beyond installing the shipped Codex-default layout.
 - On `success`, install should clearly tell the user the outcome and recommend asking their agent to use `spar.init`.
@@ -107,6 +108,7 @@ In scope:
 - `.spar-kit/.local/` is seedable when absent and preserved when present.
 - Packaged installs use the current `install-root/` content that ships with the build.
 - `AGENTS.md` is created if missing from `install-root/AGENTS.md` and prepended if it already exists.
+- Malformed SPAR markers in `AGENTS.md` are handled conservatively: warn and leave unchanged when safe repair is not possible.
 - The installer creates a skeleton `justfile` only when one is not already present.
 - The installer must not overwrite existing files in `.spar-kit/.local/`.
 - Managed SPAR files outside `.spar-kit/.local/` may be updated on reinstall.

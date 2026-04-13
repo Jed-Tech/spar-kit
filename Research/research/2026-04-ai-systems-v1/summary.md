@@ -42,3 +42,20 @@ For v1, "other AI systems" should mean:
 - but systems that are both widely relevant and realistic to support without over-stretching the project
 
 On that basis, **Windsurf + GitHub Copilot** is the best pair.
+
+## Packaging Implications
+
+Beta1 `spar-kit` install is currently built and distributed as an npm package.
+
+- The package tarball is built by `npm pack` and later published with `npm publish`.
+- The package includes three shipped paths from [`package.json`](/c:/Users/jedde/GithubRepos/spar-kit/package.json): `install-root/`, `lib/`, and `bin/`.
+- `install-root/` is the canonical authored source for installable assets.
+- `lib/` contains installer behavior such as bootstrap and reporting logic.
+- `bin/` contains the CLI entrypoint for `npx spar-kit install`.
+
+Important implications:
+
+- To change what gets installed into user repos, update `install-root/`.
+- To change how installation behaves, update `lib/`.
+- To change how users invoke the installer, update `bin/` and/or `package.json`.
+- Because `install-root/` is the packaging contract for Beta1, adding new installable assets should normally mean adding them there rather than creating a separate manifest system.
