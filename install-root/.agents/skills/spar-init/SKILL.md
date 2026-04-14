@@ -1,137 +1,120 @@
 ---
 name: spar.init
 description: >-
-  After install or on demand, verify and repair spar-kit in the repo—version vs canonical
-  main, five skills + AGENTS.md for the active AI system, tool inventory in
-  .spar-kit/.local/tools.yaml only (and that .spar-kit/.local/ is git-ignored or the user
-  is warned), optional AGENTS.md optimization (≤40 lines, with consent), optional tool
-  installs, and closeout with handoff to spar.specify.
+  After install or on demand, verify and lightly repair the repo-local spar-kit
+  setup: version freshness, .agents/skills, AGENTS.md, and
+  .spar-kit/.local/tools.yaml, then finish with a short handoff to spar.specify.
 ---
 
 # Init
 
-Run after spar-kit is installed in a project (or when the user wants a full setup pass): verify and repair setup, then hand off clearly.
+Run after `spar-kit` is installed in a project, or when the user wants a setup check. Treat this as a post-install verification and light repair pass for the repo-local SPAR bundle.
 
 ## What this skill delivers
 
-Work through these **six** areas in order unless blocked:
+Work through these areas in order unless blocked:
 
-1. **Version check** — `main` vs **`.spar-kit/VERSION`**; if stale, **reinstall** (**primary** first, **secondary** second).
-2. **Skills + `AGENTS.md`** — Five SPAR skills for this AI system; **`AGENTS.md`** SPAR section.
-3. **Tool check** — **`.spar-kit/.local/tools.yaml`** (`registry` + `installed`); verify **`.spar-kit/.local/`** is git-ignored or warn / fix with consent.
-4. **Optimize `AGENTS.md`** — Optional; ≤40 lines; ask first; keep canonical SPAR block.
-5. **Install tools** — Try missing tools when allowed; else commands / elevation.
-6. **Closeout** — Done / not done; **SPAR initialization is complete** → **`spar.specify`**.
-
----
-
-## 1. Version check (This section is under construction and needs updated after Install is finalized)
-
-**First:** Confirm **repository root**. Note **`.spar-kit/VERSION`**.
-
-- **Canonical (one line):** fetch  
-  `https://raw.githubusercontent.com/Jed-Tech/spar-kit/main/VERSION`  
-  (**Jed-Tech/spar-kit**, branch **`main`**).
-- **Local:** **`<repo>/.spar-kit/VERSION`** (trimmed one line, SemVer **2.0.0**).
-- **Compare** with proper **SemVer ordering**, not string sort.
-- **Behind or bad local** (missing, invalid, unreadable): **stale** → **reinstall** spar-kit (see below)—do not patch **`.spar-kit/VERSION`** by hand to “fix” the check.
-- **Cannot fetch canonical** (offline, error): **warn**, note **version check skipped**, **continue** other steps—do not call stale **only** because of network.
-
-**When stale (reinstall):** Do **not** hand-edit **`.spar-kit/VERSION`**. Use the **exact** commands from current **spar-kit** install documentation (e.g. **README**).
----
-
-
-## 2. Skills + `AGENTS.md`
-
-- For each of **`spar.init`**, **`spar.specify`**, **`spar.plan`**, **`spar.act`**, **`spar.retain`**: verify the skill is available to this agent (e.g. `.cursor/skills`, `.agents/skills`, `.claude/skills`, or project convention).
-- If something is missing or in the wrong place: **propose** copy/symlink/move steps; apply only with **user approval**.
-
-**`AGENTS.md` (baseline, not optimization):**
-
-- Locate the spar-kit **`AGENTS.md`** snippet to prepend (from the installed bundle).
-- **Prepend** spar-kit guidance **before** existing content; **never** delete the user’s own instructions.
-- Use markers for idempotency:
-  - `<!-- spar-kit:start -->`
-  - `<!-- spar-kit:end -->`
-- If markers exist, **update inside the block** if spar-kit guidance changed; do not duplicate the whole block.
-- Edits that would **remove or contradict** user content require **consent**—stop and ask.
+1. **Version check** - compare upstream `VERSION` to local `.spar-kit/VERSION`.
+2. **Repo-local skill placement check** - verify the SPAR skills are in the correct repo-local location for the current agent.
+3. **`AGENTS.md` recommendation** - encourage a short, effective `AGENTS.md` for lower token usage and clearer agent behavior.
+4. **Tool verify-install-sync** - seed or update `.spar-kit/.local/tools.yaml`.
+5. **`.gitignore` hygiene check** - recommend ignoring `.spar-kit/.local/` when needed.
+6. **Closeout** - a short summary and a recommendation to use `spar.specify`.
 
 ---
 
-## 3. Tool check
+## 1. Version check
 
-Store **registry** and **installed** only in **`.spar-kit/.local/tools.yaml`**.
+First confirm repository root and note `.spar-kit/VERSION`.
 
-### `.spar-kit/.local/` ignore check
+- **Canonical:** fetch
+  `https://raw.githubusercontent.com/Jed-Tech/spar-kit/main/VERSION`
+- **Local:** `<repo>/.spar-kit/VERSION`
+- Compare using SemVer ordering, not string sorting.
+- If local is missing, invalid, unreadable, or behind upstream: treat the install as stale.
+- If canonical cannot be fetched: warn that the version check was skipped and continue the rest of init.
 
-Do **not** change **`.gitignore`** unless the **user explicitly agrees**.
+When stale:
 
-- **Install/bootstrap** should add the ignore line once when laying down **`.spar-kit/`**; init is the safety net when that did not happen.
-- If this directory is a **git** repo, check whether **`.spar-kit/.local/`** is ignored (e.g. read **`.gitignore`** / parent ignore files, or **`git check-ignore -q .spar-kit/.local`** when available).
-- If it is **not** ignored: **warn** and give the exact line to add:
+- Do **not** hand-edit `.spar-kit/VERSION`.
+- Recommend rerunning the current install path:
+  - `npx spar-kit install`
+- If the user wants help, explain that reinstall is the supported way to refresh the repo-local SPAR bundle.
+
+---
+
+## 2. Repo-local skill placement check
+
+Determine whether this agent uses repo-local skills and, if so, what repo-local location it expects.
+
+- Identify the correct repo-local skill location for the current agent.
+- Verify the five SPAR skills are present in the correct repo-local location for that agent.
+- Prefer repo-local installed assets as the repair source when safe and available.
+
+If the current skill location is wrong, missing, or unclear:
+
+- explain the issue
+- move or copy the SPAR skills to the preferred repo-local location for this agent when that repair is safe
+- repair only when the action is safe and consistent with the installed repo-local bundle
+- otherwise recommend rerunning `npx spar-kit install`
+
+Keep this focused on verifying and repairing skill placement, not re-running the full install workflow.
+
+---
+
+## 3. `AGENTS.md` recommendation
+
+`AGENTS.md` includes a brief description of how to use spar-kit. That guidance is essential and should be kept.
+
+Check how many lines `AGENTS.md` contains. If it is longer than 60 lines, give this lightweight recommendation (using natural language):
+
+- shorter `AGENTS.md` files are usually better for agent focus and lower token usage
+- keep instructions crisp, specific, non-redundant, and relevant to most agent communications.
+- avoid turning `AGENTS.md` into a long instruction list.
+
+If the user wants help optimizing `AGENTS.md`, keep the guidance brief and preserve the intended SPAR instructions.
+
+---
+
+## 4. Tool verify-install-sync
+
+Use only `.spar-kit/.local/tools.yaml`.
+
+### Tool state file
+
+- Run checks across the full tool set and record missing tools.
+- If tools are missing, install them automatically when your permissions allow.
+- Re-check tools that had install attempts, then persist the final post-install result.
+- For each tool entry, maintain `installed`, `version` (when available), and `reason` (when missing/failing) consistently.
+- Update `checked_at` once after the completed full pass.
+- Respect `when` rules (for example, `uv` when the repo uses Python tooling).
+
+If `.spar-kit/.local/` cannot be written, summarize tool presence in chat instead.
+
+---
+
+## 5. `.gitignore` hygiene check
+
+Treat `.gitignore` as a follow-up hygiene check, not part of install.
+
+- If this is a git repo, check whether `.spar-kit/.local/` is ignored.
+- If it is not ignored, recommand that the user add it as ignored.
   - `.spar-kit/.local/`
-- Teams may manage ignores elsewhere—only append that line **after** explicit user consent.
-- If you **cannot** determine git state (not a git repo, sandbox limits), **note** the same line for the user so they can add it if they use git later.
-
-Open or create **`.spar-kit/.local/tools.yaml`** (seed `registry` if missing).
-
-**Path:** **`.spar-kit/.local/tools.yaml`**
-
-**Shape:**
-
-```yaml
-# Machine-local tool state
-checked_at: "2026-04-10T12:00:00Z"
-
-# Same structure as the spar-kit registry in .spar-kit/.local/tools.yaml (core_cli, forge_cli, …, skills)
-registry:
-  core_cli:
-    - name: git
-      purpose: version control
-      check: "git --version"
-  # … remainder of registry from spar-kit
-
-# Flat map: tool `name` -> installed (evaluate checks from registry to populate)
-installed:
-  git: true
-  just: false
-  rg: true
-```
-
-**Behavior:**
-
-- If the file is **missing**, **seed** `registry` from spar-kit **`.spar-kit/.local/tools.yaml`** (bundled path next to the installed package, or the same path when working inside **spar-kit**), set **`installed`** after running checks, set **`checked_at`**.
-- On later runs, **read** `registry` from this file; **update** `installed` and `checked_at` after checks.
-- If **`registry`** is stale vs upstream, **refresh** from the bundle when the user agrees.
-
-**Run checks:** run **`check`** commands from **`registry`** where applicable; respect **`when`** for repo-dependent tools.
-
-If **`.spar-kit/.local/`** cannot be created, **summarize** tool presence in chat only.
-
----
-
-## 4. Optimize `AGENTS.md`
-
-- **Only** after **2. Skills + `AGENTS.md`** baseline SPAR section is correct.
-- **Target ≤ 40 lines** total when optimized; **explain** why brevity helps; **ask permission** before rewriting.
-- An optimized file **always** includes the **exact** canonical SPAR prepended block (same meaning as upstream **`AGENTS.md`** / project policy). If the user declines optimization, leave **`AGENTS.md`** at baseline from **2. Skills + `AGENTS.md`**.
-
----
-
-## 5. Install tools
-
-- For tools marked **false** in **`installed`** that are **recommended**, try **brew / winget / apt** (etc.) if the environment allows.
-- On failure or need for **sudo** / admin: stop and give **copy-paste** commands for the user.
-
-Do not install packages without a clear path and user alignment on elevated permissions.
+- Only modify `.gitignore` after explicit user consent.
 
 ---
 
 ## 6. Closeout
 
-- List **completed** vs **not done** (with reason).
-- Say clearly: **SPAR initialization is complete** (or what remains if something critical failed).
-- Point to **`spar.specify`** for starting the next change.
+Keep the wrap-up short:
+
+- what was verified or fixed
+- what still needs user action, if anything
+- recommend using `spar.specify`
+
+Example shape:
+
+SPAR initialization is complete. Verified version, repo-local SPAR skill placement, `AGENTS.md` length, and tool state. You are ready to start utilizing SPAR-kit. Mention **`spar.specify`** when starting your next feature or change.
 
 ---
 
@@ -139,13 +122,18 @@ Do not install packages without a clear path and user alignment on elevated perm
 
 Stop and ask when:
 
-- Canonical **`VERSION`** or spar-kit **`AGENTS.md`** source cannot be found
-- Install docs do not define **primary** and **secondary** commands (cannot follow the ordered reinstall)
-- Skill install paths are ambiguous (multiple agents, unclear roots)
-- **`registry`** cannot be loaded to seed **`.spar-kit/.local/tools.yaml`** and **`.spar-kit/.local/`** cannot be written
+- `.spar-kit/VERSION` cannot be checked and the repo-local SPAR bundle is obviously incomplete
+- the installed SPAR `AGENTS.md` block source cannot be found
+- `.spar-kit/.local/tools.yaml` cannot be seeded and the local directory cannot be written
 
 Do not use destructive workarounds.
 
 ## Completion
 
-Initialization is **complete** when: **(1)** version check run or **skipped with warning** (offline), and if **stale**, reinstall **attempted** or **exact install commands** given to the user; **(2)** five skills **and** **`AGENTS.md`** SPAR section **verified or fixed** (moves only with consent); **(3)** **`.spar-kit/.local/tools.yaml`** written/updated or **summarized** if unwritable, and **`.spar-kit/.local/`** ignore status **warned** or **fixed with consent** (or **noted** if git unknown); **(4)** **`AGENTS.md`** optimization only if approved; **(5)** installs attempted or user given commands; **(6)** closeout delivered with **`spar.specify`** handoff.
+Initialization is complete when:
+
+- version check ran or was skipped with warning
+- repo-local SPAR skill placement was checked, adjusted when safe, or reinstall was recommended
+- `AGENTS.md` length was checked and a recommendation was given when useful
+- `.spar-kit/.local/tools.yaml` was updated or tool state was summarized
+- the closeout is short and points to `spar.specify`

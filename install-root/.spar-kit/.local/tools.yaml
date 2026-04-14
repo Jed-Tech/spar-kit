@@ -1,78 +1,92 @@
-# Tool registry for spar-kit and repos that adopt it.
-#
-# Order of reading: core_cli → pick forge_cli for your Git host → installers
-#   only where you need them → repo_dependent when this repository uses that stack.
-# Linux: use your distro or preferred stack; paths here are not prescribed.
+schema_version: 1
+# SPAR tools registry
+# Used to record tool presence and versions.
+# Contract fields are machine-readable; comments are guidance only.
+# Procedure: check all tools, auto-install missing when permitted, re-check attempted installs, then persist results.
+# checked_at: UTC RFC 3339 timestamp of the latest completed check pass.
+checked_at: "1970-01-01T00:00:00Z"
 
+# Core tools are expected in all environments used with spar-kit.
 core_cli:
   - name: git
     purpose: version control
     check: "git --version"
+    installed: false
+    reason: "not yet checked"
 
   - name: just
     purpose: task runner (see repo justfile)
     check: "just --version"
+    installed: false
+    reason: "not yet checked"
 
   - name: rg
     purpose: fast code search
     check: "rg --version"
+    installed: false
+    reason: "not yet checked"
 
   - name: jq
     purpose: JSON parsing
     check: "jq --version"
+    installed: false
+    reason: "not yet checked"
 
-  - name: fd
-    purpose: file discovery
-    check: "fd --version"
+  - name: npm
+    purpose: Node package manager (required for spar-kit install path)
+    check: "npm --version"
+    installed: false
+    reason: "not yet checked"
 
 forge_cli:
+  # Select the forge target(s) relevant to the repository host.
   github:
     - name: gh
+      target: github
       purpose: GitHub CLI (issues, PRs, Actions)
       check: "gh --version"
+      installed: false
+      reason: "not yet checked"
 
   gitlab:
     - name: glab
+      target: gitlab
       purpose: GitLab CLI (issues, MRs, pipelines)
       check: "glab version"
+      installed: false
+      reason: "not yet checked"
+
+  bitbucket:
+    - name: bb
+      target: bitbucket
+      purpose: Bitbucket CLI
+      check: "bb --version"
+      installed: false
+      reason: "not yet checked"
 
 installers:
+  # OS/package-manager and ecosystem installers; check only entries relevant to this environment.
   windows:
     - name: winget
+      target: windows
       purpose: install and update packages on Windows
       check: "winget --version"
-
-    - name: choco
-      purpose: Chocolatey package manager for Windows
-      check: "choco --version"
+      installed: false
+      reason: "not yet checked"
 
   macos:
     - name: brew
+      target: macos
       purpose: Homebrew — install CLI tools on macOS
       check: "brew --version"
+      installed: false
+      reason: "not yet checked"
 
-repo_dependent:
-  - name: node
-    purpose: JavaScript runtime
-    check: "node --version"
-    when: "repos with Node (e.g. package.json, pnpm-lock.yaml)"
-
-  - name: npm
-    purpose: Node package manager
-    check: "npm --version"
-    when: "Node.js projects using npm"
-
-  - name: python
-    purpose: Python interpreter
-    check: "python --version"
-    when: "repos with Python (e.g. pyproject.toml, requirements.txt)"
-
-  - name: uv
-    purpose: fast Python package and env manager
-    check: "uv --version"
-    when: "Python projects standardizing on uv"
-
-  - name: java
-    purpose: JVM (builds, Android, Kotlin, etc.)
-    check: "java --version"
-    when: "repos with Java/Kotlin/JVM (e.g. Gradle, Maven)"
+  python:
+    - name: uv
+      target: python
+      purpose: fast Python package and env manager
+      check: "uv --version"
+      when: "repo uses Python tooling"
+      installed: false
+      reason: "not yet checked"

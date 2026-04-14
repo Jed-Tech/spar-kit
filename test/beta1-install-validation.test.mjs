@@ -199,22 +199,25 @@ test("CLI stdout: success without warnings matches install-report layout", async
     const { stdout } = await execFileP(process.execPath, [binCli, "install", dir], {
       encoding: "utf8",
     });
-    assert.match(stdout, /^Outcome: success\r?\n\r?\nNext: Ask your agent to use spar\.init\.\r?\n$/);
+    assert.match(
+      stdout,
+      /^Outcome: Success\r?\n\r?\nTo finalize setup: Ask your AI agent to: Use the spar\.init skill\r?\n  ↑  ↑  ↑  ↑  ↑\r?\n$/,
+    );
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
 });
 
-test("CLI stdout: success with preserved justfile includes Warnings section", async () => {
+test("CLI stdout: success with preserved justfile includes Notes section", async () => {
   const dir = await mktemp("spar-cli-warn-");
   try {
     await writeFile(join(dir, "justfile"), "x:\n", "utf8");
     const { stdout } = await execFileP(process.execPath, [binCli, "install", dir], {
       encoding: "utf8",
     });
-    assert.match(stdout, /^Outcome: success\r?\n\r?\nWarnings:\r?\n/);
+    assert.match(stdout, /^Outcome: Success\r?\n\r?\nNotes:\r?\n/);
     assert.ok(stdout.includes("justfile"));
-    assert.ok(stdout.includes("Next: Ask your agent"));
+    assert.ok(stdout.includes("To finalize setup") && stdout.includes("spar.init"));
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
@@ -231,7 +234,7 @@ test("CLI stdout: failure when target path is an existing file", async () => {
     } catch (e) {
       threw = true;
       assert.equal(e.code, 1);
-      assert.match(e.stdout, /^Outcome: failure\r?\n\r?\n/);
+      assert.match(e.stdout, /^Outcome: Failure\r?\n\r?\n/);
       assert.ok(e.stdout.includes("EEXIST") || e.stdout.includes("mkdir"));
     }
     assert.ok(threw);

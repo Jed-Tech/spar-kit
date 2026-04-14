@@ -27,8 +27,6 @@ Repository root = `<root>`.
 |--------|------|
 | Active (SPAR pipeline) | `specs/active/<change-name>/` |
 | Completed (archived) | `specs/completed/<change-name>/` |
-| Next (queued soon) | `specs/next/<change-name>/` |
-| Later (backlog / horizon) | `specs/later/<change-name>/` |
 
 **Specify**, **Plan**, and **Act** run against **`specs/active/`**. **Retain** moves the **whole** directory from **`active/`** to **`completed/`** with no duplicate left under **`active`**. Use **`next/`** and **`later/`** to prioritize or park work that is not in the active pipeline yet; move a folder into **`active/`** when you start planning or implementation.
 
