@@ -41,7 +41,7 @@ Establish a single, machine-readable and human-readable `tools.yaml` format that
   - `reason`: short failure reason when not installed or check fails.
 
 ## Final v1 Tool Set
-- `core_cli`: `git`, `just`, `rg`, `jq`, `npm`
+- `core_cli`: `git`, `just`, `npm`
 - `forge_cli`: `gh` (`target: github`), `glab` (`target: gitlab`), `bb` (`target: bitbucket`)
 - `installers`: `winget` (`target: windows`), `brew` (`target: macos`), `uv` (`target: python`, `when: "repo uses Python tooling"`)
 

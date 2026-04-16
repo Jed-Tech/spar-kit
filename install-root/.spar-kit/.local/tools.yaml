@@ -20,18 +20,6 @@ core_cli:
     installed: false
     reason: "not yet checked"
 
-  - name: rg
-    purpose: fast code search
-    check: "rg --version"
-    installed: false
-    reason: "not yet checked"
-
-  - name: jq
-    purpose: JSON parsing
-    check: "jq --version"
-    installed: false
-    reason: "not yet checked"
-
   - name: npm
     purpose: Node package manager (required for spar-kit install path)
     check: "npm --version"
