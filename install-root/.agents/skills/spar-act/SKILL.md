@@ -1,142 +1,130 @@
 ---
 name: spar-act
 description: >-
-  Use when implementation is approved after spar-plan: run tasks in order, validate with
-  the project's usual checks, retry obvious failures once, stop and ask if blocked, and
-  do not change spec intent without approval. Progress and completion stay brief but tied
-  to the plan and user outcome.
+  Use after the user has approved implementation. Execute the
+  active plan sequentially, follow the plan's approach, execution constraints,
+  validation strategy, and risks, update task progress, stop for spec drift or
+  blockers, and ask before starting retention.
 ---
 
 # Act
 
-**Run the steps below in order.**
+Execute the approved `plan.md` while preserving the intent and boundaries in
+`<change-name>_spec.md`.
 
-Execute the plan in `plan.md` while strictly preserving the intent in `<change-name>_spec.md`. Work sequentially, validate each step, keep progress updated. Refine or reorder tasks only for correctness; do not change underlying intent without approval. No silent workarounds, no drifting from the spec.
-
-**Change location:** `specs/active/<change-name>/` (repository root = `<root>`).
-
-**Prerequisite:** **spar-plan** should have produced stable `<change-name>_spec.md` and `plan.md`. If missing, stop and run **spar-plan** (or **spar-specify** first).
-
-Optional files in the change folder (e.g. `research.md`, notes) are preserved; do not remove them.
+Act is implementation, not replanning. Refine execution details when needed, but
+do not change product intent, spec constraints, or accepted decisions without
+user approval.
 
 ## Inputs
 
 - `specs/active/<change-name>/<change-name>_spec.md`
 - `specs/active/<change-name>/plan.md`
-- Repository code and docs
-- When a task fails or implementation details are unclear: **MCP tools**, **web search**, **vendor or official documentation**, and other vetted external sources (use alongside the repo to interpret errors, APIs, and constraints)
+- Optional notes or artifacts in the same folder, such as `research.md`
+- Relevant repository code and documentation
 
-## Outputs
+If the active spec or plan is missing, stop and use `spar-plan` first, or
+`spar-specify` if no spec exists.
 
-- Code or configuration changes that satisfy `<change-name>_spec.md`
-- Updated `plan.md` with progress (checked tasks)
-- Proposed `<change-name>_spec.md` updates (if you recommend spec updates, approval is needed — do not apply without approval)
+## Execution Context
 
----
+Before changing files, read the spec and plan together.
 
-## Execution order
+- Use spec `Scope`, `Out of Scope`, `Constraints`, `Success Criteria`, and
+  `Decisions` as fixed implementation anchors.
+- Use plan `Approach` for the intended technical direction.
+- Use plan `Execution Constraints` as tactical guardrails.
+- Execute unchecked `Tasks` in order unless reordering is required for
+  correctness.
+- Use plan `Validation Strategy` as the primary validation path.
+- Track plan `Risks / Follow-ups` while implementing and update them if new
+  information materially changes them.
 
-### Step 1 — Load context
-
-- Read `<change-name>_spec.md` and `plan.md`
-- Confirm the change folder path
-- Identify current progress (checked tasks)
-
----
-
-### Step 2 — Execute tasks
+## Execute Tasks
 
 For each unchecked task:
 
-1. Understand the task and affected files
-2. Implement the change
-3. Validate using the **project’s usual checks** (tests, lint, build, or narrower equivalents when a full run is unnecessary)
-4. Mark the task complete in `plan.md`
+1. Understand the task, relevant spec anchors, and affected files.
+2. Implement the smallest coherent change that satisfies the task.
+3. Validate using the plan's `Validation Strategy`, plus targeted project checks
+   when useful.
+4. Mark the task complete in `plan.md` only after validation is sufficient.
 
-Proceed sequentially unless reordering is clearly required for correctness.
+Keep `plan.md` accurate as work progresses. It is fine to split, clarify, or
+reorder tasks for correctness, but do not alter task intent in a way that changes
+the spec.
 
----
+## Research and Blockers
 
-### Step 3 — Validation
+Use repo context first. When errors, APIs, or implementation details are unclear,
+use available MCP tools, official docs, vendor docs, or web search to understand
+the issue.
 
-- Prefer targeted checks when a full run is unnecessary
-- Ensure changes align with **Success Criteria** in `<change-name>_spec.md`
-- Ask the user to test or validate only if you cannot run the needed checks
+If a task fails:
 
----
+1. Investigate the cause.
+2. Fix obvious issues and retry once.
+3. If still blocked, stop, summarize what you tried, explain the blocker, offer
+   concrete next-step options with a recommendation, and ask how to proceed.
 
-### Step 4 — Failure handling
+Do not introduce silent workarounds that change intent, reduce quality, or bypass
+the plan's validation strategy.
 
-If a task fails or you are blocked:
+## Validation
 
-1. **Investigate** using the repository and, as needed, **MCP**, **web search**, **vendor or project docs**, and other external references to understand the error, API, or environment—same as a human lead would. Gathering facts this way is **expected** when the plan or local code is not enough; it is not a substitute for user approval if you discover **spec-level** surprises (see Step 6).
-2. Fix obvious issues and **retry the task once**
-3. If still failing: **stop**, explain the blocker, summarize what you tried (including external lookups), propose next steps, ask how to proceed
+Validate independently where practical. Use available project checks, local
+tools, integrated browsers, screenshots, logs, or other agent-accessible
+evidence to confirm the work before asking the user to test.
 
-Do not introduce workarounds that change intent or degrade quality without approval.
+If user validation is needed, provide concrete steps: where to go, what action to
+take, what result to expect, and what information to report back if it fails.
 
----
+## Spec Drift
 
-### Step 5 — Task evolution (allowed)
+Stop and ask before continuing if implementation would contradict or require
+changing any of these spec sections:
 
-- Refine wording for clarity
-- Split tasks into smaller steps
-- Reorder tasks if needed for correctness
+- `Scope`
+- `Out of Scope`
+- `Constraints`
+- `Success Criteria`
+- `Decisions`
 
-Do not alter task intent in a way that would change the spec.
+When a spec change is needed, propose it clearly and wait for approval before
+updating `<change-name>_spec.md` or implementing the divergent path.
 
----
-
-### Step 6 — Spec change handling
-
-If implementation reveals incorrect assumptions, missing constraints, or a better approach that **changes intent**:
-
-1. Propose the spec update clearly
-2. **Do not** implement that divergent path yet
-3. Wait for user approval
-4. Update `<change-name>_spec.md` only after approval
-
----
-
-### Step 7 — Keep context accurate
-
-- Keep `plan.md` in sync with progress
-- Add brief notes for edge cases, follow-ups, or partial work
-
----
-
-## Stop conditions
+## Stop Conditions
 
 Stop and ask if:
 
-- A task cannot be completed after one retry
-- A required spec change is identified
-- The task list is insufficient or conflicts with the spec
-
----
+- A task cannot be completed after one retry.
+- The task list cannot be safely refined to satisfy the spec, or conflicts with
+  the spec.
+- Required validation cannot be run or reasonably substituted.
+- A spec change is needed.
 
 ## Completion
 
 Implementation is complete when:
 
-- All tasks are completed or explicitly resolved
-- Work satisfies **Success Criteria** in `<change-name>_spec.md`
-- No unresolved blockers remain
+- All tasks are checked or explicitly resolved.
+- Work satisfies the spec `Success Criteria`.
+- Validation has run or any gaps are clearly explained.
+- No unresolved blockers remain.
 
 Then:
 
-1. **Summarize concisely** — brief, but **connected** to what you shipped and **why it matters** (thread + **Goal** / **Success Criteria**). Include, without turning it into a long report:
-   - **What was built** (plain language)
-   - **How it maps to the plan** (e.g. tasks or phases covered — not a full audit)
-   - **Validation results**, **deviations** (if any), and **notable learnings** (e.g. constraints discovered or assumptions overturned)
-   **Exact wording is optional**; stay natural.
+1. Summarize concisely: what shipped, how it maps to the plan, validation results,
+   deviations, and notable learnings.
+2. Ask whether the user wants to close out the change with `spar-retain`.
+3. Stop until the user confirms. Do not begin `spar-retain` automatically.
 
-2. **State wrap-up intent.** Sound aware of what just landed; use the gist below as a guide — **exact wording is optional.**
+If the user asks for more implementation work, continue from the active spec and
+plan, keep both accurate, and repeat this completion flow when done.
 
-   > We’re done with the planned work—want me to close this out? I’d sync the spec with what we shipped, tidy the change folder, and move it to **completed** so the docs stay the **source of truth**.
+## Artifact Recap
 
-3. **Wait for the user.** After you send that wrap-up message, **stop until they reply**. Do **not** begin **spar-retain** without their clear go-ahead. If they defer (“not now,” “later,” etc.), do **not** archive.
-
-4. **If they want more implementation or another follow-on request:** Do that work (keep `plan.md` and the spec accurate; follow **Execution order** Steps 2–7 as needed). When that work is done, **repeat Completion steps 1–3** in **this Completion section**.
-
-5. **When they confirm they want to close out:** begin skill: **spar-retain**.
+| Artifact | In this phase |
+| --- | --- |
+| `<change-name>_spec.md` | Source of truth for intent, boundaries, constraints, success criteria, and decisions |
+| `plan.md` | Source of execution order, validation strategy, progress, and risks/follow-ups |

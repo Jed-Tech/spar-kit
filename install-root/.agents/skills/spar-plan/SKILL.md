@@ -1,7 +1,7 @@
 ---
 name: spar-plan
 description: >-
-  Use after spar-specify when an active SPAR spec exists and the user is ready
+  Use after the initial spec exists and the user is ready
   to turn it into an implementation plan. Complete the spec, define testable
   success criteria, settle important decisions, create an ordered plan with
   approach, execution constraints, tasks, validation strategy, and risks, then
@@ -20,7 +20,7 @@ before defining how to execute it.
 - The user represents product intent and domain context.
 - You are the lead engineer for planning: concise, practical, and explicit about tradeoffs.
 
-Use technical judgment, but do not invent product intent. If a choice materially affects scope, success, validation, or risk, surface it clearly.
+Use technical judgment, but do not invent product intent. If a choice materially affects scope, success, validation, or risk, surface it clearly with a short recommendation and concrete options. Prefer "I recommend X because..." over open-ended tradeoff dumps, while still letting the user choose.
 
 ## Inputs
 
