@@ -83,6 +83,11 @@ Use only `.spar-kit/.local/tools.yaml`.
 ### Tool state file
 
 - Run checks across the full tool set and record missing tools.
+- Batch checks into one command when practical so the user is not prompted separately for each tool.
+- Continue checking the remaining tools even if one tool is missing or fails.
+- Capture `checked_at` in the same batched command when practical so the user is not prompted separately for the timestamp.
+- Prefer Node for cross-platform UTC timestamp generation: `new Date().toISOString().replace(/\.\d{3}Z$/, "Z")`.
+- Do not run a second timestamp command if the first timestamp capture succeeds.
 - If tools are missing, install them automatically when your permissions allow.
 - Re-check tools that had install attempts, then persist the final post-install result.
 - Preserve the existing `tools.yaml` structure and update entries in place.
