@@ -1,117 +1,116 @@
 ---
 name: spar-retain
 description: >-
-  Use after implementation when the user wants cleanup and durable documentation:
-  reconcile the spec with actual behavior, propose broader documentation edits for
-  approval only, tidy notes in the change folder, then archive the change folder as a
-  unit so nothing remains in active work. Closeout should convey why the retained spec
-  matters as the durable record of what shipped.
+  Use after implementation when the user approves closeout. Reconcile the active
+  spec and plan with what shipped, propose broader documentation updates for
+  approval, then move the whole change folder from specs/active to
+  specs/completed.
 ---
 
 # Retain
 
-**Run the steps below in order.**
+Turn completed implementation into durable project knowledge.
 
-Turn completed implementation into clean, accurate, durable knowledge: `<change-name>_spec.md` matches reality, broader repo doc updates only with approval, then archive by **moving** the whole change folder.
-
-- **Active:** `specs/active/<change-name>/`
-- **Completed:** `specs/completed/<change-name>/`
-
-**Archive rule:** Move the entire directory `specs/active/<change-name>/` -> `specs/completed/<change-name>/`. If `specs/completed/<change-name>/` already exists, **stop** and ask how to resolve (do not merge silently).
-
-All optional artifacts in the folder (`research.md`, notes, attachments) move together.
+Retain is closeout, not a retrospective by default. Make the active spec and
+plan accurate, preserve useful context, update broader docs only with approval,
+then archive the whole change folder.
 
 ## Inputs
 
 - `specs/active/<change-name>/<change-name>_spec.md`
 - `specs/active/<change-name>/plan.md`
 - Completed implementation in the repository
-- Repository documentation (README, architecture notes, setup guides, etc., as applicable)
+- Optional notes or artifacts in the same change folder
+- Relevant repo documentation, such as README, setup, architecture, or product docs
 
-## Outputs
+If implementation appears incomplete, stop and ask whether to return to
+`spar-act`.
 
-- Finalized `<change-name>_spec.md` (matches actual behavior)
-- Final `plan.md` state (done or explained; trim noise where helpful)
-- Optional updates to broader docs (**after approval** only)
-- Archived folder: `specs/completed/<change-name>/` (sole copy after a successful move)
+## Retention Context
 
----
+Before editing, review the spec, plan, implementation changes, validation
+results, and optional notes. Preserve optional artifacts unless the user asked to
+remove them or they are clearly obsolete.
 
-## Execution order
+The retained folder should explain what shipped and why it matters without
+becoming a noisy build log.
 
-### Step 1 - Review implementation vs spec
+## Reconcile the Spec
 
-- Compare implemented behavior with `<change-name>_spec.md`
-- Note mismatches, missing decisions, outdated assumptions
+Update `<change-name>_spec.md` so it describes final behavior and durable intent.
 
----
+- Keep `Summary`, `Problem`, `Scope`, and `Out of Scope` accurate.
+- Update `Constraints` if implementation revealed durable requirements.
+- Update `Success Criteria` so they reflect the outcomes that shipped and were
+  validated.
+- Update `Decisions` with important product or technical choices discovered
+  during implementation.
+- Resolve or remove stale `Open Questions`; keep only questions that materially
+  affect future implementation or validation.
 
-### Step 2 - Update `<change-name>_spec.md`
+Do not add step-by-step implementation narrative to the spec.
 
-- Reflect final behavior (spec must match reality, not original guesses)
-- Update **Decisions**, **Constraints**, **Success Criteria** as needed
-- Resolve or remove stale **Open Questions**
-- Keep intent-focused; no step-by-step implementation narrative in the spec
+## Reconcile the Plan
 
----
+Update `plan.md` so it remains a useful execution record.
 
-### Step 3 - Identify broader documentation impact
+- Ensure `Tasks` are checked or explicitly explained.
+- Ensure `Validation Strategy` reflects what actually ran or what could not be
+  validated.
+- Ensure `Risks / Follow-ups` captures unresolved risks, deferred work, or
+  follow-up decisions.
+- Ensure `Approach` and `Execution Constraints` do not contradict what shipped.
+- Remove only scratch notes or duplicate lines that would confuse future readers.
 
-- Use **Documentation Impact** in `<change-name>_spec.md` and the change itself
-- Consider README, developer onboarding, architecture or product docs as relevant to this repo
+## Documentation Updates
 
----
+Identify broader documentation impact from the final spec, plan, implementation
+changes, and repo docs.
 
-### Step 4 - Propose broader documentation updates
+If broader docs should change, propose concrete edits and ask for approval before
+applying them. Do not silently edit repo-wide documentation.
 
-- List suggested edits clearly. Be concise.
-- **Do not apply** until the user approves
-- If **no** broader repo documentation changes are warranted after Step 3, say so **briefly** in your user-facing summary later (**Completion**) - so the user knows the question was considered, not skipped.
+If no broader documentation updates are warranted, say so briefly in the final
+summary so the user knows it was considered.
 
----
+## Archive the Change
 
-### Step 5 - Apply approved updates
-
-- Update only what was approved; keep changes minimal and accurate
-
----
-
-### Step 6 - Final cleanup in the change folder
-
-- **`<change-name>_spec.md` - last pass:** Read it end-to-end. Fix typos, stale phrasing, or inconsistencies **introduced while editing**; ensure nothing contradicts the shipped behavior you captured in Step 2.
-- **`plan.md` - last pass:** Every task is checked **or** explicitly explained (won't do, superseded, follow-up elsewhere). Remove only **scratch** or **duplicate** lines that would confuse someone later; keep useful context.
-- **Optional files (`research.md`, notes, attachments):** **Keep** unless the user asked to drop something or a file is clearly obsolete after Steps 2-5. When in doubt, keep.
-
----
-
-### Step 7 - Archive change (move folder)
-
-Move the **entire** folder:
+Move the entire folder:
 
 `specs/active/<change-name>/` -> `specs/completed/<change-name>/`
 
-Create `specs/completed/` if missing. Do **not** leave a copy under `specs/active/`.
+Create `specs/completed/` and `specs/completed/<change-name>/` if needed. Do
+not leave a copy under `specs/active/`. If a destination file already exists,
+stop and ask how to resolve it; do not overwrite or merge file contents silently.
 
----
+## Stop Conditions
 
-## Rules
+Stop and ask if:
 
-- Spec describes **final** behavior; it is not a build log
-- No silent edits to repo-wide documentation - approval first
-- Stay concise - closeout is **not** a long retrospective by default (unless the user asks for one)
-
----
+- Implementation appears incomplete.
+- Validation is missing and cannot be explained honestly.
+- Final behavior contradicts the spec in a way the user has not approved.
+- Broader documentation changes are needed but not yet approved.
+- A destination file already exists in `specs/completed/<change-name>/`.
 
 ## Completion
 
-Done when:
+Retention is complete when:
 
-- `<change-name>_spec.md` matches the implementation
-- Approved documentation updates are applied (or none were needed)
-- The change folder exists only under `specs/completed/<change-name>/`
+- The spec matches the implementation.
+- The plan reflects completed or explained work.
+- Approved documentation updates are applied, or none were needed.
+- The change folder exists only under `specs/completed/<change-name>/`.
 
-Then:
+Then summarize concisely with genuine enthusiasm for the completed change: final
+archived path, spec and plan reconciliation, documentation updates made or
+skipped, and any retained follow-ups. Emphasize that the completed folder is the
+durable source of truth for what shipped.
 
-1. **Summarize concisely** - key outcomes, **doc updates made** (or **none** - state that briefly if Step 4 had nothing to apply), **final path** under `specs/completed/`. Tie the closeout to **why retention exists**: the archived **`<change-name>_spec.md`** (and folder) are the **durable source of truth** for what shipped - not administrative noise. **Exact wording is optional**; sound natural.
-2. Keep the summary **short**; at most **one line** of notable learning if useful - not a full postmortem unless the user wants depth.
-3. Confirm to the user that implementation and retention are complete.
+## Artifact Recap
+
+| Artifact | In this phase |
+| --- | --- |
+| `<change-name>_spec.md` | Final behavior, durable intent, constraints, success criteria, decisions, and material open questions |
+| `plan.md` | Final task state, validation record, risks, and follow-ups |
+| `specs/completed/<change-name>/` | Archived source of truth for the shipped change |

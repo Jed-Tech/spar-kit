@@ -1,9 +1,10 @@
 ---
 name: spar-init
 description: >-
-  After install or on demand, verify and lightly repair the repo-local spar-kit
-  setup: version freshness, .agents/skills, AGENTS.md, and
-  .spar-kit/.local/tools.yaml, then finish with a short handoff to spar-specify.
+  After install or on demand, complete the repo-local spar-kit setup by checking
+  version freshness, .agents/skills, AGENTS.md, .spar-kit/.local/tools.yaml, and
+  .gitignore hygiene; make safe repairs or recommendations, then finish with a
+  short handoff to spar-specify.
 ---
 
 # Init
@@ -54,9 +55,8 @@ Determine whether this agent uses repo-local skills and, if so, what repo-local 
 If the current skill location is wrong, missing, or unclear:
 
 - explain the issue
-- move or copy the SPAR skills to the preferred repo-local location for this agent when that repair is safe
+- move or copy the SPAR skills to the preferred repo-local location for this agent.
 - repair only when the action is safe and consistent with the installed repo-local bundle
-- otherwise recommend rerunning `npx spar-kit install`
 
 Keep this focused on verifying and repairing skill placement, not re-running the full install workflow.
 
@@ -85,6 +85,7 @@ Use only `.spar-kit/.local/tools.yaml`.
 - Run checks across the full tool set and record missing tools.
 - If tools are missing, install them automatically when your permissions allow.
 - Re-check tools that had install attempts, then persist the final post-install result.
+- Preserve the existing `tools.yaml` structure and update entries in place.
 - For each tool entry, maintain `installed`, `version` (when available), and `reason` (when missing/failing) consistently.
 - Update `checked_at` once after the completed full pass.
 - Respect `when` rules (for example, `uv` when the repo uses Python tooling).
@@ -98,9 +99,9 @@ If `.spar-kit/.local/` cannot be written, summarize tool presence in chat instea
 Treat `.gitignore` as a follow-up hygiene check, not part of install.
 
 - If this is a git repo, check whether `.spar-kit/.local/` is ignored.
-- If it is not ignored, recommand that the user add it as ignored.
+- If it is not ignored, recommend that the user add it as ignored.
   - `.spar-kit/.local/`
-- Only modify `.gitignore` after explicit user consent.
+- Offer the exact line to add, then modify `.gitignore` only after explicit user consent.
 
 ---
 
@@ -110,7 +111,7 @@ Keep the wrap-up short:
 
 - what was verified or fixed
 - what still needs user action, if anything
-- recommend using `spar-specify`
+- briefly confirm SPAR is ready, note any remaining user action, and recommend `spar-specify` for the next change
 
 Example shape:
 
@@ -123,7 +124,7 @@ SPAR initialization is complete. Verified version, repo-local SPAR skill placeme
 Stop and ask when:
 
 - `.spar-kit/VERSION` cannot be checked and the repo-local SPAR bundle is obviously incomplete
-- the installed SPAR `AGENTS.md` block source cannot be found
+- `AGENTS.md` is missing or malformed and a safe repair source is not available; explain the issue with an enthusiastic, constructive recommendation for the safest next step
 - `.spar-kit/.local/tools.yaml` cannot be seeded and the local directory cannot be written
 
 Do not use destructive workarounds.

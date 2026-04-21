@@ -28,6 +28,7 @@ async function mktemp(prefix) {
 async function makeFixtureRepo() {
   const dir = await mktemp("spar-pp-fix-");
   await cp(join(repoRoot, "install-root"), join(dir, "install-root"), { recursive: true });
+  await cp(join(repoRoot, "templates"), join(dir, "templates"), { recursive: true });
   await cp(join(repoRoot, "VERSION"), join(dir, "VERSION"));
   await cp(join(repoRoot, "package.json"), join(dir, "package.json"));
   return dir;
@@ -80,12 +81,35 @@ test("verifyInstallPayload fails when a required path is missing", async () => {
 test("runPackPrep on fixture copy: versions aligned, payload OK (tests off)", async () => {
   const dir = await makeFixtureRepo();
   try {
+    await writeFile(
+      join(dir, "install-root", ".agents", "skills", "spar-plan", "assets", "plan.md"),
+      "outdated plan template\n",
+      "utf8",
+    );
+    await writeFile(
+      join(dir, "install-root", ".agents", "skills", "spar-specify", "assets", "spec.md"),
+      "outdated spec template\n",
+      "utf8",
+    );
+
     await runPackPrep(dir, { runTests: false });
     const v = (await readFile(join(dir, "VERSION"), "utf8")).trim();
     const payloadV = (await readFile(join(dir, "install-root", ".spar-kit", "VERSION"), "utf8")).trim();
     const pkg = JSON.parse(await readFile(join(dir, "package.json"), "utf8"));
+    const templatePlan = await readFile(join(repoRoot, "templates", "plan.md"), "utf8");
+    const templateSpec = await readFile(join(repoRoot, "templates", "spec.md"), "utf8");
+    const syncedPlan = await readFile(
+      join(dir, "install-root", ".agents", "skills", "spar-plan", "assets", "plan.md"),
+      "utf8",
+    );
+    const syncedSpec = await readFile(
+      join(dir, "install-root", ".agents", "skills", "spar-specify", "assets", "spec.md"),
+      "utf8",
+    );
     assert.equal(payloadV, v);
     assert.equal(pkg.version, v);
+    assert.equal(syncedPlan, templatePlan);
+    assert.equal(syncedSpec, templateSpec);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
