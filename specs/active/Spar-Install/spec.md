@@ -51,7 +51,7 @@ In scope:
 
 ## Non-Goals
 
-- defining the full behavior of `spar.init` beyond its dependency on the installed repo-local payload
+- defining the full behavior of `spar-init` beyond its dependency on the installed repo-local payload
 - designing every future install path beyond Beta1
 - supporting a no-Node install path in Beta1
 - silently overwriting user-owned or machine-local files
@@ -73,7 +73,7 @@ In scope:
 - If `AGENTS.md` contains malformed SPAR markers that are not safely repairable, Beta1 warns and leaves it unchanged rather than duplicating SPAR content.
 - Existing `justfile` content must be preserved; install only creates a skeleton when no `justfile` exists.
 - In Beta1, no additional platform detection is required beyond installing the shipped Codex-default layout.
-- On `success`, install should clearly tell the user the outcome and recommend asking their agent to use `spar.init`.
+- On `success`, install should clearly tell the user the outcome and recommend asking their agent to use `spar-init`.
 - Detailed bootstrap rules live in `repo-bootstrap_spec.md`.
 - Detailed reporting rules live in `install-report_spec.md`.
 - The host repo’s root `package.json` must remain untouched except for the normal effects of the chosen `npx` invocation path; SPAR must not depend on the app package version.
@@ -89,9 +89,9 @@ In scope:
 - Install uses the `install-root/` content that shipped with the current build of `spar-kit`.
 - Install creates `AGENTS.md` when missing from `install-root/AGENTS.md`.
 - Re-running install is idempotent for managed files and preserves user-owned content.
-- The installed repo-local state is sufficient for later `spar.init`-guided setup.
+- The installed repo-local state is sufficient for later `spar-init`-guided setup.
 - Beta1 install reports the outcome states defined in `install-report_spec.md`.
-- On `success`, install prints a next-step recommendation to ask the active agent to use `spar.init`.
+- On `success`, install prints a next-step recommendation to ask the active agent to use `spar-init`.
 
 ## Open Questions
 
@@ -113,7 +113,7 @@ In scope:
 - The installer must not overwrite existing files in `.spar-kit/.local/`.
 - Managed SPAR files outside `.spar-kit/.local/` may be updated on reinstall.
 - Beta1 install reporting follows `install-report_spec.md`.
-- On `success`, install recommends that the user ask their agent to use `spar.init`.
+- On `success`, install recommends that the user ask their agent to use `spar-init`.
 - `install-root/` itself is the Beta1 packaging contract; no separate asset manifest is required.
 - `install` is the only required Beta1 installer command.
 - Installed `specs/README.md` content comes directly from `install-root/specs/README.md` at build time.
@@ -125,7 +125,7 @@ In scope:
 - `README.md` must document `npx spar-kit install` as the single primary Beta1 install command.
 - Beta onboarding docs should describe Node/npm as a prerequisite.
 - Installation docs must explain that Beta1 installs the Codex-default layout from `install-root/`.
-- Docs must describe the installed repo-local payload and later `spar.init` guidance.
+- Docs must describe the installed repo-local payload and later `spar-init` guidance.
 - Docs must explain the installer’s non-overwrite rule for `.spar-kit/.local/`.
 - Build and packaging docs must ensure the shipped installer assets include the current `install-root/`.
-- Future `spar.init` documentation should assume the installed repo-local content can be used to guide later setup.
+- Future `spar-init` documentation should assume the installed repo-local content can be used to guide later setup.

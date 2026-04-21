@@ -1,6 +1,6 @@
 # <change-name> - Intent and Specifications
 
-<!-- Copy this template to specs/<stage>/<change-name>/<change-name>_spec.md (name matches the folder). After Retain: specs/completed/<change-name>/<change-name>_spec.md. Optional queues: specs/next/ or specs/later/ until moved to active/. -->
+<!-- Copy this template to specs/active/<change-name>/<change-name>_spec.md (name matches the folder). After Retain: specs/completed/<change-name>/<change-name>_spec.md. -->
 
 ## Summary
 ## Problem

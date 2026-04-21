@@ -97,7 +97,7 @@ Implement Beta1 installer output so users and agents get a clear success/failure
 
 ### Status
 
-- **Complete.** Implemented in `lib/install-report.mjs`; CLI wraps `runInstall` in try/catch. Layout: `Outcome:` → optional `Warnings:` (one `- ` line per warning) → `Next: Ask your agent to use spar.init.` on success.
+- **Complete.** Implemented in `lib/install-report.mjs`; CLI wraps `runInstall` in try/catch. Layout: `Outcome:` → optional `Warnings:` (one `- ` line per warning) → `Next: Ask your agent to use spar-init.` on success.
 
 ### Related Documents
 
@@ -107,7 +107,7 @@ Implement Beta1 installer output so users and agents get a clear success/failure
 ### Tasks
 - [X] Implement Beta1 `success` and `failure` reporting.
 - [X] Add `Warnings:` output when warnings exist.
-- [X] Add the Beta1 next-step recommendation to use `spar.init` on success.
+- [X] Add the Beta1 next-step recommendation to use `spar-init` on success.
 
 ### Notes
 

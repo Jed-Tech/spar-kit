@@ -47,7 +47,7 @@ In scope:
 - defining reporting layout beyond the meaning of target-related warnings and outcomes
 - redefining the shipped Beta1 Codex-default layout
 - defining every future platform-integration path beyond the first Beta2 targets
-- defining `spar.init` behavior beyond its use as a recovery/setup path
+- defining `spar-init` behavior beyond its use as a recovery/setup path
 
 ## Constraints
 
@@ -66,7 +66,7 @@ In scope:
 - When a detected supported target cannot be configured, the installer emits a warning and the final outcome is not overstated.
 - No detected platform does not force `partial success` or `failure` by itself.
 - The installer can complete repo-local install without requiring external agent-target success.
-- Future `spar.init` flows can rely on the installed repo-local content as the recovery source for missing or stale agent-target setup.
+- Future `spar-init` flows can rely on the installed repo-local content as the recovery source for missing or stale agent-target setup.
 
 ## Open Questions
 

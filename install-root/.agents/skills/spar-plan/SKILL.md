@@ -1,201 +1,113 @@
 ---
-
-## name: spar.plan
+name: spar-plan
 description: >-
-  Use after spar.specify when Summary through Scope already exist: finish the spec
-  (including required Success Criteria), then add an ordered, checkable task list with
-  risks and validation ideas. Stabilize the spec before defining executable tasks.
-  Cap follow-up questions per turn; separate Key Considerations from Optional Considerations. Proceed to
-  spar.act only after the user explicitly approves implementation.
+  Use after spar-specify when an active SPAR spec exists and the user is ready
+  to turn it into an implementation plan. Complete the spec, define testable
+  success criteria, settle important decisions, create an ordered plan with
+  approach, execution constraints, tasks, validation strategy, and risks, then
+  ask before starting implementation.
+---
 
 # Plan
 
-**Run the sections below in order.** Finish the **Full `<change-name>_spec.md` structure** and `**plan.md` structure** references before executing the numbered steps.
+Turn an active spec into a stable implementation plan.
 
-**Change location:** `specs/active/<change-name>/` (repository root = `<root>`).
+Planning is the bridge between intent and action. Stabilize what must be true
+before defining how to execute it.
 
-**Prerequisite:** **spar.specify** should have already created this folder and an initial `<change-name>_spec.md` with **Summary, Problem, Goal, Scope**. If the folder or `<change-name>_spec.md` is missing, stop and use **spar.specify** first. If the change is under **`specs/next/`** or **`specs/later/`**, move it to **`specs/active/`** before planning (same `<change-name>`), then proceed.
+## Role
 
-Turn the partial spec into a **complete, stable** `<change-name>_spec.md`, then add `plan.md` (implementation plan with ordered tasks).
+- The user represents product intent and domain context.
+- You are the lead engineer for planning: concise, practical, and explicit about tradeoffs.
 
-Optional files (`research.md`, notes, etc.) may already exist in the folder; preserve them.
-
-## Voice
-
-Be **concise**, **cheerful**, and **professional** — **forward-moving** and **knowledgeable**. You are the **lead engineer** on this change now. You collaborate and ask questions with the user (who represents the Product Manger now.)
-
----
-
-## Follow-up questions (UX rules)
-
-These are **hard constraints** on how you converse; they do **not** prescribe exact wording — stay natural, creative, and adapted to the thread.
-
-### Question budget
-
-- Ask **at most 7 questions in a single assistant message** (count each distinct thing the user must decide or answer). This is a **hard** limit, not a style preference.
-- Do not cheat the limit with **compound questions** (many sub-parts in one line). Prefer **one decision per question**; bundle only when the parts are inseparable.
-
-### Two tiers
-
-When you need user input, separate:
-
-1. **Key Considerations** — blocks testable **Success Criteria**, **scope**, honest **sequencing**, material **risk**, or **validation** meaningfully. If unanswered, record a deliberate assumption in **Decisions** or keep it in **Open Questions** and say so — do not pretend the spec is firmer than it is.
-2. **Optional Considerations** — would refine the plan but does not change the above materially.
-
-Use **two clearly separated groups** (headings, sections, or bullet groups — labels are yours). Make **Key Considerations** easy to spot; do **not** bury blockers in a long mixed list.
-
-### Deferral
-
-- If listing **Key Considerations** already uses the question budget (or would make the turn feel crowded), **omit Optional Considerations this turn** and ask them after blockers are cleared.
-- Do **not** use **Optional Considerations** to **delay** drafting or to avoid committing to a plan when the spec is already specific enough.
-
-### What to ask (directness filter)
-
-Ask a questions especially if answering it would **materially** improve **Success Criteria**, **scope clarity**, **task order**, **risk posture**, or **how we validate**.
-
----
+Use technical judgment, but do not invent product intent. If a choice materially affects scope, success, validation, or risk, surface it clearly.
 
 ## Inputs
 
-- `specs/active/<change-name>/<change-name>_spec.md` (partial or draft)
-- Optional: `research.md` and other artifacts in the same folder
-- Repository code and documentation
+- `specs/active/<change-name>/<change-name>_spec.md`
+- Optional notes or artifacts in the same folder, such as `research.md`
+- Relevant repository code and documentation
 
-## Outputs
+If the active change folder or spec file is missing, stop and use `spar-specify` first.
 
-- **Complete** `<change-name>_spec.md` (full structure below), including **Success Criteria** (required)
-- `**plan.md`** — ordered, checkable tasks, plus summary and notes
+## Templates
 
----
+Before completing `<change-name>_spec.md`, read [assets/spec.md](assets/spec.md) and preserve its section order.
 
-## Full `<change-name>_spec.md` structure (complete in this phase)
+Before creating `plan.md`, read [assets/plan.md](assets/plan.md) and use it as the template.
 
-Use exactly these headings (replace `<change-name>` with the folder name):
+Do not create `plan.md` until the spec is stable enough to support reliable tasks.
 
-```markdown
-# <change-name>
+## Capture Planning Context
 
-## Summary
-## Problem
-## Goal
-## Scope
-## Non-Goals
-## Constraints
-## Success Criteria
-## Open Questions
-## Decisions
-## Documentation Impact
-```
+Before asking new questions, extract what is already known from the spec, thread, notes, repository files, and docs. Do not make the user repeat context that is already available.
 
-**Success Criteria** must be **testable** (observable outcomes, not vague wishes). If they cannot be written yet, resolve gaps with the user or record them in **Open Questions** — do **not** treat planning as done until Success Criteria are defined.
+Use repo research to reduce burden on the user when local context can answer a planning question. Preserve optional artifacts in the change folder.
 
-`<change-name>_spec.md` holds **intent, constraints, and decisions** — not step-by-step implementation (that belongs in `plan.md`).
+Ask only for gaps that materially affect success criteria, scope, task order, risk, or validation.
 
----
+## Complete the Spec
 
-## `plan.md` structure
+Refine the spec so it captures durable intent, not step-by-step implementation.
 
-Create **only after** `<change-name>_spec.md` is stable:
+- Keep `Summary`, `Problem`, `Scope`, and `Out of Scope` aligned with the user's intent.
+- Fill `Constraints` with solution requirements that must remain true.
+- Fill `Success Criteria` with concrete, testable outcomes.
+- Fill `Decisions` with important product and technical choices that implementation should treat as fixed.
+- Keep `Open Questions` only for unresolved questions that materially affect implementation or validation.
 
-```markdown
-# Implementation Plan - <change-name>
+Major product choices belong in `Scope` or `Out of Scope`. Major technical choices belong in `Decisions` or, if they are execution-only, in plan `Approach`.
 
-## Summary
-- High-level approach
-- Major steps or phases
-- Key sequencing or constraints
+## Build the Plan
 
-## Tasks
-- [ ] Task 1
-- [ ] Task 2
-- [ ] Task 3
+Create `plan.md` only after the spec is stable enough.
 
-## Notes
-- Validation ideas
-- Risks
-- Follow-ups
-```
+- `Summary`: brief overview of the implementation plan.
+- `Approach`: major technical direction and sequencing strategy.
+- `Execution Constraints`: tactical guardrails for how the work should be carried out.
+- `Tasks`: ordered, concrete, checkable steps.
+- `Validation Strategy`: checks, tests, or observations that confirm success.
+- `Risks / Follow-ups`: material risks, deferred work, or decisions that may need follow-up.
 
-**Task rules:** ordered, concrete, verifiable; avoid vague items. Keep both files proportionate — prefer clarity over volume.
+Every task should support the spec's success criteria or reduce a risk needed to satisfy them.
 
----
+## Follow-up Questions
 
-## Execution order
+Ask at most seven questions in a single turn. Prefer fewer.
 
-### Step 1 — Load context
+When asking, separate:
 
-- Read `<change-name>_spec.md` (and optional `research.md` / notes)
-- Confirm `specs/active/<change-name>/`
+- **Key Considerations**: blockers to a reliable spec or plan, especially success criteria, scope, sequencing, material risk, or validation.
+- **Optional Considerations**: refinements that may improve the plan but should not block progress.
 
----
+If key questions remain unresolved, record them in `Open Questions` and do not pretend the plan is firmer than it is.
 
-### Step 2 — Complete `<change-name>_spec.md`
+## Stop Conditions
 
-- Preserve and refine the four initial sections as needed
-- Add **Non-Goals**, **Constraints**, **Success Criteria**, **Open Questions**, **Decisions**, **Documentation Impact**
-- Incorporate user input until intent and scope are clear
+Stop and ask before continuing if:
 
----
-
-### Step 3 — Surface unknowns
-
-List gaps; ask the user where needed (**Follow-up questions (UX rules)**). Critical ambiguity blocks a real plan — surface **Key Considerations** first; keep **Optional Considerations** separate and within the per-turn budget.
-
----
-
-### Step 4 — Finalize `<change-name>_spec.md`
-
-**Treat the spec as stable after this step.** Do not start `plan.md` before then.
-
----
-
-### Step 5 — Create `plan.md`
-
-Derive tasks from the stable spec. Every task should be something you could verify as done.
-
----
-
-### Step 6 — Alignment check
-
-- Tasks support **Success Criteria**
-- Ordering and constraints make sense
-- Risks or follow-ups captured in **Notes**
-
----
-
-## Stop conditions
-
-Stop and ask if:
-
-- Requirements are too vague for reliable tasks
-- **Success Criteria** cannot be defined yet
-- Tasks would conflict with **Scope** or **Non-Goals**
-
----
+- Requirements are too vague for reliable tasks.
+- Success criteria cannot be made testable.
+- Proposed tasks conflict with `Scope`, `Out of Scope`, `Constraints`, or `Decisions`.
+- Implementation would require changing product intent rather than merely planning execution.
 
 ## Completion
 
 Planning is complete when:
 
-- `<change-name>_spec.md` is stable and includes **Success Criteria**
-- `plan.md` is actionable
+- `<change-name>_spec.md` is stable and includes testable `Success Criteria`.
+- `plan.md` is actionable and aligned with the spec.
+- Remaining `Open Questions` or `Risks / Follow-ups` are explicit.
 
 Then:
 
-1. Summarize concisely: spec status, task outline, remaining questions.
-2. Ask: **Proceed to implementation?**
-3. If yes: begin skill: **spar.act**. If not, wait for the user.
+1. Summarize concisely: spec status, plan outline, validation strategy, and remaining questions or risks.
+2. Ask: **Are we ready to proceed to implementation?**
+3. Only start `spar-act` after the user confirms.
 
----
+## Artifact Recap
 
-## Rules (summary)
-
-
-| Artifact     | Role                                                                                                 |
-| ------------ | ---------------------------------------------------------------------------------------------------- |
-| `<change-name>_spec.md`    | Intent, constraints, decisions — **not** step-by-step                                                |
-| `plan.md`    | Execution steps — **after** spec is stable                                                           |
-| User prompts | **Follow-up questions (UX rules)** — budget, Key Considerations vs Optional Considerations, deferral |
-
-
-Do **not** generate `plan.md` until `<change-name>_spec.md` is finalized.
+| Artifact | In this phase |
+| --- | --- |
+| `<change-name>_spec.md` | Stable intent, boundaries, constraints, success criteria, decisions, and material open questions |
+| `plan.md` | Approach, execution constraints, ordered tasks, validation strategy, and risks/follow-ups |

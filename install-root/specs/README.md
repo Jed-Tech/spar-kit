@@ -13,4 +13,4 @@ This directory holds **change folders** for SPAR work. Each subfolder under a st
 
 In each change folder, the spec file is **`<change-name>_spec.md`** (underscore before `spec.md`; spelling matches the folder). **`plan.md`** keeps that name.
 
-Use the SPAR skills for phase guidance: `spar.specify`, `spar.plan`, `spar.act`, and `spar.retain`.
+Use the SPAR skills for phase guidance: `spar-specify`, `spar-plan`, `spar-act`, and `spar-retain`.

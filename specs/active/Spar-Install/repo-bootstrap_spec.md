@@ -69,7 +69,7 @@ In scope:
 - defining agent-platform detection or external platform-specific installation
 - defining installer output formatting
 - defining packaging mechanics or build pipeline behavior
-- defining the full behavior of `spar.init`
+- defining the full behavior of `spar-init`
 - defining Beta2 or later platform-specific installation beyond the Codex-default install-root layout
 
 ## Constraints

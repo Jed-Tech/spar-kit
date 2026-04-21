@@ -79,7 +79,7 @@ Beta1 reporting is intentionally small:
 
 - `Outcome: success` or `Outcome: failure`
 - optional `Warnings:` section
-- `Next: Ask your agent to use spar.init.` on success
+- `Next: Ask your agent to use spar-init.` on success
 
 Warnings are used for preserved or skipped actions where appropriate, such as:
 

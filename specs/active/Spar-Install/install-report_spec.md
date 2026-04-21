@@ -2,7 +2,7 @@
 
 ## Summary
 
-Define the installer reporting contract for `spar-kit` Beta1 installs. This spec covers how `npx spar-kit install` reports outcome state, warnings, and the next-step recommendation to use `spar.init`.
+Define the installer reporting contract for `spar-kit` Beta1 installs. This spec covers how `npx spar-kit install` reports outcome state, warnings, and the next-step recommendation to use `spar-init`.
 
 The goal is to make installer output predictable for both humans and AI agents. Reporting should clearly describe repo-local install success while keeping the messaging short and actionable.
 
@@ -26,7 +26,7 @@ Reporting rules:
 - `success` means the required repo-local install completed successfully.
 - `failure` means the required repo-local install did not complete, so the repo is not in a valid SPAR-installed state.
 - In Beta1, no platform-detection message is required because the install ships a Codex-default layout directly from `install-root/`.
-- On `success`, the installer recommends asking the active agent to use `spar.init`.
+- On `success`, the installer recommends asking the active agent to use `spar-init`.
 - Warnings are allowed on `success` when they describe actions that were intentionally skipped or preserved.
 - Warnings should be concise and specific enough to explain what was skipped or preserved.
 
@@ -36,7 +36,7 @@ In scope:
 
 - outcome state definitions for Beta1 installer reporting
 - success and failure message requirements
-- next-step recommendation behavior for `spar.init`
+- next-step recommendation behavior for `spar-init`
 - warning/reporting rules for skipped or preserved repo-local actions
 - keeping reporting short and consistent enough for users and agents to interpret reliably
 
@@ -45,7 +45,7 @@ In scope:
 - defining file copy behavior or install mechanics
 - defining future Beta2 platform-detection logic
 - defining packaging or build behavior
-- defining the full behavior of `spar.init`
+- defining the full behavior of `spar-init`
 - defining logging verbosity for internal debugging beyond user-facing outcome reporting
 
 ## Constraints
@@ -61,7 +61,7 @@ In scope:
 - Installer output always includes exactly one outcome state: `success` or `failure`.
 - `success` is used when repo-local install succeeded.
 - `failure` is used when the required repo-local install did not complete.
-- On `success`, the installer includes a next-step recommendation to use `spar.init`.
+- On `success`, the installer includes a next-step recommendation to use `spar-init`.
 - Reporting language stays concise enough to serve as both human-facing output and agent-consumable status.
 
 ## Open Questions
@@ -73,7 +73,7 @@ In scope:
 - Installer reporting has its own dedicated spec within `Spar-Install`.
 - Beta1 installer reporting defines two outcome states: `success` and `failure`.
 - Repo-local install completion is the determinant of outcome state in Beta1.
-- On `success`, the installer recommends using `spar.init`.
+- On `success`, the installer recommends using `spar-init`.
 - Installer reporting uses a fixed, simple layout rather than flexible free-form messaging.
 - Beta1 warnings are grouped under a dedicated `Warnings:` section when warnings exist.
 

@@ -4,7 +4,7 @@
 Define and adopt a clear `tools.yaml` contract for SPAR tool checks that keeps registry metadata and runtime status in one file. The target format is a unified per-tool object model with one top-level `checked_at` timestamp representing the snapshot time of the most recent check run.
 
 ## Problem
-The current `tools.yaml` acts as a registry template, while `spar.init` guidance expects runtime state updates (`installed`, `checked_at`). Without a concrete file contract, agents may write inconsistent shapes, produce noisy diffs, or make tool status hard to read and automate. We also need to avoid ambiguous timestamp semantics across per-tool and global updates.
+The current `tools.yaml` acts as a registry template, while `spar-init` guidance expects runtime state updates (`installed`, `checked_at`). Without a concrete file contract, agents may write inconsistent shapes, produce noisy diffs, or make tool status hard to read and automate. We also need to avoid ambiguous timestamp semantics across per-tool and global updates.
 
 ## Goal
 Establish a single, machine-readable and human-readable `tools.yaml` format that supports:
@@ -17,7 +17,7 @@ Establish a single, machine-readable and human-readable `tools.yaml` format that
 - Define the canonical `tools.yaml` schema for this repo and installed payload.
 - Specify naming and timestamp conventions (top-level `checked_at`, RFC 3339 UTC).
 - Define required vs optional per-tool fields in the unified structure.
-- Clarify what `spar.init` should read/write in this file for check runs.
+- Clarify what `spar-init` should read/write in this file for check runs.
 
 ## Non-Goals
 - Defining installer-time migration behavior for legacy `tools.yaml` shapes.
@@ -118,14 +118,14 @@ installers:
 - Category and tool ordering remain unchanged after write.
 
 ## Constraints
-- `spar.init` step 4 must read and write only `.spar-kit/.local/tools.yaml`.
+- `spar-init` step 4 must read and write only `.spar-kit/.local/tools.yaml`.
 - `checked_at` updates once per completed check pass, not per-tool.
 - category and tool ordering is stable and follows the Final v1 Tool Set order.
 - `schema_version` must be written on every successful file update.
 - Unknown top-level or tool fields should be preserved when practical.
 
 ## Success Criteria
-- A single `tools.yaml` shape is defined and used consistently by `spar.init`.
+- A single `tools.yaml` shape is defined and used consistently by `spar-init`.
 - Every v1 tool entry has deterministic metadata and deterministic status fields.
 - `checked_at` reflects the latest completed check pass in UTC RFC 3339 format.
 - Missing or failing tools are represented via `installed: false` plus `reason`.

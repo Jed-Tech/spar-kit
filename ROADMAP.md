@@ -36,7 +36,7 @@ Beta means:
 
 Define the exact checklist yourself; Beta should mean **“an invited early adopter can follow the repo and complete one real change using SPAR without guessing.”** Candidate pillars (edit freely):
 
-1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/` (with optional `specs/next/` and `specs/later/` for queuing).
+1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/`.
 2. **Templates** — Spec and plan templates match what the skills expect.
 3. **Guidance for agents** — `AGENTS.md` (and related pointers) make the workflow and folder layout unavoidable for tools that read repo instructions.
 4. **Install / copy path** — One documented way to get skills (and any required files) into a project for at least your Beta target agents.
@@ -62,14 +62,14 @@ v1 should build on the Beta foundation with stronger onboarding, clearer public-
 ## Beta foundations
 These remain the highest-priority foundations because both Beta and v1 depend on them:
 
-1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/` (with optional `specs/next/` and `specs/later/` for queuing).
+1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/`.
 2. **Templates** — Spec and plan templates match what the skills expect.
 3. **Guidance for agents** — `AGENTS.md` (and related pointers) make the workflow and folder layout unavoidable for tools that read repo instructions.
 4. **Install / copy path** — One documented way to get skills (and any required files) into a project for at least the currently supported agents.
-5. **Specify-phase behavior (`spar.specify`)** — Agents should **infer which feature or change they are working on** when recent chat context already makes that clear. Inference must **not** replace rigor: they still **ask the questions the skill requires** and **work through spec and documentation steps** in full. The goal is less repetitive restating, not skipping discovery or documentation.
-6. **Starting SPAR / invocation clarity** — Feedback: people find it hard to remember **how to start** the workflow (for example, how or when to invoke `spar.specify`). Explore a more obvious, memorable entry—**ideas to compare:** a single umbrella command or alias (e.g. `spar.start`), a fixed “start here” line in `README.md` and `AGENTS.md`, or a tiny onboarding checklist. Settle on **one primary path** for Beta and document it so invited adopters are not guessing.
-7. **Specify questioning tone (`spar.specify`)** — Questioning should be **creative and suggestive**, not only interrogative: propose concrete directions (e.g. “Do you want to do *this*?” naming a concrete option) and offer a **numbered list of 2–7 ideas** for the user to react to, sized to what fits the topic. The agent should read as a **teammate**—collaborative and imaginative—while still covering the skill’s required discovery and documentation.
-8. **Plan follow-ups (`spar.plan`)** — Be **direct and forward** about follow-up questions. Ask **no more than seven** follow-up questions in total. Present them in **two clearly separated sections** so users see the distinction: **Key Follow-Up Questions** (needed for the plan to succeed) and **Optional Follow-ups** (worth considering but not critical to a successful plan).
+5. **Specify-phase behavior (`spar-specify`)** — Agents should **infer which feature or change they are working on** when recent chat context already makes that clear. Inference must **not** replace rigor: they still **ask the questions the skill requires** and **work through spec and documentation steps** in full. The goal is less repetitive restating, not skipping discovery or documentation.
+6. **Starting SPAR / invocation clarity** — Feedback: people find it hard to remember **how to start** the workflow (for example, how or when to invoke `spar-specify`). Explore a more obvious, memorable entry—**ideas to compare:** a single umbrella command or alias (e.g. `spar-start`), a fixed “start here” line in `README.md` and `AGENTS.md`, or a tiny onboarding checklist. Settle on **one primary path** for Beta and document it so invited adopters are not guessing.
+7. **Specify questioning tone (`spar-specify`)** — Questioning should be **creative and suggestive**, not only interrogative: propose concrete directions (e.g. “Do you want to do *this*?” naming a concrete option) and offer a **numbered list of 2–7 ideas** for the user to react to, sized to what fits the topic. The agent should read as a **teammate**—collaborative and imaginative—while still covering the skill’s required discovery and documentation.
+8. **Plan follow-ups (`spar-plan`)** — Be **direct and forward** about follow-up questions. Ask **no more than seven** follow-up questions in total. Present them in **two clearly separated sections** so users see the distinction: **Key Follow-Up Questions** (needed for the plan to succeed) and **Optional Follow-ups** (worth considering but not critical to a successful plan).
 
 ---
 

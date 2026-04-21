@@ -35,7 +35,7 @@ Use this checklist to make Beta1 install real for users coming from the landing 
 - [ ] Update the landing page with the exact Beta1 install command: `npx spar-kit install`.
 - [ ] Document prerequisites clearly: Node/npm required.
 - [ ] Document what the installer lays down in the repo.
-- [ ] Document the next step after install: ask the agent to use `spar.init`.
+- [ ] Document the next step after install: ask the agent to use `spar-init`.
 - [ ] Make sure the landing page and root `README.md` say the same thing.
 
 ## Phase 5: Onboarding Flow
@@ -44,8 +44,8 @@ Use this checklist to make Beta1 install real for users coming from the landing 
 - [ ] User visits landing page.
 - [ ] User follows install instructions.
 - [ ] User opens the repo in the supported agent.
-- [ ] User asks the agent to use `spar.init`.
-- [ ] User begins work with `spar.specify`.
+- [ ] User asks the agent to use `spar-init`.
+- [ ] User begins work with `spar-specify`.
 
 ## Phase 6: Release Decision
 

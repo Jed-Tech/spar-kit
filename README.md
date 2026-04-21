@@ -2,7 +2,7 @@
 
 **spar-kit** is a lightweight AI workflow system for building software with clarity, speed, and consistency.
 
-**Released version (SemVer 2.0.0):** see the root [`VERSION`](VERSION) file. Canonical `main` for checks (e.g. `spar.init`): `https://raw.githubusercontent.com/Jed-Tech/spar-kit/main/VERSION`.
+**Released version (SemVer 2.0.0):** see the root [`VERSION`](VERSION) file. Canonical `main` for checks (e.g. `spar-init`): `https://raw.githubusercontent.com/Jed-Tech/spar-kit/main/VERSION`.
 
 It uses a simple four-phase model:
 
@@ -28,11 +28,11 @@ Repository root = `<root>`.
 | Active (SPAR pipeline) | `specs/active/<change-name>/` |
 | Completed (archived) | `specs/completed/<change-name>/` |
 
-**Specify**, **Plan**, and **Act** run against **`specs/active/`**. **Retain** moves the **whole** directory from **`active/`** to **`completed/`** with no duplicate left under **`active`**. Use **`next/`** and **`later/`** to prioritize or park work that is not in the active pipeline yet; move a folder into **`active/`** when you start planning or implementation.
+**Specify**, **Plan**, and **Act** run against **`specs/active/`**. **Retain** moves the **whole** directory from **`active/`** to **`completed/`** with no duplicate left under **`active`**.
 
 Each change folder usually contains `<change-name>_spec.md` (same spelling as the folder name) and `plan.md`, side by side. Optional files (`research.md`, notes, small artifacts) may live in the same folder.
 
-See [`specs/README.md`](specs/README.md) for a concise overview of the four folders.
+See [`specs/README.md`](specs/README.md) for a concise overview of the workflow folders.
 
 ---
 
@@ -42,11 +42,11 @@ Core workflow and initialization are implemented as agent skills under `skills/`
 
 | Stage | Skill |
 |-------|--------|
-| Init | `spar.init` |
-| Specify | `spar.specify` |
-| Plan | `spar.plan` |
-| Act | `spar.act` |
-| Retain | `spar.retain` |
+| Init | `spar-init` |
+| Specify | `spar-specify` |
+| Plan | `spar-plan` |
+| Act | `spar-act` |
+| Retain | `spar-retain` |
 
 Copy or symlink each skill directory into your agent’s skills location (for example `.cursor/skills`, `.agents/skills`, or `.claude/skills`), following your tool’s documentation.
 
@@ -54,4 +54,4 @@ Copy or symlink each skill directory into your agent’s skills location (for ex
 
 ## Templates
 
-`templates/spec.md` is copied per change to `<change-name>_spec.md`; `templates/plan.md` becomes `plan.md`. The spec template lists every heading; **spar.specify** only fills **Summary** through **Scope** at first, and **spar.plan** completes the rest. Both templates include HTML comments noting paths under `specs/active/` through completion under `specs/completed/`, and optional `specs/next/` and `specs/later/`.
+`templates/spec.md` is copied per change to `<change-name>_spec.md`; `templates/plan.md` becomes `plan.md`. The spec template lists every heading; **spar-specify** fills the sections known from discovery, and **spar-plan** completes the rest. Both templates include HTML comments noting paths under `specs/active/` through completion under `specs/completed/`.

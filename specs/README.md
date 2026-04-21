@@ -6,15 +6,13 @@ This directory holds **change folders** for SPAR work. Each subfolder under a st
 
 | Folder | Role |
 |--------|------|
-| **`active/`** | Changes in the SPAR pipeline (specify → plan → act). **Retain** archives from here to **`completed/`**. |
+| **`active/`** | Changes in the SPAR pipeline (specify -> plan -> act). **Retain** archives from here to **`completed/`**. |
 | **`completed/`** | Closed-out changes: the folder moved here as a unit after retention; no duplicate under **`active/`**. |
-| **`next/`** | Queued changes you intend to pull into **`active/`** soon (priority after current work). |
-| **`later/`** | Backlog or horizon items—lower priority or not scheduled. |
 
 `<change-name>` is one folder per change: short, descriptive, and safe as a directory name.
 
 In each change folder, the spec file is **`<change-name>_spec.md`** (underscore before `spec.md`; spelling matches the folder). **`plan.md`** keeps that name.
 
-**Planning and implementation** ( **spar.plan** / **spar.act** ) use **`specs/active/<change-name>/`**. If a change lives under **`next/`** or **`later/`**, move it to **`active/`** when you start that phase.
+**Planning and implementation** ( **spar-plan** / **spar-act** ) use **`specs/active/<change-name>/`**.
 
 See the root [`README.md`](../README.md) for the SPAR phases and how they relate to **`active/`** and **`completed/`**.

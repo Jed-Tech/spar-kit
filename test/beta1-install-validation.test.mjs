@@ -61,7 +61,7 @@ test("clean Beta1 install: repo-root layout matches payload (no install-root/ di
 
     const agents = await readFile(join(dir, "AGENTS.md"), "utf8");
     assert.match(agents, /<!--\s*spar-kit:start\s*-->/);
-    assert.match(agents, /spar\.specify/);
+    assert.match(agents, /spar-specify/);
 
     const payloadJf = await readPayload("justfile");
     const targetJf = await readFile(join(dir, "justfile"), "utf8");
@@ -201,7 +201,7 @@ test("CLI stdout: success without warnings matches install-report layout", async
     });
     assert.match(
       stdout,
-      /^Outcome: Success\r?\n\r?\nTo finalize setup: Ask your AI agent to: Use the spar\.init skill\r?\n  ↑  ↑  ↑  ↑  ↑\r?\n$/,
+      /^Outcome: Success\r?\n\r?\nTo finalize setup: Ask your AI agent to: Use the spar-init skill\r?\n  ↑  ↑  ↑  ↑  ↑\r?\n$/,
     );
   } finally {
     await rm(dir, { recursive: true, force: true });
@@ -217,7 +217,7 @@ test("CLI stdout: success with preserved justfile includes Notes section", async
     });
     assert.match(stdout, /^Outcome: Success\r?\n\r?\nNotes:\r?\n/);
     assert.ok(stdout.includes("justfile"));
-    assert.ok(stdout.includes("To finalize setup") && stdout.includes("spar.init"));
+    assert.ok(stdout.includes("To finalize setup") && stdout.includes("spar-init"));
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

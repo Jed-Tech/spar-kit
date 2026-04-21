@@ -1,9 +1,9 @@
 ---
-name: spar.init
+name: spar-init
 description: >-
   After install or on demand, verify and lightly repair the repo-local spar-kit
   setup: version freshness, .agents/skills, AGENTS.md, and
-  .spar-kit/.local/tools.yaml, then finish with a short handoff to spar.specify.
+  .spar-kit/.local/tools.yaml, then finish with a short handoff to spar-specify.
 ---
 
 # Init
@@ -19,7 +19,7 @@ Work through these areas in order unless blocked:
 3. **`AGENTS.md` recommendation** - encourage a short, effective `AGENTS.md` for lower token usage and clearer agent behavior.
 4. **Tool verify-install-sync** - seed or update `.spar-kit/.local/tools.yaml`.
 5. **`.gitignore` hygiene check** - recommend ignoring `.spar-kit/.local/` when needed.
-6. **Closeout** - a short summary and a recommendation to use `spar.specify`.
+6. **Closeout** - a short summary and a recommendation to use `spar-specify`.
 
 ---
 
@@ -110,11 +110,11 @@ Keep the wrap-up short:
 
 - what was verified or fixed
 - what still needs user action, if anything
-- recommend using `spar.specify`
+- recommend using `spar-specify`
 
 Example shape:
 
-SPAR initialization is complete. Verified version, repo-local SPAR skill placement, `AGENTS.md` length, and tool state. You are ready to start utilizing SPAR-kit. Mention **`spar.specify`** when starting your next feature or change.
+SPAR initialization is complete. Verified version, repo-local SPAR skill placement, `AGENTS.md` length, and tool state. You are ready to start utilizing SPAR-kit. Mention **`spar-specify`** when starting your next feature or change.
 
 ---
 
@@ -136,4 +136,4 @@ Initialization is complete when:
 - repo-local SPAR skill placement was checked, adjusted when safe, or reinstall was recommended
 - `AGENTS.md` length was checked and a recommendation was given when useful
 - `.spar-kit/.local/tools.yaml` was updated or tool state was summarized
-- the closeout is short and points to `spar.specify`
+- the closeout is short and points to `spar-specify`

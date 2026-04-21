@@ -1,7 +1,7 @@
 ---
-name: spar.act
+name: spar-act
 description: >-
-  Use when implementation is approved after spar.plan: run tasks in order, validate with
+  Use when implementation is approved after spar-plan: run tasks in order, validate with
   the project's usual checks, retry obvious failures once, stop and ask if blocked, and
   do not change spec intent without approval. Progress and completion stay brief but tied
   to the plan and user outcome.
@@ -15,7 +15,7 @@ Execute the plan in `plan.md` while strictly preserving the intent in `<change-n
 
 **Change location:** `specs/active/<change-name>/` (repository root = `<root>`).
 
-**Prerequisite:** **spar.plan** should have produced stable `<change-name>_spec.md` and `plan.md`. If missing, stop and run **spar.plan** (or **spar.specify** first).
+**Prerequisite:** **spar-plan** should have produced stable `<change-name>_spec.md` and `plan.md`. If missing, stop and run **spar-plan** (or **spar-specify** first).
 
 Optional files in the change folder (e.g. `research.md`, notes) are preserved; do not remove them.
 
@@ -135,8 +135,8 @@ Then:
 
    > We’re done with the planned work—want me to close this out? I’d sync the spec with what we shipped, tidy the change folder, and move it to **completed** so the docs stay the **source of truth**.
 
-3. **Wait for the user.** After you send that wrap-up message, **stop until they reply**. Do **not** begin **spar.retain** without their clear go-ahead. If they defer (“not now,” “later,” etc.), do **not** archive.
+3. **Wait for the user.** After you send that wrap-up message, **stop until they reply**. Do **not** begin **spar-retain** without their clear go-ahead. If they defer (“not now,” “later,” etc.), do **not** archive.
 
 4. **If they want more implementation or another follow-on request:** Do that work (keep `plan.md` and the spec accurate; follow **Execution order** Steps 2–7 as needed). When that work is done, **repeat Completion steps 1–3** in **this Completion section**.
 
-5. **When they confirm they want to close out:** begin skill: **spar.retain**.
+5. **When they confirm they want to close out:** begin skill: **spar-retain**.
