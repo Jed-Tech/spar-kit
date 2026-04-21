@@ -17,8 +17,8 @@ Work through these areas in order unless blocked:
 
 1. **Version check** - compare upstream `VERSION` to local `.spar-kit/VERSION`.
 2. **Repo-local skill placement check** - verify the SPAR skills are in the correct repo-local location for the current agent.
-3. **`AGENTS.md` recommendation** - encourage a short, effective `AGENTS.md` for lower token usage and clearer agent behavior.
-4. **Tool verify-install-sync** - seed or update `.spar-kit/.local/tools.yaml`.
+3. **Tool verify-install-sync** - seed or update `.spar-kit/.local/tools.yaml`.
+4. **`AGENTS.md` recommendation** - encourage a short, effective `AGENTS.md` for lower token usage and clearer agent behavior.
 5. **`.gitignore` hygiene check** - recommend ignoring `.spar-kit/.local/` when needed.
 6. **Closeout** - a short summary and a recommendation to use `spar-specify`.
 
@@ -62,21 +62,7 @@ Keep this focused on verifying and repairing skill placement, not re-running the
 
 ---
 
-## 3. `AGENTS.md` recommendation
-
-`AGENTS.md` includes a brief description of how to use spar-kit. That guidance is essential and should be kept.
-
-Check how many lines `AGENTS.md` contains. If it is longer than 60 lines, give this lightweight recommendation (using natural language):
-
-- shorter `AGENTS.md` files are usually better for agent focus and lower token usage
-- keep instructions crisp, specific, non-redundant, and relevant to most agent communications.
-- avoid turning `AGENTS.md` into a long instruction list.
-
-If the user wants help optimizing `AGENTS.md`, keep the guidance brief and preserve the intended SPAR instructions.
-
----
-
-## 4. Tool verify-install-sync
+## 3. Tool verify-install-sync
 
 Use only `.spar-kit/.local/tools.yaml`.
 
@@ -96,6 +82,22 @@ Use only `.spar-kit/.local/tools.yaml`.
 - Respect `when` rules (for example, `uv` when the repo uses Python tooling).
 
 If `.spar-kit/.local/` cannot be written, summarize tool presence in chat instead.
+
+---
+
+## 4. `AGENTS.md` recommendation
+
+`AGENTS.md` includes a brief description of how to use spar-kit. That guidance is essential and should be kept.
+
+Check how many lines `AGENTS.md` contains. If it is longer than 60 lines, give this lightweight recommendation (using natural language):
+
+- shorter `AGENTS.md` files are usually better for agent focus and lower token usage
+- keep instructions crisp, specific, non-redundant, and relevant to most agent communications.
+- avoid turning `AGENTS.md` into a long instruction list.
+
+If `AGENTS.md` is longer than 60 lines, surface this recommendation when found instead of saving it only for closeout, and ask whether the user wants help trimming it.
+
+If the user wants help optimizing `AGENTS.md`, keep the guidance brief and preserve the intended SPAR instructions.
 
 ---
 
