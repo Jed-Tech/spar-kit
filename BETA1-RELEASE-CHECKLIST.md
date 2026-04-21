@@ -4,13 +4,13 @@ Use this checklist to make Beta1 install real for users coming from the landing 
 
 ## Phase 1: Package Readiness
 
-- [ ] Set root `VERSION` to the intended Beta1 release version.
-- [ ] Create an npm account if needed.
-- [ ] Enable npm 2FA for publishing.
-- [ ] Run `npm login` from the release machine.
-- [ ] Run `just pack-prep`.
-- [ ] Run `npm pack` and verify the tarball contents.
-- [ ] Confirm the tarball includes the expected `install-root/`, `bin/`, and `lib/` files.
+- [X] Set root `VERSION` to the intended Beta1 release version.
+- [X] Create an npm account if needed.
+- [X] Enable npm 2FA for publishing.
+- [X] Run `npm login` from the release machine.
+- [X] Run `just pack-prep`.
+- [X] Run `npm pack` and verify the tarball contents.
+- [X] Confirm the tarball includes the expected `install-root/`, `bin/`, and `lib/` files.
 
 `just pack-prep` is the required prep step before `npm pack`. It syncs release version data from root `VERSION` into `install-root/.spar-kit/VERSION` and `package.json.version`, verifies the required install payload exists, and runs the current test suite.
 

@@ -1,15 +1,20 @@
 # Implementation Plan - <change-name>
 
 <!-- Plan/act use specs/active/<change-name>/plan.md. After Retain: specs/completed/<change-name>/plan.md. Optional queues: specs/next/ or specs/later/ until moved to active/. -->
+<!-- This plan should align with <change-name>_spec.md in the same folder. -->
 
-## Project Summary
+## Summary
 
-## Phase <phase-name>
-### Phase Summary
+## Approach
 
-### Related Documents
+## Execution Constraints
 
-### Tasks
+## Tasks
+<!-- Ordered, concrete, checkable steps. -->
 - [ ]
 
-### Notes
+## Validation Strategy
+<!-- List the checks, tests, or observations that will confirm success. -->
+
+## Risks / Follow-ups
+<!-- Capture notable risks, deferred work, or decisions that may need follow-up. -->

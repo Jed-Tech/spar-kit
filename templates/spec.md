@@ -1,14 +1,14 @@
-# <change-name>
+# <change-name> - Intent and Specifications
 
 <!-- Copy this template to specs/<stage>/<change-name>/<change-name>_spec.md (name matches the folder). After Retain: specs/completed/<change-name>/<change-name>_spec.md. Optional queues: specs/next/ or specs/later/ until moved to active/. -->
 
 ## Summary
 ## Problem
-## Goal
 ## Scope
-## Non-Goals
+## Out of Scope
 ## Constraints
 ## Success Criteria
-## Open Questions
 ## Decisions
-## Documentation Impact
+<!-- Record important product and technical choices that implementation should treat as fixed. -->
+## Open Questions
+<!-- Only include unresolved questions that materially affect implementation or validation. -->
