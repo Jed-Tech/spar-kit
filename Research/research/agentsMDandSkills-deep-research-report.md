@@ -13,6 +13,8 @@ On the narrow question you asked—**“Will all three read `AGENTS.md` in the p
 
 For “skills,” all three systems are converging on the **Agent Skills** progressive-disclosure architecture: at startup, agents load a small routing layer (primarily *name + description*), then lazily load full skill instructions and resources only when invoked/needed. This is stated directly in the Agent Skills standard and echoed in Codex and Claude Code docs; Cursor community + staff reports also describe metadata being present in context and skill bodies loading on demand. citeturn10view0turn10view1turn19view1turn5view2turn18view0  
 
+Follow-up testing after this report verified that **Cursor can use repo-local `.agents/skills/` without problem**. A subsequent documentation check found **no equivalent Claude Code documentation for `.agents/skills/`**; Claude Code's documented project-local skill path remains **`.claude/skills/`**.
+
 ## Verification of root AGENTS.md support
 
 Codex’s behavior is the most crisply specified, Cursor’s is broadly confirmed (but with ecosystem-specific edge cases), and Claude Code’s is explicitly **“no, but you can import it.”**
@@ -44,7 +46,7 @@ The table below is grounded in the systems’ official docs where available (Cod
 | Skill format | Agent Skills standard (`SKILL.md` + optional resources); Codex adds optional `agents/openai.yaml`. citeturn19view1turn10view1 | Agent Skills standard (`SKILL.md`), plus Cursor packaging via plugins/marketplace. citeturn8view0turn16view6turn10view1 | Agent Skills standard (`SKILL.md`), with substantial extensions in frontmatter (invocation/tool controls, subagent execution, hooks, etc.). citeturn5view2turn10view1 |
 | Skill metadata preloaded at startup | Codex: starts with metadata (name, description, file path, plus optional metadata from `agents/openai.yaml`), loads full body only when used. citeturn19view1 | Cursor: staff/user reports show skill metadata (incl. name/description/path/version) showing in context; duplicates can waste context if multiple copies exist. citeturn18view0turn18view1 | Claude Code: “skill descriptions are loaded into context… full skill loads when invoked” (unless model invocation disabled). citeturn5view2 |
 | Invocation modes | Explicit (`$skill` or `/skills`) and implicit (description match). Optional `allow_implicit_invocation` in `agents/openai.yaml`. citeturn19view1 | Explicit (`/skill-name`) and implicit (description match); supports `disable-model-invocation` semantics (with known UI bugs around it). citeturn8view3turn20search1turn20search0 | Explicit (`/skill-name`) and implicit (description match), with fine controls (`disable-model-invocation`, `user-invocable`, etc.). citeturn5view2 |
-| Skill discovery locations | Repo: `.agents/skills` from CWD up to repo root; user: `$HOME/.agents/skills`; admin/system locations; symlinks supported. citeturn19view1 | Mixed: `.cursor/skills` and `~/.cursor/skills` used; agent context also loads from `~/.agents/skills` but some UIs historically scanned only `.cursor/skills` for slash menus (being fixed iteratively). citeturn18view1turn18view0turn8view3 | Project/global skill sources under `.claude/skills` and `~/.claude/skills`, with nested discovery for monorepos and live change detection for certain sources. citeturn5view4turn5view2turn13view1 |
+| Skill discovery locations | Repo: `.agents/skills` from CWD up to repo root; user: `$HOME/.agents/skills`; admin/system locations; symlinks supported. citeturn19view1 | Mixed: `.cursor/skills` and `~/.cursor/skills` used; agent context also loads from `~/.agents/skills` but some UIs historically scanned only `.cursor/skills` for slash menus (being fixed iteratively). Our later local testing also verified repo-local `.agents/skills/` works in practice. citeturn18view1turn18view0turn8view3 | Project/global skill sources under `.claude/skills` and `~/.claude/skills`, with nested discovery for monorepos and live change detection for certain sources. We did not find documentation supporting `.agents/skills/` as a Claude Code discovery path. citeturn5view4turn5view2turn13view1 |
 | Execution safety model | OS sandbox locally + approvals; cloud runs in isolated containers with 2-phase runtime; default network off; protected paths include `.agents`/`.codex`. citeturn12view0 | Local agent sandboxing (Seatbelt on macOS; Landlock/seccomp on Linux; WSL2-based on Windows), plus allowlists + network controls; plugins bundle agent resources. citeturn16view0turn16view6 | Permission modes ranging from read-only to “auto,” with classifier-based checks; protected paths include `.git` and most of `.claude`. citeturn14view0turn13view0 |
 | Persistence / memory interaction | Instruction chain rebuilt each run/session; guidance capped by byte limit; auditing via logs is documented. citeturn21view4turn21view0 | Cloud agents: re-indexing on every start described as “by design” due to isolated environments; local indexing and skill scans occur at startup. citeturn15search22turn18view0 | Each session starts with fresh context; persistence via `CLAUDE.md` plus auto memory; explicit tools (`/memory`, `/context`) to inspect what loaded. citeturn13view0turn13view1 |
 
@@ -94,6 +96,8 @@ Two distinct “startup” behaviors matter in Cursor:
 - **AGENTS.md preload:** Cursor staff describe a root `AGENTS.md` as auto-read, always-on. citeturn4view0turn17search18  
 - **Skill catalog preload:** Cursor scans skill directories at startup and presents skills to the agent; Cursor CLI historically had inconsistencies between what the agent-context system loads and what the `/` menu shows (e.g., context loads `~/.agents/skills` while the slash menu scanned `.cursor/skills`), with fixes landing iteratively. citeturn18view1turn18view2  
 
+Later hands-on validation for SPAR confirmed that Cursor can use repo-local `.agents/skills/` without requiring a separate `.cursor/skills/` copy for the tested workflow.
+
 These differences strongly affect practical discoverability: you can have a skill that auto-invokes (agent sees it) but does not appear in interactive UI lists for manual invocation, depending on version and surface. citeturn18view1turn18view2  
 
 **Rules vs AGENTS.md**
@@ -133,6 +137,8 @@ This aligns with the Agent Skills standard’s progressive disclosure definition
 
 Claude Code documentation is explicit: it reads `CLAUDE.md`, not `AGENTS.md`. If a repo uses `AGENTS.md` for other agents, Claude Code recommends a `CLAUDE.md` that imports `@AGENTS.md` so both tools share the same content. citeturn13view0  
 
+For skills, the Claude Code docs we checked document project and user discovery under `.claude/skills/` and `~/.claude/skills/`. We did not find Anthropic documentation claiming support for repo-local `.agents/skills/`, so that path should not be treated as a supported Claude Code target without separate verification.
+
 **Security and permissions**
 
 Claude Code’s permission modes range from default read-only behavior through progressively more autonomous modes; it lists protected paths (including `.git` and most of `.claude`) that are never auto-approved. It also describes an “auto mode” where a separate classifier evaluates actions before execution and blocks common escalation patterns. citeturn14view0  
@@ -166,6 +172,12 @@ Because the routing layer is primarily the **description**, treat it as a classi
 - Include explicit negative scope (“do not trigger when…”) where high false positives would be costly. Codex explicitly warns implicit matching depends on description boundaries. citeturn19view1  
 - Use `disable-model-invocation: true` for workflows with side effects or for rarely-used heavy skills, so they only load when explicitly invoked. This behavior is described in Claude Code’s docs and is referenced in Cursor/Codex ecosystems as well (though Cursor has had UI bugs around it). citeturn5view2turn20search1turn20search0turn19view1  
 - Prefer one canonical installation location per surface to avoid duplicate metadata bloat, especially in Cursor where duplicates across tool ecosystems have been observed to multiply the metadata injected into context. citeturn18view0turn18view1  
+
+For current SPAR compatibility, that translates to a simple path policy:
+
+- Codex: target `.agents/skills/`
+- Cursor: `.agents/skills/` is acceptable based on our verified testing
+- Claude Code: target `.claude/skills/` unless `.agents/skills/` is separately verified in practice
 
 ### Recommendations for Cursor `.cursor/rules` alongside AGENTS.md
 

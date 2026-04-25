@@ -10,6 +10,8 @@ The decision criteria for this note are:
 2. **Practicality of adaptation**
 3. **How naturally the system maps to SPAR concepts** such as repo instructions, skills, reusable prompts, and tool/MCP integration
 
+Compatibility note for the current top three systems: our repo research and testing now support a shared-instructions approach centered on `AGENTS.md`, but skill discovery paths still differ. Cursor has been verified to work with repo-local `.agents/skills/`, while Claude Code should still be treated as a `.claude/skills/` target unless `.agents/skills/` is separately verified.
+
 ## Decision
 
 Recommend these two for v1:

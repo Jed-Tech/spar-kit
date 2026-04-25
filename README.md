@@ -48,7 +48,11 @@ Core workflow and initialization are implemented as agent skills under `skills/`
 | Act | `spar-act` |
 | Retain | `spar-retain` |
 
-Copy or symlink each skill directory into your agent’s skills location (for example `.cursor/skills`, `.agents/skills`, or `.claude/skills`), following your tool’s documentation.
+Copy or symlink each skill directory into your agent's supported skills location, following your tool's documentation.
+
+- Codex: `.agents/skills/`
+- Cursor: `.agents/skills/` is documented in our research and verified by local testing to work
+- Claude Code: use `.claude/skills/` as the supported project-local path
 
 ---
 

@@ -8,7 +8,7 @@ This document captures planned work and a **suggested implementation order**. Pr
 
 - **Audience (near term):** You and AI agents shaping the skill system.
 - **Audience (eventually):** Beginning practitioners who can install and use the toolkit with minimal friction.
-- **Agents:** Beta focuses on **Codex** and **Cursor**. **Claude Code** joins in v1. Other systems come later, after v1.
+- **Agents:** Beta supports **Codex**, **Cursor**, **Windsurf**, **GitHub Copilot**, **Gemini CLI**, and **OpenCode**. **Claude Code** joins in v1. Keep **Antigravity** in view as a strategic follow-on, but treat it as lower-confidence until its repo-instruction and skill-path story is clearer.
 - **Storytelling:** A static GitHub Pages site plus a friendly root `README.md`—both should explain value and how to get started (aligned messaging, not necessarily identical text).
 
 ---
@@ -33,13 +33,17 @@ Beta means:
 
 - **Codex**
 - **Cursor**
+- **Windsurf**
+- **GitHub Copilot**
+- **Gemini CLI**
+- **OpenCode**
 
 Define the exact checklist yourself; Beta should mean **“an invited early adopter can follow the repo and complete one real change using SPAR without guessing.”** Candidate pillars (edit freely):
 
 1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/`.
 2. **Templates** — Spec and plan templates match what the skills expect.
 3. **Guidance for agents** — `AGENTS.md` (and related pointers) make the workflow and folder layout unavoidable for tools that read repo instructions.
-4. **Install / copy path** — One documented way to get skills (and any required files) into a project for at least your Beta target agents.
+4. **Install / copy path** — One documented way to get skills (and any required files) into a project for the Beta target agents.
 
 Until those exist at a bar you are happy with, treat everything else as optional.
 
@@ -53,6 +57,10 @@ v1 is the release where you begin inviting users beyond the early Beta group.
 
 - **Codex**
 - **Cursor**
+- **Windsurf**
+- **GitHub Copilot**
+- **Gemini CLI**
+- **OpenCode**
 - **Claude Code**
 
 v1 should build on the Beta foundation with stronger onboarding, clearer public-facing documentation, and enough confidence that the workflow is ready for broader real-world use.
@@ -90,9 +98,9 @@ Order reflects your stated priority: **skills → templates → `AGENTS.md` → 
 | 3 | **`AGENTS.md`** | Single source of truth for “how to work in this repo” and how SPAR fits; keep in sync as skills and templates change. |
 | 4 | **Tooling** | `justfile`, `.spar-kit/.local/tools.yaml`, checks or helpers—only what reduces friction for you and adopters. |
 | 5 | **Install / copy path** | Define one clear way to bring SPAR into a project for the supported agents, with as little guesswork as possible. |
-| 6 | **Beta README / docs** | Friendly onboarding for invited adopters using Codex and Cursor; links to docs and install steps. |
+| 6 | **Beta README / docs** | Friendly onboarding for invited adopters using the Beta-supported agents; links to docs and install steps. |
 | 7 | **v1 docs / GitHub Pages** | Public-facing value prop, getting started, and compatibility notes once broader invitation begins. |
-| 8 | **Compatibility expansion** | Document and test Claude Code for v1, then additional agent environments after v1 feels solid. |
+| 8 | **Compatibility expansion** | Complete and document the six-system Beta surface, then add Claude Code for v1 and later any lower-confidence environments such as Antigravity. |
 
 Adjust sequence if two tracks can run in parallel; the table is a default **dependency-friendly** ordering.
 
@@ -108,22 +116,29 @@ Adjust sequence if two tracks can run in parallel; the table is a default **depe
 
 1. **Beta**
    - invited adopters only
-   - supports **Codex** and **Cursor**
+   - supports **Codex**, **Cursor**, **Windsurf**, **GitHub Copilot**, **Gemini CLI**, and **OpenCode**
 2. **v1**
    - broader user invitations begin
    - adds **Claude Code**
+3. **Post-v1 compatibility expansion**
+   - keep **Antigravity** as a later exploratory target unless its compatibility surface becomes clearer
 
 ---
 
 ## Later
 
-These are post-v1 compatibility targets rather than Beta or v1 commitments:
+These are post-v1 compatibility targets rather than Beta or v1 commitments.
 
-- **Windsurf**
-- **GitHub Copilot**
+Current post-v1 compatibility focus:
+
 - **Antigravity**
-- **Gemini CLI**
-- other systems you choose to validate after the core three are solid
+- other systems you choose to validate after the Beta six plus Claude Code are solid
+
+Notes:
+
+- **Windsurf**, **GitHub Copilot**, **Gemini CLI**, and **OpenCode** are now part of the intended **Beta** compatibility surface alongside **Codex** and **Cursor**.
+- **Claude Code** stays in **v1**, but should be treated as a `.claude/skills/` target rather than a `.agents/skills/` target unless that changes through future verification.
+- **Antigravity** remains interesting strategically, but it is not yet in the same documentation-confidence tier as the others.
 
 ---
 
@@ -134,4 +149,4 @@ Use this section as a scratchpad; fill in when ready.
 - **Beta exit criteria:** …
 - **First GitHub Pages structure (sections, tone):** …
 - **First tag name after Beta:** …
-- **Which “Later” systems to prioritize after v1:** Windsurf, GitHub Copilot, Antigravity, Gemini CLI, and any other post-v1 targets you decide to validate.
+- **Which “Later” systems to prioritize after v1:** Antigravity and any other post-v1 targets you decide to validate.

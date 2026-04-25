@@ -23,6 +23,8 @@ The package installs a working repository structure rather than leaving users to
 
 The workflow model is centered on named change folders under `specs/`, moving work through active delivery and then into retained history. Agent skills such as `spar-init`, `spar-specify`, `spar-plan`, `spar-act`, and `spar-retain` are part of the operating model and guide the user through that lifecycle.
 
+The skill content is designed to stay portable across agent ecosystems, but discovery paths still vary by tool. In particular, Cursor has been verified to work with repo-local `.agents/skills/`, while Claude Code should use `.claude/skills/` as its supported repo-local skill path.
+
 The `docs/` folder is the public-facing landing page for users. It is intended to be served as a static GitHub Pages website, giving users a lightweight entry point for install guidance, workflow explanation, and onboarding into the kit.
 
 ## Release and publish process

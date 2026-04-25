@@ -42,9 +42,6 @@ body {
   color: var(--text);
   font-family: var(--body-font);
   background:
-    radial-gradient(circle at top left, rgba(255, 183, 120, 0.18), transparent 28rem),
-    radial-gradient(circle at 85% 15%, rgba(222, 122, 77, 0.16), transparent 22rem),
-    radial-gradient(circle at bottom right, rgba(255, 218, 189, 0.08), transparent 25rem),
     linear-gradient(180deg, #120f0d 0%, #171311 44%, #120f0f 100%);
   line-height: 1.6;
 }
@@ -60,6 +57,18 @@ body::before {
   background-size: 120px 120px;
   mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
   opacity: 0.35;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 16% 14%, rgba(255, 183, 120, 0.2), transparent 20rem),
+    radial-gradient(circle at 78% 22%, rgba(222, 122, 77, 0.18), transparent 24rem),
+    radial-gradient(circle at 70% 72%, rgba(255, 212, 180, 0.08), transparent 18rem);
+  z-index: 0;
 }
 
 a {
@@ -200,20 +209,6 @@ code {
   margin-top: 1.4rem;
   padding: clamp(2rem, 3vw, 3rem);
   border-radius: var(--radius-lg);
-}
-
-.hero::before,
-.initialize::before,
-.content-section::before {
-  content: "";
-  position: absolute;
-  inset: auto auto -30% -12%;
-  width: 16rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(230, 162, 111, 0.26), transparent 72%);
-  filter: blur(6px);
-  pointer-events: none;
 }
 
 .hero__content,
@@ -612,6 +607,15 @@ h3 {
 
   #further-reading {
     animation-delay: 300ms;
+  }
+}
+
+@media (max-width: 720px) {
+  body::after {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 183, 120, 0.16), transparent 15rem),
+      radial-gradient(circle at 84% 20%, rgba(222, 122, 77, 0.13), transparent 17rem),
+      radial-gradient(circle at 68% 72%, rgba(255, 212, 180, 0.06), transparent 14rem);
   }
 }
 

@@ -10,38 +10,41 @@ After **Cursor**, **Codex**, and **Claude Code**, support these two systems in v
 If a sixth target is added soon after v1 for the current audience mix, choose **Antigravity**.
 After that, choose **Gemini CLI**.
 
-## Why these two
+## Compatibility matrix
 
-### Windsurf
+The table below separates two different questions:
 
-- Mainstream enough to matter now
-- Best fit for SPAR's structure
-- Official support for `AGENTS.md`, Skills, Rules, Workflows, and MCP
-- Lowest expected translation cost from the current SPAR approach
+1. Which systems are the best **next v1 targets** for SPAR?
+2. Which systems already fit the current **shared instructions + shared skills path** pattern well?
 
-### GitHub Copilot
+| System | Uses `AGENTS.md` or `CLAUDE.md` | Uses repo `.agents/skills/` | Fit for current shared pattern | Notes |
+| --- | --- | --- | --- | --- |
+| Codex | Yes - `AGENTS.md` | Yes | Strong | Best current baseline for SPAR's repo-local pattern |
+| Cursor | Yes - `AGENTS.md` | Yes | Strong | `.agents/skills/` verified by our testing |
+| Claude Code | Yes - `CLAUDE.md` | No documented support | Partial | Use `.claude/skills/`; do not assume `.agents/skills/` |
+| Windsurf | Yes - `AGENTS.md` | Yes | Strong | Explicit cross-agent `.agents/skills/` support in docs |
+| GitHub Copilot | Yes - `AGENTS.md` or root `CLAUDE.md` | Yes | Strong | Supports multiple agent-instruction and skill locations |
+| Gemini CLI | Yes - configurable context names including `AGENTS.md` | Yes | Strong | `.agents/skills/` supported as a workspace alias |
+| OpenCode | Yes - `AGENTS.md` and `CLAUDE.md` fallback | Yes | Strong | Good compatibility candidate even though not a current v1 priority |
+| Antigravity | Unclear / not yet established in our research | Unclear / not yet established in our research | Weak for now | Still attractive strategically because of persona fit |
 
-- Massive distribution and adoption
-- Official support for repo instructions, `AGENTS.md`, prompt files, skills, hooks, custom agents, and MCP
-- Extends SPAR into GitHub-native and IDE-native workflows
+## Practical compatibility takeaway
 
-## Why Antigravity ranks above Gemini CLI
+If we care specifically about systems that already align well with the current SPAR convention of:
 
-One of SPAR's intended users is a new-to-coding vibecoder. That user is more likely to adopt an editor-native or AI-Studio-native agent than a terminal-first CLI agent. Because of that, **Antigravity** is a better next compatibility target than **Gemini CLI** even if Gemini CLI is cleaner technically.
+- shared repo instructions via `AGENTS.md` or `CLAUDE.md`
+- shared repo-local skills via `.agents/skills/`
 
-## Why not Gemini CLI first
+then the strongest documented candidates are:
 
-Gemini CLI is very promising and technically compatible, but for this audience mix it loses first to GitHub Copilot on ecosystem reach and then to Antigravity on beginner-friendly vibe-coding fit.
+1. **Codex**
+2. **Cursor**
+3. **Windsurf**
+4. **GitHub Copilot**
+5. **Gemini CLI**
+6. **OpenCode**
 
-## Practical interpretation
-
-For v1, "other AI systems" should mean:
-
-- not just popular systems
-- not just technically elegant systems
-- but systems that are both widely relevant and realistic to support without over-stretching the project
-
-On that basis, **Windsurf + GitHub Copilot** is the best pair.
+That list is different from the **v1 roadmap priority list**. The roadmap still favors **Windsurf** and **GitHub Copilot** next because they combine compatibility with stronger strategic reach for SPAR's intended audience.
 
 ## Packaging Implications
 
