@@ -19,11 +19,24 @@ The project is not just a CLI. It is a packaged installer plus a repo-local work
 
 ## Current system shape
 
-The package installs a working repository structure rather than leaving users to assemble one manually. That payload includes items such as `AGENTS.md`, `justfile`, `.spar-kit/`, and `specs/`.
+The package installs a working repository structure rather than leaving users to assemble one manually. The authored install payload now lives under `install-root/` as shared assets plus target configs. In practice, that means:
+
+- shared repo assets such as `.spar-kit/`, `specs/`, and `justfile`
+- canonical skill content under `install-root/skills/`
+- instruction templates such as `install-root/AGENTS.md` and `install-root/CLAUDE.md`
+- target placement configs under `install-root/targets/`
 
 The workflow model is centered on named change folders under `specs/`, moving work through active delivery and then into retained history. Agent skills such as `spar-init`, `spar-specify`, `spar-plan`, `spar-act`, and `spar-retain` are part of the operating model and guide the user through that lifecycle.
 
-The skill content is designed to stay portable across agent ecosystems, but discovery paths still vary by tool. In particular, Cursor has been verified to work with repo-local `.agents/skills/`, while Claude Code should use `.claude/skills/` as its supported repo-local skill path.
+The installer now uses a target model rather than a single fixed repo layout. With no flags, `npx spar-kit install` applies the default general layout, which installs `AGENTS.md` plus `.agents/skills/`. With explicit flags such as `--codex`, `--claude`, or `--cursor`, the installer applies target-native layouts using the shared authored assets and per-target config files in `install-root/targets/`.
+
+The skill content is designed to stay portable across agent ecosystems, but discovery paths still vary by tool. The practical result is:
+
+- default/general and Codex installs use `.agents/skills/`
+- Claude Code installs use `.claude/skills/` plus `CLAUDE.md`
+- Cursor-native installs use `.cursor/skills/` plus `AGENTS.md`
+
+The installer applies a small policy vocabulary per asset rather than treating each top-level folder as uniform. For example, `.spar-kit/VERSION` is replaced from the package payload, `.spar-kit/.local/tools.yaml` is only seeded when missing, and `AGENTS.md` / `CLAUDE.md` use SPAR-managed block updates.
 
 The `docs/` folder is the public-facing landing page for users. It is intended to be served as a static GitHub Pages website, giving users a lightweight entry point for install guidance, workflow explanation, and onboarding into the kit.
 
@@ -33,7 +46,7 @@ The `docs/` folder is the public-facing landing page for users. It is intended t
 
 Publishing is driven from the root `VERSION` file. The repo treats that file as the canonical release version, and the publish flow is designed to make sure the packaged artifact stays aligned with it.
 
-`just pack-prep` is the required pre-publish gate. It syncs the root version into derived package locations, verifies that the required install payload exists, and runs the current automated tests. In practice, this is the step that confirms the package is internally consistent before anything is packed.
+`just pack-prep` is the required pre-publish gate. It syncs the root version into derived package locations, syncs skill asset templates from `templates/` into `install-root/skills/` where those assets exist, verifies that the required install payload exists, and runs the current automated tests. In practice, this is the step that confirms the package is internally consistent before anything is packed.
 
 `npm pack` creates the tarball exactly as npm would publish it. That gives us a local checkpoint to inspect the final artifact and confirm the package contains the expected installer and payload directories, especially `install-root/`, `bin/`, and `lib/`.
 

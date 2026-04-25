@@ -1,11 +1,5 @@
 /**
- * Phase 5 — Beta1 install validation (implementation-plan.md).
- * Hardening: payload upgrade + malformed AGENTS markers (see tests at end).
- *
- * Environment: this suite is run and passing on **Windows 10** with **Node.js 22** (see `npm test`
- * output in CI or locally). No separate macOS/Linux run is performed in the default workflow;
- * running `npm test` on those platforms before release is still recommended to confirm identical
- * Node `fs` behavior for temp dirs, `fs.cp`, and `mkdtemp` (no divergence observed on Windows).
+ * Install validation and upgrade behavior.
  *
  * Run: npm test
  */
@@ -85,6 +79,59 @@ test("clean Beta1 install: repo-root layout matches payload (no install-root/ di
 
     const root = await readdir(dir);
     assert(!root.includes("install-root"), "must not create install-root/ at repo root");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("clean Claude install: native Claude layout is installed without general .agents surface", async () => {
+  const dir = await mktemp("spar-claude-");
+  try {
+    await runInstall({ targetDir: dir, targets: ["claude"] });
+
+    const claude = await readFile(join(dir, "CLAUDE.md"), "utf8");
+    assert.match(claude, /<!--\s*spar-kit:start\s*-->/);
+    assert.match(claude, /spar-specify/);
+    assert.equal(await pathExists(join(dir, "AGENTS.md")), false);
+    assert.equal(await pathExists(join(dir, ".agents")), false);
+
+    const skills = await readdir(join(dir, ".claude", "skills"));
+    for (const name of ["spar-init", "spar-specify", "spar-plan", "spar-act", "spar-retain"]) {
+      assert(skills.includes(name), `missing Claude skill ${name}`);
+      await readFile(join(dir, ".claude", "skills", name, "SKILL.md"), "utf8");
+    }
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("clean Codex install: explicit Codex target matches .agents layout", async () => {
+  const dir = await mktemp("spar-codex-");
+  try {
+    await runInstall({ targetDir: dir, targets: ["codex"] });
+
+    const agents = await readFile(join(dir, "AGENTS.md"), "utf8");
+    assert.match(agents, /<!--\s*spar-kit:start\s*-->/);
+    assert.equal(await pathExists(join(dir, "CLAUDE.md")), false);
+
+    const skills = await readdir(join(dir, ".agents", "skills"));
+    for (const name of ["spar-init", "spar-specify", "spar-plan", "spar-act", "spar-retain"]) {
+      assert(skills.includes(name), `missing Codex skill ${name}`);
+    }
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("multi-target install: Claude and Cursor layouts both materialize when both flags are requested", async () => {
+  const dir = await mktemp("spar-multi-");
+  try {
+    await runInstall({ targetDir: dir, targets: ["claude", "cursor"] });
+    assert.equal(await pathExists(join(dir, "CLAUDE.md")), true);
+    assert.equal(await pathExists(join(dir, "AGENTS.md")), true);
+    assert.equal(await pathExists(join(dir, ".claude", "skills", "spar-init", "SKILL.md")), true);
+    assert.equal(await pathExists(join(dir, ".cursor", "skills", "spar-init", "SKILL.md")), true);
+    assert.equal(await pathExists(join(dir, ".agents")), false);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
@@ -199,10 +246,8 @@ test("CLI stdout: success without warnings matches install-report layout", async
     const { stdout } = await execFileP(process.execPath, [binCli, "install", dir], {
       encoding: "utf8",
     });
-    assert.match(
-      stdout,
-      /^Outcome: Success\r?\n\r?\nTo finalize setup: Ask your AI agent to: Use the spar-init skill\r?\n  ↑  ↑  ↑  ↑  ↑\r?\n$/,
-    );
+    assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: general\r?\n/);
+    assert.ok(stdout.includes("To finalize setup") && stdout.includes("spar-init"));
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
@@ -215,9 +260,23 @@ test("CLI stdout: success with preserved justfile includes Notes section", async
     const { stdout } = await execFileP(process.execPath, [binCli, "install", dir], {
       encoding: "utf8",
     });
-    assert.match(stdout, /^Outcome: Success\r?\n\r?\nNotes:\r?\n/);
+    assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: general\r?\n\r?\nNotes:\r?\n/);
     assert.ok(stdout.includes("justfile"));
     assert.ok(stdout.includes("To finalize setup") && stdout.includes("spar-init"));
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("CLI stdout: explicit target install reports installed targets", async () => {
+  const dir = await mktemp("spar-cli-targets-");
+  try {
+    const { stdout } = await execFileP(
+      process.execPath,
+      [binCli, "install", dir, "--claude", "--cursor"],
+      { encoding: "utf8" },
+    );
+    assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: claude, cursor\r?\n/);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
@@ -243,10 +302,6 @@ test("CLI stdout: failure when target path is an existing file", async () => {
   }
 });
 
-/**
- * Simulates two published payload trees with different `.spar-kit/VERSION` strings.
- * Uses `fs.cp` + `os.tmpdir()` (validated on Windows/Node 22 in this repo; other OS still worth a quick `npm test`).
- */
 test("upgrade: .spar-kit/VERSION updates when second payload has a newer VERSION string", async () => {
   const targetDir = await mktemp("spar-upgrade-target-");
   const payloadV1 = await mktemp("spar-payload-v1-");
@@ -258,13 +313,13 @@ test("upgrade: .spar-kit/VERSION updates when second payload has a newer VERSION
     await writeFile(join(payloadV1, ".spar-kit", "VERSION"), "0.9.0-payload-test\n", "utf8");
     await writeFile(join(payloadV2, ".spar-kit", "VERSION"), "0.10.0-payload-test\n", "utf8");
 
-    await runRepoBootstrap({ payloadRoot: payloadV1, targetDir });
+    await runRepoBootstrap({ payloadRoot: payloadV1, targetDir, targets: ["general"] });
     assert.equal(
       (await readFile(join(targetDir, ".spar-kit", "VERSION"), "utf8")).trim(),
       "0.9.0-payload-test",
     );
 
-    await runRepoBootstrap({ payloadRoot: payloadV2, targetDir });
+    await runRepoBootstrap({ payloadRoot: payloadV2, targetDir, targets: ["general"] });
     assert.equal(
       (await readFile(join(targetDir, ".spar-kit", "VERSION"), "utf8")).trim(),
       "0.10.0-payload-test",
@@ -276,16 +331,12 @@ test("upgrade: .spar-kit/VERSION updates when second payload has a newer VERSION
   }
 });
 
-/**
- * Malformed AGENTS: orphan `spar-kit:start` without `spar-kit:end` cannot be stripped safely;
- * Beta1 leaves the file unchanged and emits a warning (no duplicate SPAR content).
- */
 test("AGENTS.md: malformed marker (start without end) leaves file unchanged and warns", async () => {
   const dir = await mktemp("spar-agents-bad-");
   const brokenTail = [
     "# User repo notes",
     "<!-- spar-kit:start -->",
-    "orphaned line — no spar-kit:end marker",
+    "orphaned line - no spar-kit:end marker",
     "",
     "More user content.",
   ].join("\n");
@@ -309,10 +360,6 @@ test("AGENTS.md: malformed marker (start without end) leaves file unchanged and 
   }
 });
 
-/**
- * Two adjacent well-formed SPAR blocks (e.g. duplicate paste) strip to no markers and rebuild
- * as a single canonical AGENTS.md — exactly one start marker in the output.
- */
 test("AGENTS.md: duplicate complete SPAR blocks collapse to one canonical block", async () => {
   const dir = await mktemp("spar-agents-dup-");
   const payloadPath = join(getInstallRootPayloadPath(), "AGENTS.md");

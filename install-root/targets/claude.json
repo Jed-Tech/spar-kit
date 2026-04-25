@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "from": "CLAUDE.md",
+      "to": "CLAUDE.md",
+      "kind": "file",
+      "policy": "managed_block"
+    },
+    {
+      "from": "skills",
+      "to": ".claude/skills",
+      "kind": "dir",
+      "policy": "replace_managed_children"
+    }
+  ]
+}

@@ -82,12 +82,12 @@ test("runPackPrep on fixture copy: versions aligned, payload OK (tests off)", as
   const dir = await makeFixtureRepo();
   try {
     await writeFile(
-      join(dir, "install-root", ".agents", "skills", "spar-plan", "assets", "plan.md"),
+      join(dir, "install-root", "skills", "spar-plan", "assets", "plan.md"),
       "outdated plan template\n",
       "utf8",
     );
     await writeFile(
-      join(dir, "install-root", ".agents", "skills", "spar-specify", "assets", "spec.md"),
+      join(dir, "install-root", "skills", "spar-specify", "assets", "spec.md"),
       "outdated spec template\n",
       "utf8",
     );
@@ -99,11 +99,11 @@ test("runPackPrep on fixture copy: versions aligned, payload OK (tests off)", as
     const templatePlan = await readFile(join(repoRoot, "templates", "plan.md"), "utf8");
     const templateSpec = await readFile(join(repoRoot, "templates", "spec.md"), "utf8");
     const syncedPlan = await readFile(
-      join(dir, "install-root", ".agents", "skills", "spar-plan", "assets", "plan.md"),
+      join(dir, "install-root", "skills", "spar-plan", "assets", "plan.md"),
       "utf8",
     );
     const syncedSpec = await readFile(
-      join(dir, "install-root", ".agents", "skills", "spar-specify", "assets", "spec.md"),
+      join(dir, "install-root", "skills", "spar-specify", "assets", "spec.md"),
       "utf8",
     );
     assert.equal(payloadV, v);

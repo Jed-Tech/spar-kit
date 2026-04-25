@@ -1,0 +1,28 @@
+{
+  "entries": [
+    {
+      "from": ".spar-kit/VERSION",
+      "to": ".spar-kit/VERSION",
+      "kind": "file",
+      "policy": "replace"
+    },
+    {
+      "from": ".spar-kit/.local/tools.yaml",
+      "to": ".spar-kit/.local/tools.yaml",
+      "kind": "file",
+      "policy": "seed_if_missing"
+    },
+    {
+      "from": "justfile",
+      "to": "justfile",
+      "kind": "file",
+      "policy": "seed_if_missing"
+    },
+    {
+      "from": "specs",
+      "to": "specs",
+      "kind": "dir",
+      "policy": "replace_managed_children"
+    }
+  ]
+}

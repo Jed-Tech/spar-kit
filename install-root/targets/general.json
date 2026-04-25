@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "from": "AGENTS.md",
+      "to": "AGENTS.md",
+      "kind": "file",
+      "policy": "managed_block"
+    },
+    {
+      "from": "skills",
+      "to": ".agents/skills",
+      "kind": "dir",
+      "policy": "replace_managed_children"
+    }
+  ]
+}
