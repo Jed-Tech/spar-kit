@@ -57,6 +57,12 @@ v1 is the release where you begin inviting users beyond the early Beta group.
 
 v1 should build on the Beta foundation with stronger onboarding, clearer public-facing documentation, and enough confidence that the workflow is ready for broader real-world use.
 
+**v1 install strategy option (Option A - hybrid):**
+
+- Keep `npx spar-kit install` as the canonical bootstrap command.
+- Optionally integrate `npx skills add` for skill syncing where it reduces setup friction.
+- Keep SPAR-specific repo bootstrap guarantees (`AGENTS.md`, `.spar-kit/VERSION`, `.spar-kit/.local/**`, reporting contract) under `spar-kit` ownership.
+
 ---
 
 ## Beta foundations

@@ -1,194 +1,220 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>spar-kit — Specify → Plan → Act → Retain</title>
+    <title>SPAR-kit | Lightweight Spec-Driven Development for AI Teams</title>
     <meta
       name="description"
-      content="spar-kit is a lightweight workflow system for building software with clarity, speed, and consistency: Specify → Plan → Act → Retain."
+      content="SPAR-kit gives AI-assisted software delivery a clear operating loop: Specify, Plan, Act, Retain. Install in one command, then run spar.init."
     />
-    <meta name="color-scheme" content="dark" />
-    <meta property="og:title" content="spar-kit — Specify → Plan → Act → Retain" />
-    <meta
-      property="og:description"
-      content="A lightweight AI workflow system for building software with clarity, speed, and consistency."
-    />
-    <meta property="og:type" content="website" />
     <link rel="stylesheet" href="css/landing.css" />
+    <script src="main.js" defer></script>
   </head>
   <body>
-    <a class="skip" href="#content">Skip to content</a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="topbar" aria-label="Top navigation">
-      <div class="container">
-        <div class="topbar-inner">
-          <a class="brand" href="./" aria-label="spar-kit home">
-            <span class="logo" aria-hidden="true"></span>
-            <strong>spar-kit</strong>
+    <div class="page-shell">
+      <header class="site-header">
+        <nav class="top-nav" aria-label="Primary">
+          <a class="brand-mark" href="#top" aria-label="SPAR-kit home">
+            <span class="brand-mark__glyph">SPAR</span>
+            <span class="brand-mark__name">kit</span>
           </a>
 
-          <nav class="nav" aria-label="Sections">
+          <div class="top-nav__links">
             <a href="#why">Why</a>
             <a href="#workflow">Workflow</a>
-            <a href="#install">Install</a>
-            <a href="#beta">Beta support</a>
-            <a href="https://github.com/Jed-Tech/spar-kit" rel="noreferrer">GitHub</a>
-          </nav>
-        </div>
-      </div>
-    </header>
+            <a href="#further-reading">Further Reading</a>
+          </div>
 
-    <main id="content">
-      <section class="hero">
-        <div class="container">
-          <div class="hero-grid">
-            <div>
-              <div class="kicker">
-                <b>Specify → Plan → Act → Retain</b>
-                <span>ship with less ambiguity</span>
+          <a
+            class="github-link"
+            href="https://github.com/Jed-Tech/spar-kit"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero" id="top" aria-labelledby="hero-title">
+          <div class="hero__content">
+            <p class="eyebrow">Specify. Plan. Act. Retain.</p>
+            <h1 id="hero-title">Lightweight spec-driven development for AI teams.</h1>
+            <p class="hero__lede">
+              SPAR-kit brings calm structure to AI-assisted delivery: align intent,
+              keep context focused, plan before acting, and retain the project
+              memory that makes the next change easier.
+            </p>
+
+            <div class="command-card" aria-labelledby="install-label">
+              <p class="command-card__label" id="install-label">Install in one command</p>
+              <div class="command-card__row">
+                <code
+                  class="command-card__code"
+                  id="install-command"
+                  tabindex="0"
+                  role="textbox"
+                  aria-label="Install command. Click to select the full command."
+                >
+                  npx spar-kit install
+                </code>
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy-target="install-command"
+                  data-default-label="Copy"
+                  data-success-label="Copied"
+                >
+                  Copy
+                </button>
               </div>
+              <p class="command-card__hint">
+                Click the command to select it, or use the copy button.
+              </p>
+            </div>
+          </div>
 
-              <h1>Build software with clarity, speed, and consistency.</h1>
+          <aside class="hero__panel" aria-label="SPAR promise">
+            <p class="hero__panel-label">Why teams keep it around</p>
+            <ul class="hero__notes">
+              <li>Understand first, implement second.</li>
+              <li>Keep model context lean, high-signal, and usable.</li>
+              <li>Turn shipped work into durable project memory.</li>
+            </ul>
+          </aside>
+        </section>
 
-              <p class="lead">
-                <strong>spar-kit</strong> is a lightweight workflow system for building with AI agents. It keeps intent,
-                scope, and validation visible—so you spend less time re-litigating decisions and more time shipping.
+        <section class="initialize" aria-labelledby="initialize-title">
+          <div class="section-heading">
+            <p class="eyebrow">Immediate next step</p>
+            <h2 id="initialize-title">After install, run <code>spar.init</code>.</h2>
+          </div>
+
+          <div class="initialize__grid">
+            <p>
+              <code>spar.init</code> verifies setup, establishes a clean baseline, and
+              hands off naturally to your first Specify step. Keep the hero focused on
+              install, then let initialization carry the workflow forward.
+            </p>
+            <ol class="initialize__steps">
+              <li>Install with <code>npx spar-kit install</code>.</li>
+              <li>Ask your agent to use <code>spar.init</code>.</li>
+              <li>Start your first change with Specify.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="content-section" id="why" aria-labelledby="why-title">
+          <div class="section-heading">
+            <p class="eyebrow">Why it works</p>
+            <h2 id="why-title">Focused context beats bloated context.</h2>
+          </div>
+
+          <div class="value-grid">
+            <article class="value-card">
+              <h3>Clarity before code</h3>
+              <p>
+                SPAR-kit starts with intent, scope, and constraints so implementation
+                does not sprint ahead of understanding.
+              </p>
+            </article>
+            <article class="value-card">
+              <h3>Signal over noise</h3>
+              <p>
+                AI performs better when context stays lean and relevant. SPAR-kit keeps
+                the inputs small enough to reason with and strong enough to ship from.
+              </p>
+            </article>
+            <article class="value-card">
+              <h3>Plans that hold shape</h3>
+              <p>
+                Explicit planning reduces drift, helps the right change ship first, and
+                keeps validation tied to the original goal.
+              </p>
+            </article>
+            <article class="value-card">
+              <h3>Retained memory</h3>
+              <p>
+                Retain captures what changed and why, giving future sessions a trustworthy
+                source of project memory instead of another pile of loose notes.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-section workflow-section" id="workflow" aria-labelledby="workflow-title">
+          <div class="section-heading">
+            <p class="eyebrow">Workflow</p>
+            <h2 id="workflow-title">A simple operating loop for real repository work.</h2>
+          </div>
+
+          <div class="workflow-layout">
+            <div class="workflow-copy">
+              <p>
+                SPAR-kit is not just about writing specs. It is a practical loop that
+                keeps intent visible, turns plans into shipped outcomes, and preserves
+                what matters when the work is done.
               </p>
 
-              <div class="cta-row" role="group" aria-label="Primary calls to action">
-                <a class="btn primary" href="#install">Install now</a>
-                <a class="btn secondary" href="#workflow">See how it works</a>
+              <div class="workflow-list" role="list" aria-label="SPAR workflow steps">
+                <div class="workflow-item" role="listitem">
+                  <span class="workflow-item__phase">Specify</span>
+                  <p>Clarify goals, scope, and constraints before implementation starts.</p>
+                </div>
+                <div class="workflow-item" role="listitem">
+                  <span class="workflow-item__phase">Plan</span>
+                  <p>Turn the change into an explicit sequence that reduces drift.</p>
+                </div>
+                <div class="workflow-item" role="listitem">
+                  <span class="workflow-item__phase">Act</span>
+                  <p>Implement in the repo with validation tied to the plan and spec.</p>
+                </div>
+                <div class="workflow-item" role="listitem">
+                  <span class="workflow-item__phase">Retain</span>
+                  <p>Preserve decisions and shipped behavior as durable project memory.</p>
+                </div>
               </div>
-
             </div>
 
-            <aside class="panel pad hero-card" aria-label="What you get">
-              <h2>What spar-kit gives you</h2>
-              <p>A repeatable way to collaborate with agents and keep changes coherent from idea to shipped result.</p>
-              <div class="chips" aria-label="Benefits">
-                <span class="chip"><b>Less thrash</b> on requirements</span>
-                <span class="chip"><b>Fewer surprises</b> mid-implementation</span>
-                <span class="chip"><b>Stronger quality</b> via validation</span>
-                <span class="chip"><b>Reusable knowledge</b> after shipping</span>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="why">
-        <div class="container">
-          <h2>Why this works</h2>
-          <div class="grid-3" role="list">
-            <div class="card" role="listitem">
-              <h3>Make intent explicit</h3>
-              <p>Define the change in a crisp spec before you start coding, so the agent can stay aligned.</p>
-            </div>
-            <div class="card" role="listitem">
-              <h3>Turn intent into tasks</h3>
-              <p>Translate the spec into an ordered plan you can check off—no “magic” leaps in the middle.</p>
-            </div>
-            <div class="card" role="listitem">
-              <h3>Retain what you learned</h3>
-              <p>After shipping, update docs and archive the change so future work starts from truth, not memory.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="workflow">
-        <div class="container">
-          <h2>How it works</h2>
-          <div class="workflow">
-            <div class="panel pad">
+            <figure class="workflow-figure">
               <img
                 src="assets/workflow-diagram.svg"
-                alt="A four-step flow: Specify, Plan, Act, Retain."
-                loading="lazy"
+                alt="Workflow diagram showing the four SPAR phases: Specify, Plan, Act, and Retain."
               />
-            </div>
-
-            <div class="panel pad">
-              <ol>
-                <li><b>Specify</b> — clarify the change: summary, problem, goal, scope.</li>
-                <li><b>Plan</b> — complete success criteria, then derive ordered, checkable tasks.</li>
-                <li><b>Act</b> — implement, validate, and keep decisions consistent with the spec.</li>
-                <li><b>Retain</b> — update docs, align the spec with what shipped, and archive the change folder.</li>
-              </ol>
-              <div class="callout" role="note" style="margin-top: 12px">
-                <strong>Tip:</strong> spar-kit is intentionally simple—plain markdown artifacts, minimal ceremony, and a
-                workflow your team can adopt incrementally.
-              </div>
-            </div>
+              <figcaption>Minimal loop. Higher signal. Stronger follow-through.</figcaption>
+            </figure>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section" id="install">
-        <div class="container">
-          <h2>Install (placeholders)</h2>
-          <div class="install">
-            <div class="panel pad">
-              <h3>Primary: install via package manager</h3>
-              <p>
-                Placeholder command. This will become the “one line” install once spar-kit is packaged (package name and
-                manager TBD).
-              </p>
-              <pre aria-label="Install command placeholder"><code>spar install spar-kit  # TODO: replace with real package-manager install</code></pre>
-              <p class="note">
-                After install, you’ll point your agent at the included skills (Specify / Plan / Act / Retain).
-              </p>
-            </div>
-
-            <div class="panel pad">
-              <h3>Secondary: agent setup via URL</h3>
-              <p>
-                Placeholder URL. The idea: paste a single URL into your agent tool and ask it to set up spar-kit for you
-                (exact integration TBD).
-              </p>
-              <pre aria-label="Agent setup URL placeholder"><code>https://example.com/spar-kit/setup  # TODO: replace with real agent-setup URL</code></pre>
-              <p class="note">Good for first-time users who want a guided setup and verification.</p>
-            </div>
+        <section class="content-section reading-section" id="further-reading" aria-labelledby="reading-title">
+          <div class="section-heading">
+            <p class="eyebrow">Further reading</p>
+            <h2 id="reading-title">Built for disciplined delivery, not feature sprawl.</h2>
           </div>
-        </div>
-      </section>
 
-      <section class="section" id="beta">
-        <div class="container">
-          <h2>Beta support</h2>
-          <div class="panel pad">
-            <p style="margin: 0 0 10px; color: var(--muted)">
-              spar-kit is actively evolving. Current agent/tooling support should be treated as beta and may change as
-              the ecosystem shifts.
+          <div class="reading-copy">
+            <p>
+              SPAR-kit is designed for teams that want lightweight structure without
+              inheriting heavyweight process. It keeps the emphasis on understanding the
+              change, carrying a plan all the way through implementation, and retaining
+              the context that will matter next time.
             </p>
-            <div class="badge" aria-label="Beta status">
-              <span class="dot" aria-hidden="true"></span>
-              <span>Beta: agent support is in flux (see repo docs)</span>
-            </div>
-            <p class="note" style="margin-top: 10px">
-              Prefer source-of-truth details in the repository README and roadmap.
+            <p>
+              That makes it a strong fit when broader agent toolkits feel too diffuse,
+              spec-only workflows stop short of shipped outcomes, or formal specification
+              systems add more ceremony than day-to-day engineering work needs. The goal
+              is not more process. The goal is better context, steadier execution, and
+              lasting project memory.
             </p>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
 
-    <footer>
-      <div class="container">
-        <div class="foot">
-          <div>© <span id="y">2026</span> spar-kit</div>
-          <div>
-            <a href="https://github.com/Jed-Tech/spar-kit" rel="noreferrer">Repository</a>
-            <span aria-hidden="true"> · </span>
-            <a href="#install">Install</a>
-            <span aria-hidden="true"> · </span>
-            <a href="#workflow">Workflow</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- No JS by design: keep the landing dependency-free for GitHub Pages. -->
+    <p class="sr-only" id="copy-status" aria-live="polite"></p>
   </body>
 </html>

@@ -1,55 +1,187 @@
 # github-pages-landing
 
 ## Summary
-Add a static marketing landing page served from the repository `docs/` folder so GitHub Pages can publish it from the `/docs` source. The page explains Spar-kit’s value and the Specify → Plan → Act → Retain workflow, then drives a first-time-user CTA to install (placeholder: package-manager command) with a secondary CTA (placeholder: “paste this URL into your agent to set up spar-kit”).
+Build a dependency-free, static landing page in `docs/` to be served by GitHub Pages from `main` branch `/docs`. The page should communicate SPAR-kit value in seconds, present a warm/dark/minimal brand expression, and drive users to install with a copyable hero command.
+
+Primary install CTA:
+
+- `npx spar-kit install`
+
+Immediate onboarding sequence:
+
+- show install command in hero
+- guide user to run `spar.init` in the next section
+
+The page should be visually polished but lightweight: plain `index.html + css + assets` (with optional tiny vanilla JS only for copy-to-clipboard and simple interaction).
 
 ## Problem
-Prospective adopters need a focused, shareable entry point that sells the workflow and reduces guesswork on how to get started. The root README explains structure but is not optimized as a public-facing marketing surface; the roadmap calls for a static GitHub Pages site aligned with that messaging.
+Prospective adopters need a focused and shareable first-touch page that immediately explains what SPAR-kit is and why it matters. Current repository docs communicate structure and internals but are not optimized for a public-facing "understand in seconds -> install now" experience.
 
-## Goal
-Ship a fast, accessible, dependency-free static page (`index.html` plus styles) that works when GitHub Pages uses the `docs/` folder on the default branch, reinforces Spar-kit’s positioning, and drives visitors toward installation via two clear placeholder CTAs (primary: package-manager command; secondary: agent-URL setup).
+Without a focused landing page:
+
+- users may not quickly grasp SPAR (Specify -> Plan -> Act -> Retain)
+- install intent can be buried in longer technical docs
+- onboarding can stall before users run `spar.init`
+- differentiators versus alternatives remain implicit instead of clearly expressed
 
 ## Scope
-- **Page**: add a static marketing landing page under `docs/` suitable for GitHub Pages.
-- **Core messaging**: describe Spar-kit’s value and the Specify → Plan → Act → Retain workflow for first-time users.
-- **CTA (primary, placeholder)**: show a copyable “install via package manager” command (exact install method TBD).
-- **CTA (secondary, placeholder)**: show a “paste this URL into your agent to set up spar-kit” affordance (exact URL + integration details TBD).
-- **Credibility**: include current Beta agent/tooling support as described in repo docs.
-- **No build step**: keep it dependency-free static HTML/CSS.
 
-## Non-Goals
-- Building a documentation site, blog, or multi-page marketing site (single landing page only).
-- Introducing a JS framework, bundler, or node toolchain for the site.
-- Finalizing the real install mechanism and agent-URL integration in this change (placeholders only).
-- Custom domains / DNS; repository settings configuration is out of scope for code changes.
+This change includes:
+
+1. Single-page static landing experience in `docs/` with:
+   - hero
+   - immediate post-install onboarding (`spar.init`) directly below hero
+   - why-it-works value section
+   - workflow explanation
+   - install + copy interaction in hero
+   - "further reading" differentiation paragraph section
+
+2. Visual system and UX direction:
+   - warm, soft, friendly dark minimalism
+   - charcoal/warm background with white text
+   - soft warm accent gradients used sparingly
+   - clean visual weight and strong typography hierarchy
+
+3. Navigation model:
+   - minimal top nav with same-page anchors only
+   - one external GitHub button to repository
+   - no additional footer link cluster
+
+4. Motion and interaction model:
+   - subtle to moderate motion only
+   - static-site-compatible effects (CSS-first)
+   - tiny copy button for install command
+
+5. Accessibility baseline:
+   - semantic markup
+   - keyboard-usable navigation and copy control
+   - strong text contrast and focus states
+   - responsive layout across mobile and desktop
+
+6. Messaging alignment:
+   - copy aligns with `core-messaging-and-principles.md`
+   - install and onboarding language aligns with the active install contract in repo specs and any README/package wording updated in the same delivery pass
+
+## Out of Scope
+
+This change does not include:
+
+- JavaScript framework migration (React/Vue/Next/etc.)
+- build tooling pipeline (bundlers, preprocessors)
+- analytics/telemetry integration
+- CMS/blog/docs engine integration
+- testimonial/social-proof claims
+- feature-comparison cards or tables
+- dark/light theme toggle
+- complex animation libraries
+- footer link directory
 
 ## Constraints
-- Must be valid static HTML/CSS viewable locally and on GitHub Pages.
-- Must not rely on a build step or external runtime.
-- Copy must stay consistent with the repository’s current facts (workflow, folder layout, skills).
-- No tracking scripts or third-party cookies.
-- Accessible and responsive (semantic headings, visible focus states, works on narrow viewports).
+
+1. Technical constraints
+   - Must be static and dependency-free (`index.html`, CSS files, assets).
+   - Keep JavaScript minimal; only small utility behavior (copy button and optional small progressive enhancement).
+   - Must run correctly on GitHub Pages from `/docs` without extra runtime setup.
+   - Use relative local asset/style/script URLs so the page remains correct under the GitHub Pages project-site path.
+
+2. Design constraints
+   - Aesthetic direction is fixed: warm, soft, friendly, minimal dark interface.
+   - Visual tone: design-forward and brand expressive, but not loud or cluttered.
+   - Use restrained contrast accents; avoid overpowering gradients.
+
+3. Content constraints
+   - Hero must prioritize easily copyable install command.
+   - Include one-line label above command.
+   - `spar.init` appears in the next section below hero, not inside hero CTA.
+   - Differentiation section must be paragraph-based and positive (no direct criticism of competitors).
+   - No social proof claims.
+   - No footer links.
+
+4. UX constraints
+   - Minimal nav with internal anchors + one GitHub repo button.
+   - Responsive and accessible.
+   - Performance-conscious (small asset footprint, no unnecessary scripts).
+   - Section order must remain fixed: hero -> initialize (`spar.init`) -> why it works -> workflow -> further reading.
 
 ## Success Criteria
-- Landing page exists at `docs/index.html` and loads without errors when opened locally.
-- The page clearly communicates: what Spar-kit is, why it’s useful, and the SPAR workflow (Specify → Plan → Act → Retain).
-- The page includes two CTAs:
-  - Primary CTA shows a copyable placeholder command for “install via package manager” (explicitly labeled as placeholder/TBD).
-  - Secondary CTA shows a placeholder “agent setup URL” pattern (explicitly labeled as placeholder/TBD).
-- The workflow diagram asset `docs/assets/workflow-diagram.svg` is displayed with meaningful alt text.
-- The page is usable on mobile widths (layout adapts) and keyboard navigable (tab focus visible).
-- A `docs/.nojekyll` file exists to prevent asset processing issues on GitHub Pages.
 
-## Open Questions
-- What is the definitive “install via package manager” command (tool, package name, supported OSes)?
-- What is the definitive “agent setup URL” format, and what agents/tools will it support first?
-- What is the canonical repo/org URL to use in-page (derive from git remote vs hardcode)?
-- Which “Beta support” agents should be named explicitly (and which should be avoided to prevent drift)?
+The change is successful when all criteria below are met:
+
+1. Messaging clarity
+   - A new visitor can identify SPAR-kit purpose and loop within 5-10 seconds.
+   - Page clearly communicates: lightweight, focused context, intent-before-action, plan-before-act, retain-as-memory.
+
+2. Install flow clarity
+   - `npx spar-kit install` is the most visually prominent action in hero.
+   - Command can be copied via tiny copy button.
+   - Next section clearly instructs user to run `spar.init`.
+
+3. UX and structure
+   - Top nav includes internal anchor links and one GitHub button only.
+   - Differentiation appears further down the page in paragraph form.
+   - No comparison cards/tables and no footer link list.
+
+4. Design execution
+   - Charcoal/warm background and white text implemented consistently.
+   - Warm accents are subtle and supportive.
+   - Typography and spacing create clear scan hierarchy.
+   - Visual style feels intentional, calm, and premium-minimal.
+
+5. Technical quality
+   - Works as a static GitHub Pages site from `/docs`.
+   - Mobile and desktop layouts are readable and usable.
+   - Keyboard focus states and copy button accessibility are present.
+   - Motion remains subtle-to-moderate and respects reduced-motion settings.
+   - Local assets and same-site links resolve correctly when served from the GitHub Pages project-site URL shape, not just local repo browsing.
 
 ## Decisions
-- Host as GitHub Pages from the repo `docs/` folder (no build step).
-- Use a single `docs/index.html` entrypoint plus minimal static assets (CSS + existing diagram).
-- Treat both install CTAs as placeholders until installation mechanics are defined.
 
-## Documentation Impact
-- Adds a public-facing landing page under `docs/` suitable for GitHub Pages publishing from `/docs`.
+1. Platform and delivery
+   - Use GitHub Pages with source: `main` branch `/docs`.
+   - Implement as static files with no external framework dependency.
+
+2. Visual direction
+   - Chosen aesthetic: warm dark minimalism.
+   - Design adjectives: simple, warm, capable.
+   - Reference inspiration: [CleanMeter](https://www.cleanmeter.app/) for atmosphere/weight balance (inspiration only, not layout cloning).
+
+3. Primary CTA strategy
+   - Hero centers on install command with one-line label and tiny copy interaction.
+   - Exact command promoted: `npx spar-kit install`.
+
+4. Onboarding sequencing
+   - `spar.init` guidance appears directly below hero as the immediate next action.
+   - This sequencing keeps hero focused on installation while preserving onboarding continuity.
+
+5. Navigation and information architecture
+   - Minimal anchor-based nav for core sections.
+   - Single external GitHub button in top nav.
+   - No footer links.
+   - Canonical section order: hero, initialize, why, workflow, further reading.
+
+6. Differentiation style
+   - Competitor mention (if present) only in lower "further reading" paragraph copy.
+   - Positioning must be comparative by value, never critical or dismissive.
+   - Avoid visual comparison matrices/cards/tables.
+
+7. Trust posture
+   - No social-proof claims at this stage; focus on product explanation and clarity.
+
+8. Repository target
+   - Canonical GitHub repository URL for nav/button use: `https://github.com/Jed-Tech/spar-kit`
+
+9. Motion strategy
+   - Subtle-to-moderate motion using CSS-first transitions/entrances.
+   - Keep interactions lightweight and non-distracting.
+
+## Open Questions
+
+1. Final hero headline lock
+   - Should the final H1 lead with "lightweight" language or the SPAR loop directly?
+   - Current direction supports either, but one needs final lock before polish pass.
+
+2. Section anchor labels
+   - Confirm exact top-nav anchor names for the locked section order (recommended: `Why`, `Workflow`, `Further Reading`; omit a redundant `Install` anchor because install is already in hero).
+
+3. Copy button feedback text
+   - Confirm preferred microcopy behavior (for example: "Copy" -> "Copied").

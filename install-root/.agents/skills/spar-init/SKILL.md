@@ -2,7 +2,7 @@
 name: spar-init
 description: >-
   After install or on demand, complete the repo-local spar-kit setup by checking
-  version freshness, .agents/skills, AGENTS.md, .spar-kit/.local/tools.yaml, and
+  version freshness, AGENTS.md, .spar-kit/.local/tools.yaml, and
   .gitignore hygiene; make safe repairs or recommendations, then finish with a
   short handoff to spar-specify.
 ---
@@ -16,11 +16,10 @@ Run after `spar-kit` is installed in a project, or when the user wants a setup c
 Work through these areas in order unless blocked:
 
 1. **Version check** - compare upstream `VERSION` to local `.spar-kit/VERSION`.
-2. **Repo-local skill placement check** - verify the SPAR skills are in the correct repo-local location for the current agent.
-3. **Tool verify-install-sync** - seed or update `.spar-kit/.local/tools.yaml`.
-4. **`AGENTS.md` recommendation** - encourage a short, effective `AGENTS.md` for lower token usage and clearer agent behavior.
-5. **`.gitignore` hygiene check** - recommend ignoring `.spar-kit/.local/` when needed.
-6. **Closeout** - a short summary and a recommendation to use `spar-specify`.
+2. **Tool verify-install-sync** - seed or update `.spar-kit/.local/tools.yaml`.
+3. **`AGENTS.md` recommendation** - encourage a short, effective `AGENTS.md` for lower token usage and clearer agent behavior.
+4. **`.gitignore` hygiene check** - recommend ignoring `.spar-kit/.local/` when needed.
+5. **Closeout** - a short summary and a recommendation to use `spar-specify`.
 
 ---
 
@@ -44,25 +43,7 @@ When stale:
 
 ---
 
-## 2. Repo-local skill placement check
-
-Determine whether this agent uses repo-local skills and, if so, what repo-local location it expects.
-
-- Identify the correct repo-local skill location for the current agent.
-- Verify the five SPAR skills are present in the correct repo-local location for that agent.
-- Prefer repo-local installed assets as the repair source when safe and available.
-
-If the current skill location is wrong, missing, or unclear:
-
-- explain the issue
-- move or copy the SPAR skills to the preferred repo-local location for this agent.
-- repair only when the action is safe and consistent with the installed repo-local bundle
-
-Keep this focused on verifying and repairing skill placement, not re-running the full install workflow.
-
----
-
-## 3. Tool verify-install-sync
+## 2. Tool verify-install-sync
 
 Use only `.spar-kit/.local/tools.yaml`.
 
@@ -85,7 +66,7 @@ If `.spar-kit/.local/` cannot be written, summarize tool presence in chat instea
 
 ---
 
-## 4. `AGENTS.md` recommendation
+## 3. `AGENTS.md` recommendation
 
 `AGENTS.md` includes a brief description of how to use spar-kit. That guidance is essential and should be kept.
 
@@ -101,7 +82,7 @@ If the user wants help optimizing `AGENTS.md`, keep the guidance brief and prese
 
 ---
 
-## 5. `.gitignore` hygiene check
+## 4. `.gitignore` hygiene check
 
 Treat `.gitignore` as a follow-up hygiene check, not part of install.
 
@@ -112,7 +93,7 @@ Treat `.gitignore` as a follow-up hygiene check, not part of install.
 
 ---
 
-## 6. Closeout
+## 5. Closeout
 
 Keep the wrap-up short:
 
@@ -122,7 +103,7 @@ Keep the wrap-up short:
 
 Example shape:
 
-SPAR initialization is complete. Verified version, repo-local SPAR skill placement, `AGENTS.md` length, and tool state. You are ready to start utilizing SPAR-kit. Mention **`spar-specify`** when starting your next feature or change.
+SPAR initialization is complete. Verified version, `AGENTS.md` length, and tool state. You are ready to start utilizing SPAR-kit. Mention **`spar-specify`** when starting your next feature or change.
 
 ---
 
@@ -141,7 +122,6 @@ Do not use destructive workarounds.
 Initialization is complete when:
 
 - version check ran or was skipped with warning
-- repo-local SPAR skill placement was checked, adjusted when safe, or reinstall was recommended
 - `AGENTS.md` length was checked and a recommendation was given when useful
 - `.spar-kit/.local/tools.yaml` was updated or tool state was summarized
 - the closeout is short and points to `spar-specify`

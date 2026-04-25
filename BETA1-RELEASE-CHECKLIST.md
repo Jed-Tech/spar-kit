@@ -16,27 +16,27 @@ Use this checklist to make Beta1 install real for users coming from the landing 
 
 ## Phase 2: Install Verification
 
-- [ ] Verify `npx spar-kit install` works from a fresh test repo using the packaged artifact.
-- [ ] Verify install creates the expected repo-root payload and not a literal `install-root/` directory.
-- [ ] Verify `AGENTS.md` create/prepend behavior.
-- [ ] Verify existing `justfile` is preserved.
-- [ ] Verify `.spar-kit/VERSION` is managed and updateable.
-- [ ] Verify `.spar-kit/.local/**` is never overwritten when files already exist.
-- [ ] Verify installer reporting matches the Beta1 contract.
+- [X] Verify `npx spar-kit install` works from a fresh test repo using the packaged artifact.
+- [X] Verify install creates the expected repo-root payload and not a literal `install-root/` directory.
+- [X] Verify `AGENTS.md` create/prepend behavior.
+- [X] Verify existing `justfile` is preserved.
+- [X] Verify `.spar-kit/VERSION` is managed and updateable.
+- [X] Verify `.spar-kit/.local/**` is never overwritten when files already exist.
+- [X] Verify installer reporting matches the Beta1 contract.
 
 ## Phase 3: Platform Confirmation
 
-- [ ] Confirm install behavior on Windows.
-- [ ] Confirm install behavior on macOS.
-- [ ] Confirm install behavior on Linux.
+- [X] Confirm install behavior on Windows.
 
 ## Phase 4: Landing Page And Docs
 
+- [ ] Complete landing page design pass (layout, copy, visual polish, and final CTAs).
 - [ ] Update the landing page with the exact Beta1 install command: `npx spar-kit install`.
 - [ ] Document prerequisites clearly: Node/npm required.
 - [ ] Document what the installer lays down in the repo.
 - [ ] Document the next step after install: ask the agent to use `spar-init`.
 - [ ] Make sure the landing page and root `README.md` say the same thing.
+- [ ] Clarify value proposition vs `npx skills` so users understand why/when to use `spar-kit`.
 
 ## Phase 5: Onboarding Flow
 
@@ -46,6 +46,7 @@ Use this checklist to make Beta1 install real for users coming from the landing 
 - [ ] User opens the repo in the supported agent.
 - [ ] User asks the agent to use `spar-init`.
 - [ ] User begins work with `spar-specify`.
+- [ ] Run a full end-to-end skill-system test in a fresh repo (install -> `spar-init` -> `spar-specify` -> `spar-plan` -> `spar-act` -> `spar-retain`).
 
 ## Phase 6: Release Decision
 
@@ -56,3 +57,10 @@ Use this checklist to make Beta1 install real for users coming from the landing 
 - [ ] Publish the package with `npm publish`.
 - [ ] If the package is scoped, publish with `npm publish --access public`.
 - [ ] Verify the package page appears on npm after publish.
+
+
+## Phase 7: Post-Publish Testing (Before Announcements)
+
+- [ ] Run post-publish smoke test from npm (`npx spar-kit@latest install`) in a fresh test repo.
+- [ ] Confirm install behavior on macOS using the published npm package.
+- [ ] Confirm install behavior on Linux using the published npm package.
