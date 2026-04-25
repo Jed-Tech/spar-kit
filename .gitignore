@@ -1,6 +1,8 @@
-# spar-kit machine-local state (tool install checks; never commit)
-.spar-kit/.local/*
-!.spar-kit/.local/tools.yaml
+# Agent and SPAR local state
+.agents/
+.spar-kit/
+.cursor/
+.claude/
 
 # Logs
 logs
