@@ -326,7 +326,7 @@ When drafting `docs/index.html`, keep messaging hierarchy strict:
 Implementation note:
 
 - Keep the visual section order fixed as: hero -> initialize -> what you get -> why SPAR-kit? -> workflow -> further reading.
-- The top nav uses lower-page anchors (Why SPAR-kit?, What you get, Workflow) plus GitHub; omit Install (hero) and Further reading from the nav bar.
+- The top nav uses lower-page anchors (What you get, Why SPAR-kit?, Workflow) plus GitHub; omit Install (hero) and Further reading from the nav bar.
 - Hero install remains the immediate primary CTA without needing its own nav item.
 - For any local stylesheet, script, image, or same-site link in `docs/`, use relative URLs instead of root-relative paths.
 

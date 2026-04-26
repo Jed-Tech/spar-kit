@@ -31,7 +31,7 @@ This change includes:
 1. Single-page static landing experience in `docs/` with:
    - hero
    - immediate post-install onboarding (`spar.init`) directly below hero
-   - "What you get" value cards (lightweight workflow, focused context, less drift, durable memory)
+   - "What you get" value cards (skill-guided workflow, low-context agent rules, tool index, spec structure)
    - "Why SPAR-kit?" prose section (focused context rationale)
    - workflow explanation
    - install + copy interaction in hero
@@ -44,7 +44,7 @@ This change includes:
    - clean visual weight and strong typography hierarchy
 
 3. Navigation model:
-   - minimal top nav: Why SPAR-kit?, What you get, Workflow (same-page anchors), plus one external GitHub button to the repository
+   - minimal top nav: What you get, Why SPAR-kit?, Workflow (same-page anchors), plus one external GitHub button to the repository
    - no "Further reading" or "Install" nav items (Further reading remains on-page below the fold; install stays in the hero)
    - no additional footer link cluster
 
@@ -118,7 +118,7 @@ The change is successful when all criteria below are met:
    - Next section clearly instructs user to run `spar.init`.
 
 3. UX and structure
-   - Top nav includes internal anchor links (Why SPAR-kit?, What you get, Workflow) and one GitHub button only.
+   - Top nav includes internal anchor links (What you get, Why SPAR-kit?, Workflow) and one GitHub button only.
    - Differentiation appears further down the page in paragraph form (Further reading section; optional deep link via URL fragment only).
    - No comparison cards/tables and no footer link list.
 
@@ -155,7 +155,7 @@ The change is successful when all criteria below are met:
    - This sequencing keeps hero focused on installation while preserving onboarding continuity.
 
 5. Navigation and information architecture
-   - Minimal anchor-based nav: Why SPAR-kit?, What you get, Workflow; single external GitHub button.
+   - Minimal anchor-based nav: What you get, Why SPAR-kit?, Workflow; single external GitHub button.
    - No footer links.
    - Canonical section order: hero, initialize, what you get, why SPAR-kit?, workflow, further reading.
 
