@@ -318,14 +318,16 @@ When drafting `docs/index.html`, keep messaging hierarchy strict:
 1. What it is (lightweight spec-driven system)
 2. How to start (`npx spar-kit install`) in the hero
 3. What to do next (`spar.init`) directly below hero
-4. Why it matters (focused context, less drift, better outcomes)
-5. How it works (SPAR loop)
-6. Further reading / differentiation
+4. What you get (structure at a glance)
+5. Why it matters ("Why SPAR-kit?" focused-context rationale)
+6. How it works (SPAR loop)
+7. Further reading / differentiation
 
 Implementation note:
 
-- Keep the visual section order fixed as: hero -> initialize -> why -> workflow -> further reading.
-- The top nav should point to lower-page anchors only; hero install remains the immediate primary CTA without needing its own nav item.
+- Keep the visual section order fixed as: hero -> initialize -> what you get -> why SPAR-kit? -> workflow -> further reading.
+- The top nav uses lower-page anchors (Why SPAR-kit?, What you get, Workflow) plus GitHub; omit Install (hero) and Further reading from the nav bar.
+- Hero install remains the immediate primary CTA without needing its own nav item.
 - For any local stylesheet, script, image, or same-site link in `docs/`, use relative URLs instead of root-relative paths.
 
 Accessibility and readability implications:

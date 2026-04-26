@@ -215,7 +215,9 @@ code {
 .hero__panel,
 .initialize__grid,
 .value-grid,
-.workflow-layout,
+.what-you-get__intro,
+.why-prose,
+.workflow-copy,
 .reading-copy {
   position: relative;
   z-index: 1;
@@ -245,8 +247,12 @@ h1 {
   letter-spacing: -0.04em;
 }
 
+.hero h1 {
+  max-width: min(22ch, 100%);
+}
+
 h2 {
-  max-width: 14ch;
+  max-width: min(26ch, 100%);
   font-size: clamp(2rem, 3vw, 3.1rem);
   letter-spacing: -0.03em;
 }
@@ -260,6 +266,8 @@ h3 {
 .command-card__hint,
 .initialize p,
 .value-card p,
+.what-you-get__intro,
+.why-prose p,
 .workflow-copy > p,
 .workflow-item p,
 .reading-copy p,
@@ -424,11 +432,7 @@ h3 {
   color: var(--text-muted);
 }
 
-.workflow-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.9fr);
-  gap: var(--space-4);
-  align-items: start;
+.workflow-copy {
   margin-top: var(--space-4);
 }
 
@@ -439,15 +443,37 @@ h3 {
 }
 
 .workflow-list {
+  --workflow-arrow: rgba(230, 162, 111, 0.5);
+  --workflow-arrow-size: 0.45rem;
   display: grid;
-  gap: 0.95rem;
+  grid-template-columns: 1fr;
+  gap: 1.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .workflow-item {
-  padding: 1rem 1.15rem;
-  border-left: 2px solid rgba(255, 193, 143, 0.45);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: rgba(255, 255, 255, 0.025);
+  position: relative;
+  margin: 0;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid rgba(255, 233, 214, 0.12);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.workflow-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  width: var(--workflow-arrow-size);
+  height: var(--workflow-arrow-size);
+  border-right: 1.5px solid var(--workflow-arrow);
+  border-bottom: 1.5px solid var(--workflow-arrow);
+  left: 50%;
+  bottom: calc(-0.85rem - var(--workflow-arrow-size) * 0.35);
+  transform: translateX(-50%) rotate(45deg);
 }
 
 .workflow-item__phase {
@@ -462,25 +488,50 @@ h3 {
   color: var(--text-muted);
 }
 
-.workflow-figure {
-  padding: 1.2rem;
-  border: 1px solid rgba(255, 233, 214, 0.14);
-  border-radius: var(--radius-lg);
-  background:
-    radial-gradient(circle at top, rgba(255, 199, 152, 0.12), transparent 55%),
-    rgba(255, 255, 255, 0.03);
+@media (min-width: 640px) and (max-width: 959px) {
+  .workflow-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 1.75rem;
+  }
+
+  .workflow-item:not(:last-child)::after {
+    border-right: 1.5px solid var(--workflow-arrow);
+    border-bottom: 1.5px solid var(--workflow-arrow);
+  }
+
+  .workflow-item:nth-child(1)::after,
+  .workflow-item:nth-child(3)::after {
+    left: auto;
+    right: calc(-0.85rem - var(--workflow-arrow-size) * 0.35);
+    bottom: auto;
+    top: 50%;
+    transform: translate(50%, -50%) rotate(-45deg);
+  }
+
+  .workflow-item:nth-child(2)::after {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: calc(-1rem - var(--workflow-arrow-size) * 0.35);
+    transform: translateX(-50%) rotate(45deg);
+  }
 }
 
-.workflow-figure img {
-  width: 100%;
-  border-radius: calc(var(--radius-md) - 4px);
-  background: rgba(255, 255, 255, 0.04);
-}
+@media (min-width: 960px) {
+  .workflow-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 1.35rem;
+    row-gap: 0;
+  }
 
-.workflow-figure figcaption {
-  margin-top: 0.9rem;
-  color: var(--text-dim);
-  text-align: center;
+  .workflow-item:not(:last-child)::after {
+    left: auto;
+    right: calc(-0.75rem - var(--workflow-arrow-size) * 0.35);
+    bottom: auto;
+    top: 50%;
+    transform: translate(50%, -50%) rotate(-45deg);
+  }
 }
 
 .reading-copy {
@@ -493,6 +544,25 @@ h3 {
 .reading-copy p {
   margin: 0;
   color: var(--text-muted);
+}
+
+.what-you-get__intro {
+  max-width: 72ch;
+  margin: var(--space-4) 0 0;
+  color: var(--text-muted);
+}
+
+.why-prose {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 72ch;
+  margin-top: var(--space-4);
+}
+
+.why-prose p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.65;
 }
 
 .sr-only {
@@ -520,8 +590,7 @@ h3 {
 
   .top-nav,
   .hero,
-  .initialize__grid,
-  .workflow-layout {
+  .initialize__grid {
     grid-template-columns: 1fr;
   }
 
@@ -597,16 +666,20 @@ h3 {
     animation-delay: 120ms;
   }
 
-  #why {
-    animation-delay: 180ms;
+  #what-you-get {
+    animation-delay: 150ms;
+  }
+
+  #why-spar-kit {
+    animation-delay: 210ms;
   }
 
   #workflow {
-    animation-delay: 240ms;
+    animation-delay: 270ms;
   }
 
   #further-reading {
-    animation-delay: 300ms;
+    animation-delay: 330ms;
   }
 }
 

@@ -31,10 +31,11 @@ This change includes:
 1. Single-page static landing experience in `docs/` with:
    - hero
    - immediate post-install onboarding (`spar.init`) directly below hero
-   - why-it-works value section
+   - "What you get" value cards (lightweight workflow, focused context, less drift, durable memory)
+   - "Why SPAR-kit?" prose section (focused context rationale)
    - workflow explanation
    - install + copy interaction in hero
-   - "further reading" differentiation paragraph section
+   - "further reading" differentiation paragraph section (on-page only; not required in top nav)
 
 2. Visual system and UX direction:
    - warm, soft, friendly dark minimalism
@@ -43,8 +44,8 @@ This change includes:
    - clean visual weight and strong typography hierarchy
 
 3. Navigation model:
-   - minimal top nav with same-page anchors only
-   - one external GitHub button to repository
+   - minimal top nav: Why SPAR-kit?, What you get, Workflow (same-page anchors), plus one external GitHub button to the repository
+   - no "Further reading" or "Install" nav items (Further reading remains on-page below the fold; install stays in the hero)
    - no additional footer link cluster
 
 4. Motion and interaction model:
@@ -101,7 +102,7 @@ This change does not include:
    - Minimal nav with internal anchors + one GitHub repo button.
    - Responsive and accessible.
    - Performance-conscious (small asset footprint, no unnecessary scripts).
-   - Section order must remain fixed: hero -> initialize (`spar.init`) -> why it works -> workflow -> further reading.
+   - Section order must remain fixed: hero -> initialize (`spar.init`) -> what you get -> why SPAR-kit? -> workflow -> further reading.
 
 ## Success Criteria
 
@@ -117,8 +118,8 @@ The change is successful when all criteria below are met:
    - Next section clearly instructs user to run `spar.init`.
 
 3. UX and structure
-   - Top nav includes internal anchor links and one GitHub button only.
-   - Differentiation appears further down the page in paragraph form.
+   - Top nav includes internal anchor links (Why SPAR-kit?, What you get, Workflow) and one GitHub button only.
+   - Differentiation appears further down the page in paragraph form (Further reading section; optional deep link via URL fragment only).
    - No comparison cards/tables and no footer link list.
 
 4. Design execution
@@ -154,10 +155,9 @@ The change is successful when all criteria below are met:
    - This sequencing keeps hero focused on installation while preserving onboarding continuity.
 
 5. Navigation and information architecture
-   - Minimal anchor-based nav for core sections.
-   - Single external GitHub button in top nav.
+   - Minimal anchor-based nav: Why SPAR-kit?, What you get, Workflow; single external GitHub button.
    - No footer links.
-   - Canonical section order: hero, initialize, why, workflow, further reading.
+   - Canonical section order: hero, initialize, what you get, why SPAR-kit?, workflow, further reading.
 
 6. Differentiation style
    - Competitor mention (if present) only in lower "further reading" paragraph copy.
@@ -176,12 +176,5 @@ The change is successful when all criteria below are met:
 
 ## Open Questions
 
-1. Final hero headline lock
-   - Should the final H1 lead with "lightweight" language or the SPAR loop directly?
-   - Current direction supports either, but one needs final lock before polish pass.
-
-2. Section anchor labels
-   - Confirm exact top-nav anchor names for the locked section order (recommended: `Why`, `Workflow`, `Further Reading`; omit a redundant `Install` anchor because install is already in hero).
-
-3. Copy button feedback text
+1. Copy button feedback text
    - Confirm preferred microcopy behavior (for example: "Copy" -> "Copied").
