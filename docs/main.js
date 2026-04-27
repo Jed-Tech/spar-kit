@@ -1,5 +1,8 @@
 const statusNode = document.getElementById("copy-status");
 const installCommandNode = document.getElementById("install-command");
+const installGuidanceNode = document.getElementById("install-guidance");
+const installOptionNodes = document.querySelectorAll("[data-install-option]");
+const moreTargetsNode = document.querySelector(".more-targets");
 
 function selectNodeText(node) {
   if (!node) {
@@ -28,6 +31,33 @@ function announceStatus(message) {
   window.setTimeout(() => {
     statusNode.textContent = message;
   }, 40);
+}
+
+function setInstallOption(activeButton) {
+  if (!activeButton || !installCommandNode) {
+    return;
+  }
+
+  const command = activeButton.getAttribute("data-command") || "";
+  const description = activeButton.getAttribute("data-description") || "";
+
+  installOptionNodes.forEach((button) => {
+    const isActive = button === activeButton;
+    button.setAttribute("aria-pressed", String(isActive));
+    button.classList.toggle("is-selected", isActive);
+  });
+
+  installCommandNode.textContent = command;
+
+  if (installGuidanceNode) {
+    installGuidanceNode.textContent = description;
+  }
+
+  if (moreTargetsNode && !moreTargetsNode.contains(activeButton)) {
+    moreTargetsNode.open = false;
+  }
+
+  announceStatus(`Install target set to ${activeButton.textContent || "selected option"}.`);
 }
 
 async function copyText(button) {
@@ -65,6 +95,12 @@ async function copyText(button) {
 document.querySelectorAll("[data-copy-target]").forEach((button) => {
   button.addEventListener("click", () => {
     copyText(button);
+  });
+});
+
+installOptionNodes.forEach((button) => {
+  button.addEventListener("click", () => {
+    setInstallOption(button);
   });
 });
 

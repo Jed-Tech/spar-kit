@@ -40,6 +40,11 @@ The installer applies a small policy vocabulary per asset rather than treating e
 
 The `docs/` folder is the public-facing landing page for users. It is intended to be served as a static GitHub Pages website, giving users a lightweight entry point for install guidance, workflow explanation, and onboarding into the kit.
 
+Release versioning is driven from the root `VERSION` file. The current released SemVer
+should be read from that file, and canonical `main` checks such as `spar-init` use:
+
+`https://raw.githubusercontent.com/Jed-Tech/spar-kit/main/VERSION`
+
 ## Release and publish process
 
 `just pack-prep -> npm pack -> npm publish`

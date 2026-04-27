@@ -34,6 +34,8 @@ If the active change folder or spec file is missing, stop and use `spar-specify`
 
 Before completing `<change-name>_spec.md`, read [assets/spec.md](assets/spec.md) and preserve its section order.
 
+Do not create `plan.md` until the user has explicitly approved the spec for planning.
+
 Before creating `plan.md`, read [assets/plan.md](assets/plan.md) and use it as the template.
 
 Do not create `plan.md` until the spec is stable enough to support reliable tasks.
@@ -58,6 +60,18 @@ Refine the spec so it captures durable intent, not step-by-step implementation.
 
 Major product choices belong in `Scope` or `Out of Scope`. Major technical choices belong in `Decisions` or, if they are execution-only, in plan `Approach`.
 
+## Follow-up Questions
+
+When material questions remain, ask them explicitly before creating `plan.md`.
+If there is 1 question, use a bullet. If there are 2 or more, use a numbered list.
+
+When 3 or more questions still need resolved, priortize them in your chat using helpful headers:
+
+- **Key Considerations**: blockers to a reliable spec or plan, especially success criteria, scope, sequencing, material risk, or validation.
+- **Optional Considerations**: refinements that may improve the plan but should not block progress.
+
+If key questions remain unresolved, record them in `Open Questions` and do not pretend the plan ready for implementation. Continue taking turns until all questions are resolved.
+
 ## Build the Plan
 
 Create `plan.md` only after the spec is stable enough.
@@ -70,17 +84,6 @@ Create `plan.md` only after the spec is stable enough.
 - `Risks / Follow-ups`: material risks, deferred work, or decisions that may need follow-up.
 
 Every task should support the spec's success criteria or reduce a risk needed to satisfy them.
-
-## Follow-up Questions
-
-Ask at most seven questions in a single turn. Prefer fewer.
-
-When asking, separate:
-
-- **Key Considerations**: blockers to a reliable spec or plan, especially success criteria, scope, sequencing, material risk, or validation.
-- **Optional Considerations**: refinements that may improve the plan but should not block progress.
-
-If key questions remain unresolved, record them in `Open Questions` and do not pretend the plan is firmer than it is.
 
 ## Stop Conditions
 
@@ -97,7 +100,7 @@ Planning is complete when:
 
 - `<change-name>_spec.md` is stable and includes testable `Success Criteria`.
 - `plan.md` is actionable and aligned with the spec.
-- Remaining `Open Questions` or `Risks / Follow-ups` are explicit.
+- Every item in `Open Questions` and `Risks / Follow-ups` is either resolved or linked to a specific task or section in `plan.md` that defines how it will be resolved.
 
 Then:
 

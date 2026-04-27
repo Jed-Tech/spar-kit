@@ -23,9 +23,9 @@
           </a>
 
           <div class="top-nav__links">
+            <a href="#workflow">Workflow</a>
             <a href="#what-you-get">What you get</a>
             <a href="#why-spar-kit">Why SPAR-kit?</a>
-            <a href="#workflow">Workflow</a>
           </div>
 
           <a
@@ -50,7 +50,10 @@
             </p>
 
             <div class="command-card" aria-labelledby="install-label">
-              <p class="command-card__label" id="install-label">Install in one command</p>
+              <div class="command-card__label">
+                <p id="install-label">Install in one command</p>
+                <p class="command-card__requirement">(requires Node.js)</p>
+              </div>
               <div class="command-card__row">
                 <code
                   class="command-card__code"
@@ -71,8 +74,95 @@
                   Copy
                 </button>
               </div>
-              <p class="command-card__hint">
-                Click the command to select it, or use the copy button.
+              <div class="command-card__chooser" aria-label="Choose install type" role="group">
+                <button
+                  class="install-option is-selected"
+                  type="button"
+                  data-install-option
+                  data-command="npx spar-kit install"
+                  data-description="Recommended default. Works with most AI agent platforms."
+                  aria-pressed="true"
+                >
+                  Default
+                </button>
+                <button
+                  class="install-option"
+                  type="button"
+                  data-install-option
+                  data-command="npx spar-kit install --cursor"
+                  data-description="Use when you want the Cursor-native SPAR layout."
+                  aria-pressed="false"
+                >
+                  Cursor
+                </button>
+                <button
+                  class="install-option"
+                  type="button"
+                  data-install-option
+                  data-command="npx spar-kit install --claude"
+                  data-description="Use when you want the Claude-native SPAR layout."
+                  aria-pressed="false"
+                >
+                  Claude
+                </button>
+                <button
+                  class="install-option"
+                  type="button"
+                  data-install-option
+                  data-command="npx spar-kit install --codex"
+                  data-description="Works with Codex. Same repo-local layout as Default."
+                  aria-pressed="false"
+                >
+                  Codex
+                </button>
+              </div>
+              <details class="more-targets">
+                <summary>More agents</summary>
+                <div class="more-targets__grid" role="group" aria-label="Additional install targets">
+                  <button
+                    class="install-option install-option--subtle"
+                    type="button"
+                    data-install-option
+                    data-command="npx spar-kit install --copilot"
+                    data-description="Works with Copilot. Same repo-local layout as Default."
+                    aria-pressed="false"
+                  >
+                    Copilot
+                  </button>
+                  <button
+                    class="install-option install-option--subtle"
+                    type="button"
+                    data-install-option
+                    data-command="npx spar-kit install --windsurf"
+                    data-description="Works with Windsurf. Same repo-local layout as Default."
+                    aria-pressed="false"
+                  >
+                    Windsurf
+                  </button>
+                  <button
+                    class="install-option install-option--subtle"
+                    type="button"
+                    data-install-option
+                    data-command="npx spar-kit install --gemini"
+                    data-description="Works with Gemini. Same repo-local layout as Default."
+                    aria-pressed="false"
+                  >
+                    Gemini
+                  </button>
+                  <button
+                    class="install-option install-option--subtle"
+                    type="button"
+                    data-install-option
+                    data-command="npx spar-kit install --opencode"
+                    data-description="Works with OpenCode. Same repo-local layout as Default."
+                    aria-pressed="false"
+                  >
+                    OpenCode
+                  </button>
+                </div>
+              </details>
+              <p class="command-card__guidance" id="install-guidance">
+                Recommended default. Works with most AI agent platforms.
               </p>
             </div>
           </div>
@@ -90,19 +180,53 @@
         <section class="initialize" aria-labelledby="initialize-title">
           <div class="section-heading">
             <p class="eyebrow">Immediate next step</p>
-            <h2 id="initialize-title">After install, run <code>spar.init</code>.</h2>
+            <h2 id="initialize-title">After install, ask your agent to use <code>spar-init</code></h2>
           </div>
 
           <div class="initialize__grid">
             <p>
-              <code>spar.init</code> verifies setup, establishes a clean baseline, and
-              hands off naturally to your first Specify step. Keep the hero focused on
-              install, then let initialization carry the workflow forward.
+              The <code>spar-init</code> skill verifies setup, establishes a clean
+              baseline, and hands off naturally to your first Specify step. Keep the
+              hero focused on install, then let initialization carry the workflow
+              forward.
             </p>
             <ol class="initialize__steps">
-              <li>Install with <code>npx spar-kit install</code>.</li>
-              <li>Ask your agent to use <code>spar.init</code>.</li>
-              <li>Start your first change with Specify.</li>
+              <li>Install with <code>npx spar-kit install</code></li>
+              <li>Ask your agent to use <code>spar-init</code></li>
+              <li>Start your first change with <code>spar-specify</code></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="content-section workflow-section" id="workflow" aria-labelledby="workflow-title">
+          <div class="section-heading">
+            <p class="eyebrow">Workflow</p>
+            <h2 id="workflow-title">A simple operating loop for real repository work.</h2>
+          </div>
+
+          <div class="workflow-copy">
+            <p>
+              SPAR-kit gives every change a clear path from intent to shipped work to
+              retained project memory.
+            </p>
+
+            <ol class="workflow-list" aria-label="SPAR workflow steps">
+              <li class="workflow-item">
+                <span class="workflow-item__phase">Specify</span>
+                <p>Clarify goals, scope, and constraints before implementation starts.</p>
+              </li>
+              <li class="workflow-item">
+                <span class="workflow-item__phase">Plan</span>
+                <p>Turn the change into an explicit sequence that reduces drift.</p>
+              </li>
+              <li class="workflow-item">
+                <span class="workflow-item__phase">Act</span>
+                <p>Implement in the repo with validation tied to the plan and spec.</p>
+              </li>
+              <li class="workflow-item">
+                <span class="workflow-item__phase">Retain</span>
+                <p>Preserve decisions and shipped behavior as durable project memory.</p>
+              </li>
             </ol>
           </div>
         </section>
@@ -178,39 +302,6 @@
               The result is less drift, less rework, and a cleaner path from idea to
               implemented change.
             </p>
-          </div>
-        </section>
-
-        <section class="content-section workflow-section" id="workflow" aria-labelledby="workflow-title">
-          <div class="section-heading">
-            <p class="eyebrow">Workflow</p>
-            <h2 id="workflow-title">A simple operating loop for real repository work.</h2>
-          </div>
-
-          <div class="workflow-copy">
-            <p>
-              SPAR-kit gives every change a clear path from intent to shipped work to
-              retained project memory.
-            </p>
-
-            <ol class="workflow-list" aria-label="SPAR workflow steps">
-              <li class="workflow-item">
-                <span class="workflow-item__phase">Specify</span>
-                <p>Clarify goals, scope, and constraints before implementation starts.</p>
-              </li>
-              <li class="workflow-item">
-                <span class="workflow-item__phase">Plan</span>
-                <p>Turn the change into an explicit sequence that reduces drift.</p>
-              </li>
-              <li class="workflow-item">
-                <span class="workflow-item__phase">Act</span>
-                <p>Implement in the repo with validation tied to the plan and spec.</p>
-              </li>
-              <li class="workflow-item">
-                <span class="workflow-item__phase">Retain</span>
-                <p>Preserve decisions and shipped behavior as durable project memory.</p>
-              </li>
-            </ol>
           </div>
         </section>
 

@@ -1,15 +1,15 @@
 # Claude instructions
 
 <!-- spar-kit:start -->
-Before non-trivial work:
-1. Become aware of the installed tools available to you by reading: `.spar-kit/.local/tools.yaml`.
-2. Check repo scripts and prefer using `justfile` tasks when available.
-3. This repo expects agents to use the SPAR workflow for planning and implementing non-trivial changes.
-   Use SPAR for planning or implementing changes, especially anything user-facing or multi-file.
-   To use the SPAR workflow, start with `spar-specify`.
-   SPAR is how this repo handles change planning, execution, and documentation; if unsure, suggest using `spar-specify` to properly spec, plan, and implement a change.
+- Be aware of tools in `.spar-kit/.local/tools.yaml` and commands in `justfile`/repo scripts (read them if not already in context). Use repo-defined tools and commands as the default approach.
 
-When validation passes or when finishing a project, read `spar-retain` to finalize documentation.
+SPAR workflow:
+- This repo uses the SPAR workflow for non-trivial changes.
+- Start with `spar-specify` for any multi-file, user-facing, or unclear change. When unsure, default to `spar-specify`.
+- SPAR work is tracked in `specs/` (`active/` and `completed/`).
+- SPAR is the source of truth for planning, execution, and documentation.
+- When an active spec is complete, suggest running `spar-retain` to finalize documentation.
 
-**Trivial-only exception:** obvious one-file fixes (typos, a single link) with no product ambiguity do not require full SPAR.
+Failure handling:
+- If an approach fails or is unclear, do not switch to a less ideal approach. Stop, explain the issue, offer options and ask before proceeding.
 <!-- spar-kit:end -->
