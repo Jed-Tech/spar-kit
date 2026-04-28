@@ -81,33 +81,38 @@ Validation model for this Beta:
 
 ## Phase 5: Landing Page And Docs
 
-- [ ] Complete landing page design pass (layout, copy, visual polish, and final CTAs).
-- [ ] Update the landing page with the exact Beta1 install commands:
-  - [ ] `npx spar-kit install`
-  - [ ] `npx spar-kit install --codex`
-  - [ ] `npx spar-kit install --claude`
-  - [ ] `npx spar-kit install --cursor`
-- [ ] Document prerequisites clearly: Node/npm required.
+- [X] Complete landing page design pass (layout, copy, visual polish, and final CTAs).
+- [X] Update the landing page with the exact Beta1 install commands:
+  - [X] `npx spar-kit install`
+  - [X] `npx spar-kit install --codex`
+  - [X] `npx spar-kit install --claude`
+  - [X] `npx spar-kit install --cursor`
+- [X] Document prerequisites clearly: Node/npm required.
 - [ ] Document the target-config installer model and what the installer lays down in the repo.
-- [ ] Document the next step after install: ask the agent to use `spar-init`.
-- [ ] Make sure the landing page and root `README.md` say the same thing.
+- [X] Document the next step after install: ask the agent to use `spar-init`.
+- [X] Make sure the landing page and root `README.md` say the same thing.
+- [X] Apply the remaining README wording tweak needed for final parity with the landing page.
 - [ ] Clarify value proposition vs `npx skills` so users understand why/when to use `spar-kit`.
 - [ ] Explain the current confidence model:
   - [ ] direct validation for general/Codex/Cursor
   - [ ] beta-feedback validation for the broader agent set
+- [ ] Lock the Beta1 published package name and exact user-facing install command before final docs/release steps proceed.
+- [ ] Configure GitHub Pages settings for the landing page.
+- [ ] Verify the GitHub Pages site is live on the intended public URL.
 
 ## Phase 6: Onboarding Flow
 
 - [ ] Validate the full onboarding flow for the direct-validation path:
-- [ ] User visits landing page.
-- [ ] User follows install instructions.
-- [ ] User opens the repo in Codex or Cursor.
-- [ ] User asks the agent to use `spar-init`.
-- [ ] User begins work with `spar-specify`.
+  - [ ] User visits landing page.
+  - [ ] User follows install instructions.
+  - [ ] User opens the repo in Codex or Cursor.
+  - [ ] User asks the agent to use `spar-init`.
+  - [ ] User begins work with `spar-specify`.
 - [ ] Run a full end-to-end skill-system test in a fresh repo (install -> `spar-init` -> `spar-specify` -> `spar-plan` -> `spar-act` -> `spar-retain`).
 
 ## Phase 7: Release Decision
 
+- [ ] Confirm all blocking pre-publish checklist items above are complete before `npm publish`.
 - [ ] Review known Beta1 limits and confirm they are acceptable for release.
 - [X] Confirm `just pack-prep` still passes before release.
 - [ ] Decide whether any final manual smoke test is needed before publish.

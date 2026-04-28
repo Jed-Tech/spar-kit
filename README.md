@@ -39,13 +39,11 @@ That matters because agents work better when they do not have to guess. With a t
 index, they spend less time probing the environment, use fewer tokens on tool
 discovery, and make more reliable decisions about how to act in your project.
 
-When your agent uses `spar-init`, it will walk you through:
-1. Checking that your SPAR-kit install is current
-2. Scanning and recording available tools in `.spar-kit/.local/tools.yaml`
+The `spar-init` skill will quickly:
+1. Check that your SPAR-kit install is current
+2. Index available repo tools in `.spar-kit/.local/tools.yaml`
 
-1. Install with `npx @spar-kit/install`
-2. Ask your agent to use `spar-init`
-3. Start your first change with `spar-specify`
+Once that is done, start your first change with `spar-specify`.
 
 ## Workflow
 
