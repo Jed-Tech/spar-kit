@@ -97,8 +97,8 @@ Validation model for this Beta:
   - [ ] direct validation for general/Codex/Cursor
   - [ ] beta-feedback validation for the broader agent set
 - [ ] Lock the Beta1 published package name and exact user-facing install command before final docs/release steps proceed.
-- [ ] Configure GitHub Pages settings for the landing page.
-- [ ] Verify the GitHub Pages site is live on the intended public URL.
+- [X] Configure GitHub Pages settings for the landing page.
+- [X] Verify the GitHub Pages site is live on the intended public URL.
 
 ## Phase 6: Onboarding Flow
 
