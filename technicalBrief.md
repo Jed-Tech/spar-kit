@@ -28,7 +28,7 @@ The package installs a working repository structure rather than leaving users to
 
 The workflow model is centered on named change folders under `specs/`, moving work through active delivery and then into retained history. Agent skills such as `spar-init`, `spar-specify`, `spar-plan`, `spar-act`, and `spar-retain` are part of the operating model and guide the user through that lifecycle.
 
-The installer now uses a target model rather than a single fixed repo layout. With no flags, `npx spar-kit install` applies the default general layout, which installs `AGENTS.md` plus `.agents/skills/`. With explicit flags such as `--codex`, `--claude`, or `--cursor`, the installer applies target-native layouts using the shared authored assets and per-target config files in `install-root/targets/`.
+The installer now uses a target model rather than a single fixed repo layout. With no flags, `npx @spar-kit/install` applies the default general layout, which installs `AGENTS.md` plus `.agents/skills/`. With explicit flags such as `--codex`, `--claude`, or `--cursor`, the installer applies target-native layouts using the shared authored assets and per-target config files in `install-root/targets/`.
 
 The skill content is designed to stay portable across agent ecosystems, but discovery paths still vary by tool. The practical result is:
 
@@ -47,7 +47,7 @@ should be read from that file, and canonical `main` checks such as `spar-init` u
 
 ## Release and publish process
 
-`just pack-prep -> npm pack -> npm publish`
+`just pack-prep -> npm pack -> npm publish --access=public`
 
 Publishing is driven from the root `VERSION` file. The repo treats that file as the canonical release version, and the publish flow is designed to make sure the packaged artifact stays aligned with it.
 
@@ -55,7 +55,7 @@ Publishing is driven from the root `VERSION` file. The repo treats that file as 
 
 `npm pack` creates the tarball exactly as npm would publish it. That gives us a local checkpoint to inspect the final artifact and confirm the package contains the expected installer and payload directories, especially `install-root/`, `bin/`, and `lib/`.
 
-`npm publish` is the final release step and should only happen after the pack output has been checked. If the package is ever published under a scope, the public publish form should be used as needed.
+`npm publish --access=public` is the final release step and should only happen after the pack output has been checked for the scoped package.
 
 In practice, the publish flow is:
 
@@ -64,7 +64,7 @@ In practice, the publish flow is:
 3. Confirm `package.json` and `install-root/.spar-kit/VERSION` were synchronized by the prep step.
 4. Run `npm pack` and inspect the tarball.
 5. Confirm the tarball includes the expected install payload and CLI/runtime files.
-6. Run `npm publish`.
+6. Run `npm publish --access=public`.
 
 ## Developer note
 

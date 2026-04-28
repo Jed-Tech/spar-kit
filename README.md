@@ -10,21 +10,21 @@ durable project memory.
 
 Choose the install type that matches the repo-local layout you want:
 
-- `npx spar-kit install`
+- `npx @spar-kit/install`
   General SPAR layout. Works with most AI agent platforms.
-- `npx spar-kit install --cursor`
+- `npx @spar-kit/install --cursor`
   Use when you want the Cursor-native SPAR layout.
-- `npx spar-kit install --claude`
+- `npx @spar-kit/install --claude`
   Use when you want the Claude-native SPAR layout.
-- `npx spar-kit install --codex`
+- `npx @spar-kit/install --codex`
   Works with Codex. Same repo-local layout as Default.
-- `npx spar-kit install --copilot`
+- `npx @spar-kit/install --copilot`
   Works with Copilot. Same repo-local layout as Default.
-- `npx spar-kit install --windsurf`
+- `npx @spar-kit/install --windsurf`
   Works with Windsurf. Same repo-local layout as Default.
-- `npx spar-kit install --gemini`
+- `npx @spar-kit/install --gemini`
   Works with Gemini. Same repo-local layout as Default.
-- `npx spar-kit install --opencode`
+- `npx @spar-kit/install --opencode`
   Works with OpenCode. Same repo-local layout as Default.
 
 ## Immediate next step
@@ -34,7 +34,7 @@ After install, ask your agent to use `spar-init`
 The `spar-init` skill verifies setup, establishes a clean baseline, and hands off naturally
 to your first Specify step.
 
-1. Install with `npx spar-kit install`
+1. Install with `npx @spar-kit/install`
 2. Ask your agent to use `spar-init`
 3. Start your first change with `spar-specify`
 

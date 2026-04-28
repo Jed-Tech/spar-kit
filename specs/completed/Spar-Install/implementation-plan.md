@@ -11,7 +11,7 @@ Implement Beta1 `spar-kit` installation around `npx spar-kit install`, using `in
 - **Managed and updateable:** `.spar-kit/VERSION` — SPAR-owned; create from `install-root` and allow update on reinstall or upgrade so it reflects the packaged `spar-kit` version.
 - **Never overwrite existing files:** `.spar-kit/.local/**` — machine-local; create missing files only (e.g. seed `tools.yaml` when absent); if a path already exists, preserve it.
 
-**Implementation progress:** Phases 1–5 complete. Automated Beta1 checks: `npm test` (`test/beta1-install-validation.test.mjs`).
+**Implementation progress:** Phases 1–5 complete. Automated checks: `npm test` (`test/install-validation.test.mjs`, `test/pack-prep.test.mjs`).
 
 ## Phase 1: Install Root Alignment
 ### Phase Summary
@@ -120,7 +120,7 @@ Verify that the implemented installer matches the current Beta1 install specs an
 
 ### Status
 
-- **Complete.** `npm test` runs `node --test ./test/beta1-install-validation.test.mjs` (clean install, reinstall, path rules, VERSION vs `.local`, reporting).
+- **Complete.** `npm test` runs `node --test` on `test/install-validation.test.mjs` and `test/pack-prep.test.mjs` (clean install, reinstall, path rules, VERSION vs `.local`, reporting, pack-prep).
 
 ### Related Documents
 

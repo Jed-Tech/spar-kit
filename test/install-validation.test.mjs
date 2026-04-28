@@ -48,7 +48,7 @@ async function readPayload(rel) {
   return readFile(p, "utf8");
 }
 
-test("clean Beta1 install: repo-root layout matches payload (no install-root/ dir)", async () => {
+test("clean install: repo-root layout matches payload (no install-root/ dir)", async () => {
   const dir = await mktemp("spar-clean-");
   try {
     await runInstall({ targetDir: dir });
@@ -243,7 +243,7 @@ test("AGENTS.md: prepend when file exists without SPAR markers", async () => {
 test("CLI stdout: success without warnings matches install-report layout", async () => {
   const dir = await mktemp("spar-cli-ok-");
   try {
-    const { stdout } = await execFileP(process.execPath, [binCli, "install", dir], {
+    const { stdout } = await execFileP(process.execPath, [binCli, dir], {
       encoding: "utf8",
     });
     assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: general\r?\n/);
@@ -257,7 +257,7 @@ test("CLI stdout: success with preserved justfile includes Notes section", async
   const dir = await mktemp("spar-cli-warn-");
   try {
     await writeFile(join(dir, "justfile"), "x:\n", "utf8");
-    const { stdout } = await execFileP(process.execPath, [binCli, "install", dir], {
+    const { stdout } = await execFileP(process.execPath, [binCli, dir], {
       encoding: "utf8",
     });
     assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: general\r?\n\r?\nNotes:\r?\n/);
@@ -273,7 +273,7 @@ test("CLI stdout: explicit target install reports installed targets", async () =
   try {
     const { stdout } = await execFileP(
       process.execPath,
-      [binCli, "install", dir, "--claude", "--cursor"],
+      [binCli, dir, "--claude", "--cursor"],
       { encoding: "utf8" },
     );
     assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: claude, cursor\r?\n/);
@@ -289,7 +289,7 @@ test("CLI stdout: failure when target path is an existing file", async () => {
     await writeFile(bad, "", "utf8");
     let threw = false;
     try {
-      await execFileP(process.execPath, [binCli, "install", bad], { encoding: "utf8" });
+      await execFileP(process.execPath, [binCli, bad], { encoding: "utf8" });
     } catch (e) {
       threw = true;
       assert.equal(e.code, 1);
@@ -297,6 +297,21 @@ test("CLI stdout: failure when target path is an existing file", async () => {
       assert.ok(e.stdout.includes("EEXIST") || e.stdout.includes("mkdir"));
     }
     assert.ok(threw);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("CLI stdout: no args installs into cwd", async () => {
+  const dir = await mktemp("spar-cli-cwd-");
+  try {
+    const { stdout } = await execFileP(process.execPath, [binCli], {
+      cwd: dir,
+      encoding: "utf8",
+    });
+    assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: general\r?\n/);
+    assert.equal(await pathExists(join(dir, "AGENTS.md")), true);
+    assert.equal(await pathExists(join(dir, ".spar-kit", "VERSION")), true);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

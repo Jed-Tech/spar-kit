@@ -1,7 +1,7 @@
 {
-  "name": "spar-kit",
+  "name": "@spar-kit/install",
   "version": "0.1.0",
-  "description": "SPAR workflow kit — Beta1 install bundles repo-local assets from install-root/",
+  "description": "Lightweight SPAR workflow installer for AI-assisted software development",
   "type": "module",
   "bin": {
     "spar-kit": "bin/spar-kit.mjs"
@@ -12,7 +12,7 @@
     "bin"
   ],
   "scripts": {
-    "test": "node --test test/beta1-install-validation.test.mjs test/pack-prep.test.mjs"
+    "test": "node --test test/install-validation.test.mjs test/pack-prep.test.mjs"
   },
   "engines": {
     "node": ">=18"

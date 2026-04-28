@@ -91,7 +91,7 @@ Warnings are used for preserved or skipped actions where appropriate, such as:
 
 Beta1 implementation has automated validation in:
 
-- [test/beta1-install-validation.test.mjs](/c:/Users/jedde/GithubRepos/spar-kit/test/beta1-install-validation.test.mjs)
+- [test/install-validation.test.mjs](/c:/Users/jedde/GithubRepos/spar-kit/test/install-validation.test.mjs)
 
 The validation covers:
 

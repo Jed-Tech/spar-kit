@@ -4,6 +4,6 @@ set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 pack-prep:
   node lib/pack-prep.mjs
 
-# Manual Beta1 install into the sparkitTest sandbox repo (persistent path).
+# Manual install into the sparkitTest sandbox repo (persistent path).
 sparkittest:
-  node bin/spar-kit.mjs install C:/Users/jedde/GithubRepos/sparkitTest
+  node bin/spar-kit.mjs C:/Users/jedde/GithubRepos/sparkitTest

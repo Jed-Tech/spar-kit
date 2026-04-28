@@ -38,7 +38,7 @@ When stale:
 
 - Do **not** hand-edit `.spar-kit/VERSION`.
 - Recommend rerunning the current install path:
-  - `npx spar-kit install`
+  - `npx @spar-kit/install`
 - If the user wants help, explain that reinstall is the supported way to refresh the repo-local SPAR bundle.
 
 ---
