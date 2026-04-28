@@ -184,17 +184,26 @@
           </div>
 
           <div class="initialize__grid">
-            <p>
-              The <code>spar-init</code> skill verifies setup, establishes a clean
-              baseline, and hands off naturally to your first Specify step. Keep the
-              hero focused on install, then let initialization carry the workflow
-              forward.
-            </p>
-            <ol class="initialize__steps">
-              <li>Install with <code>npx @spar-kit/install</code></li>
-              <li>Ask your agent to use <code>spar-init</code></li>
-              <li>Start your first change with <code>spar-specify</code></li>
-            </ol>
+            <div class="initialize__copy">
+              <p>
+                <code>spar-init</code> does more than a quick setup check. Its purpose
+                is updating SPAR-kit's local tool index so your AI knows exactly which
+                tools, CLIs, and project commands are available in your repo.
+              </p>
+              <p>
+                That matters because agents work better when they do not have to guess.
+                With a tool index, they spend less time probing the environment, use
+                fewer tokens on tool discovery, and make more reliable decisions about
+                how to act in your project.
+              </p>
+            </div>
+            <div class="initialize__card">
+              <p class="initialize__card-label">The <code>spar-init</code> skill will quickly:</p>
+              <ol class="initialize__steps">
+                <li><span class="initialize__step-copy">Check that your SPAR-kit install is current</span></li>
+                <li><span class="initialize__step-copy">Index available repo tools in<br /><code>.spar-kit/.local/tools.yaml</code></span></li>
+              </ol>
+            </div>
           </div>
         </section>
 

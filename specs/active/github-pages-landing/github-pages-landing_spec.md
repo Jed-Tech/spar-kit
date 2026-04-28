@@ -5,7 +5,7 @@ Build a dependency-free, static landing page in `docs/` to be served by GitHub P
 
 Primary install CTA:
 
-- `npx spar-kit install`
+- `npx @spar-kit/install`
 
 Immediate onboarding sequence:
 
@@ -113,7 +113,7 @@ The change is successful when all criteria below are met:
    - Page clearly communicates: lightweight, focused context, intent-before-action, plan-before-act, retain-as-memory.
 
 2. Install flow clarity
-   - `npx spar-kit install` is the most visually prominent action in hero.
+   - `npx @spar-kit/install` is the most visually prominent action in hero.
    - Command can be copied via tiny copy button.
    - Next section clearly instructs user to run `spar.init`.
 
@@ -148,7 +148,7 @@ The change is successful when all criteria below are met:
 
 3. Primary CTA strategy
    - Hero centers on install command with one-line label and tiny copy interaction.
-   - Exact command promoted: `npx spar-kit install`.
+   - Exact command promoted: `npx @spar-kit/install`.
 
 4. Onboarding sequencing
    - `spar.init` guidance appears directly below hero as the immediate next action.

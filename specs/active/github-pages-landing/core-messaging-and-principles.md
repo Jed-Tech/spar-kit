@@ -175,7 +175,7 @@ Suggested framing:
 
 Default recommended path:
 
-- `npx spar-kit install`
+- `npx @spar-kit/install`
 
 Key requirement:
 
@@ -196,7 +196,7 @@ Intent:
 
 Suggested short sequence copy:
 
-1. Install: `npx spar-kit install`
+1. Install: `npx @spar-kit/install`
 2. Initialize: run `spar.init`
 3. Start first change with Specify
 
@@ -253,7 +253,7 @@ That memory helps future AI sessions understand what changed and why.
 
 Install in one command:
 
-- `npx spar-kit install`
+- `npx @spar-kit/install`
 
 Then run:
 
@@ -316,7 +316,7 @@ leave behind useful documentation for the next iteration."
 When drafting `docs/index.html`, keep messaging hierarchy strict:
 
 1. What it is (lightweight spec-driven system)
-2. How to start (`npx spar-kit install`) in the hero
+2. How to start (`npx @spar-kit/install`) in the hero
 3. What to do next (`spar.init`) directly below hero
 4. What you get (structure at a glance)
 5. Why it matters ("Why SPAR-kit?" focused-context rationale)

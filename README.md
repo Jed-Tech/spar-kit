@@ -31,8 +31,17 @@ Choose the install type that matches the repo-local layout you want:
 
 After install, ask your agent to use `spar-init`
 
-The `spar-init` skill verifies setup, establishes a clean baseline, and hands off naturally
-to your first Specify step.
+`spar-init` does more than a quick setup check. Its purpose is updating SPAR-kit's
+local tool index so your AI knows exactly which tools, CLIs, and project commands
+are available in your repo.
+
+That matters because agents work better when they do not have to guess. With a tool
+index, they spend less time probing the environment, use fewer tokens on tool
+discovery, and make more reliable decisions about how to act in your project.
+
+When your agent uses `spar-init`, it will walk you through:
+1. Checking that your SPAR-kit install is current
+2. Scanning and recording available tools in `.spar-kit/.local/tools.yaml`
 
 1. Install with `npx @spar-kit/install`
 2. Ask your agent to use `spar-init`

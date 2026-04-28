@@ -58,7 +58,7 @@ Validation loop policy for this change:
 
 - [x] Apply final hero headline and supporting copy.
 - [x] Add one-line label above install command.
-- [x] Ensure hero command is exactly: `npx spar-kit install`.
+- [x] Ensure hero command is exactly: `npx @spar-kit/install`.
 - [x] Place `spar.init` onboarding guidance in the next section directly below hero.
 - [x] Make intent-before-action explicit in copy, not just plan-before-act.
 - [x] Add positive, paragraph-only differentiation content in lower "further reading."

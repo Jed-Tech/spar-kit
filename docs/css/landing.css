@@ -523,23 +523,47 @@ h3 {
   grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.9fr);
   gap: var(--space-4);
   margin-top: var(--space-4);
+  align-items: start;
+}
+
+.initialize__copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.initialize__card {
+  padding: 1.1rem 1.4rem;
+  border: 1px solid rgba(255, 233, 214, 0.12);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.initialize__card-label {
+  margin: 0 0 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.initialize__card-label code {
+  color: var(--accent-strong);
+  font-size: 0.94em;
 }
 
 .initialize__steps {
   counter-reset: initialize-step;
   margin: 0;
-  padding: 1.1rem 1.4rem;
-  border: 1px solid rgba(255, 233, 214, 0.12);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
+  padding: 0;
   list-style: none;
 }
 
 .initialize__steps li {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.15rem minmax(0, 1fr);
   align-items: baseline;
-  gap: 0.9rem;
+  column-gap: 0.9rem;
   color: var(--text-muted);
+  min-width: 0;
 }
 
 .initialize__steps li::before {
@@ -551,6 +575,10 @@ h3 {
   font-size: 0.95rem;
 }
 
+.initialize__step-copy {
+  min-width: 0;
+}
+
 .initialize__steps li + li {
   margin-top: 0.85rem;
   padding-top: 0.85rem;
@@ -560,7 +588,8 @@ h3 {
 .initialize__steps code {
   color: var(--accent-strong);
   font-size: 0.94em;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .value-grid {
@@ -703,7 +732,7 @@ h3 {
 }
 
 .what-you-get__note {
-  max-width: 72ch;
+  max-width: none;
   margin: var(--space-3) 0 0;
   color: var(--text-dim);
   font-size: 0.92rem;
