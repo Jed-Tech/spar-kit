@@ -4,6 +4,8 @@ SPAR-kit is a lightweight, spec-driven workflow for AI-assisted software develop
 It helps humans and AI agents align intent, plan clearly, act with less drift, and retain
 durable project memory.
 
+View the product homepage: [https://jed-tech.github.io/spar-kit/](https://jed-tech.github.io/spar-kit/)
+
 > **Specify -> Plan -> Act -> Retain**
 
 ## Install
