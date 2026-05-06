@@ -144,7 +144,6 @@ These flags should drive which repo-local target surfaces are created.
 - `.spar-kit/`
 - `specs/`
 - `skills/`
-- `justfile`
 - `AGENTS.md`
 - `CLAUDE.md`
 - `targets/default.json`
@@ -164,7 +163,6 @@ Current expected contents include:
 
 - `.spar-kit/`
 - `specs/`
-- `justfile`
 
 Installer behavior should be:
 
@@ -293,9 +291,6 @@ This policy set is intended to stay small unless practical implementation reveal
 ## Current policy mapping
 
 Current expected mappings include:
-
-- `justfile`
-  - `seed_if_missing`
 - `AGENTS.md`
   - `managed_block`
 - `CLAUDE.md`

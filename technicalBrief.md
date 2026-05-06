@@ -21,7 +21,7 @@ The project is not just a CLI. It is a packaged installer plus a repo-local work
 
 The package installs a working repository structure rather than leaving users to assemble one manually. The authored install payload now lives under `install-root/` as shared assets plus target configs. In practice, that means:
 
-- shared repo assets such as `.spar-kit/`, `specs/`, and `justfile`
+- shared repo assets such as `.spar-kit/` and `specs/`
 - canonical skill content under `install-root/skills/`
 - instruction templates such as `install-root/AGENTS.md` and `install-root/CLAUDE.md`
 - target placement configs under `install-root/targets/`

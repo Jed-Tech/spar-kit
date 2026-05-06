@@ -13,12 +13,6 @@
       "policy": "seed_if_missing"
     },
     {
-      "from": "justfile",
-      "to": "justfile",
-      "kind": "file",
-      "policy": "seed_if_missing"
-    },
-    {
       "from": "specs",
       "to": "specs",
       "kind": "dir",

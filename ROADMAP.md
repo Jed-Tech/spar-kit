@@ -15,7 +15,7 @@ This document captures planned work and a **suggested implementation order**. Pr
 
 ## North star
 
-A small, easy-to-install toolkit where the **Specify → Plan → Act → Retain** workflow is obvious, the skills reliably steer agents toward clear specs and plans, and adoption spreads because the experience feels inevitable—not because of heavy ceremony.
+A small, easy-to-install toolkit where the **Specify → Plan → Act → Retain** workflow is obvious, the skills reliably steer agents toward clear specs and plans, and adoption spreads because the experience feels inevitable—not because of heavy ceremony..
 
 ---
 
@@ -45,7 +45,7 @@ Define the exact checklist yourself; Beta should mean **“an invited early adop
 2. **Templates** — Spec and plan templates match what the skills expect.
 3. **Guidance for agents** — `AGENTS.md` (and related pointers) make the workflow and folder layout unavoidable for tools that read repo instructions.
 4. **Install / copy path** — One documented way to get skills (and any required files) into a project for the Beta target agents, including the new target-config install model and explicit agent flags where needed.
-   Direct validation is expected for general, Codex, and Cursor. The broader Beta agent set may rely on beta-tester feedback for compatibility refinement.
+  Direct validation is expected for general, Codex, and Cursor. The broader Beta agent set may rely on beta-tester feedback for compatibility refinement.
 
 Until those exist at a bar you are happy with, treat everything else as optional.
 
@@ -70,12 +70,13 @@ v1 should build on the Beta foundation with stronger onboarding, clearer public-
 **v1 install strategy option (Option A - hybrid):**
 
 - Keep `npx spar-kit install` as the canonical bootstrap command.
-- Keep SPAR-specific repo bootstrap guarantees (`AGENTS.md`, `CLAUDE.md`, `.spar-kit/VERSION`, `.spar-kit/.local/**`, reporting contract) under `spar-kit` ownership.
+- Keep SPAR-specific repo bootstrap guarantees (`AGENTS.md`, `CLAUDE.md`, `.spar-kit/VERSION`, `.spar-kit/.local/`**, reporting contract) under `spar-kit` ownership.
 - Keep `install-root/targets/default.json` plus per-target configs as the installer contract for native target layouts.
 
 ---
 
 ## Beta foundations
+
 These remain the highest-priority foundations because both Beta and v1 depend on them:
 
 1. **Skills** — The four phase skills are coherent end-to-end for a single change folder under `specs/active/` … `specs/completed/`.
@@ -93,16 +94,18 @@ These remain the highest-priority foundations because both Beta and v1 depend on
 
 Order reflects your stated priority: **skills → templates → `AGENTS.md` → tooling → install path**.
 
-| Order | Track | Notes |
-|-------|--------|--------|
-| 1 | **Skills** | Specify, Plan, Act, Retain—behavior, boundaries, and cross-references between phases. |
-| 2 | **Templates** | Ensure spec and plan templates match what the skills expect and make the workflow legible to adopters. |
-| 3 | **`AGENTS.md`** | Single source of truth for “how to work in this repo” and how SPAR fits; keep in sync as skills and templates change. |
-| 4 | **Tooling** | `justfile`, `.spar-kit/.local/tools.yaml`, checks or helpers—only what reduces friction for you and adopters. |
-| 5 | **Install / copy path** | Define one clear way to bring SPAR into a project for the supported agents, with as little guesswork as possible, using the target-config installer model and explicit agent flags where needed. |
-| 6 | **Beta README / docs** | Friendly onboarding for invited adopters using the Beta-supported agents; links to docs and install steps. |
-| 7 | **v1 docs / GitHub Pages** | Public-facing value prop, getting started, and compatibility notes once broader invitation begins. |
-| 8 | **Compatibility expansion** | Complete and document the seven-system Beta surface, directly validate general/Codex/Cursor, collect beta-tester feedback for the broader supported set, and later evaluate lower-confidence environments such as Antigravity. |
+
+| Order | Track                       | Notes                                                                                                                                                                                                                          |
+| ----- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1     | **Skills**                  | Specify, Plan, Act, Retain—behavior, boundaries, and cross-references between phases.                                                                                                                                          |
+| 2     | **Templates**               | Ensure spec and plan templates match what the skills expect and make the workflow legible to adopters.                                                                                                                         |
+| 3     | `**AGENTS.md`**             | Single source of truth for “how to work in this repo” and how SPAR fits; keep in sync as skills and templates change.                                                                                                          |
+| 4     | **Tooling**                 | `justfile`, `.spar-kit/.local/tools.yaml`, checks or helpers—only what reduces friction for you and adopters.                                                                                                                  |
+| 5     | **Install / copy path**     | Define one clear way to bring SPAR into a project for the supported agents, with as little guesswork as possible, using the target-config installer model and explicit agent flags where needed.                               |
+| 6     | **Beta README / docs**      | Friendly onboarding for invited adopters using the Beta-supported agents; links to docs and install steps.                                                                                                                     |
+| 7     | **v1 docs / GitHub Pages**  | Public-facing value prop, getting started, and compatibility notes once broader invitation begins.                                                                                                                             |
+| 8     | **Compatibility expansion** | Complete and document the seven-system Beta surface, directly validate general/Codex/Cursor, collect beta-tester feedback for the broader supported set, and later evaluate lower-confidence environments such as Antigravity. |
+
 
 Adjust sequence if two tracks can run in parallel; the table is a default **dependency-friendly** ordering.
 
@@ -117,13 +120,13 @@ Adjust sequence if two tracks can run in parallel; the table is a default **depe
 ### Planned release sequence
 
 1. **Beta**
-   - invited adopters only
-   - supports **Codex**, **Cursor**, **Windsurf**, **GitHub Copilot**, **Gemini CLI**, **OpenCode**, and **Claude Code**
+  - invited adopters only
+  - supports **Codex**, **Cursor**, **Windsurf**, **GitHub Copilot**, **Gemini CLI**, **OpenCode**, and **Claude Code**
 2. **v1**
-   - broader user invitations begin
-   - builds on the Beta agent surface with stronger onboarding and public documentation
+  - broader user invitations begin
+  - builds on the Beta agent surface with stronger onboarding and public documentation
 3. **Post-v1 compatibility expansion**
-   - keep **Antigravity** as a later exploratory target unless its compatibility surface becomes clearer
+  - keep **Antigravity** as a later exploratory target unless its compatibility surface becomes clearer
 
 ---
 
@@ -153,3 +156,4 @@ Use this section as a scratchpad; fill in when ready.
 - **First GitHub Pages structure (sections, tone):** …
 - **First tag name after Beta:** …
 - **Which “Later” systems to prioritize after v1:** Antigravity and any other post-v1 targets you decide to validate.
+

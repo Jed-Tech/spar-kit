@@ -57,15 +57,20 @@ test("clean install: repo-root layout matches payload (no install-root/ dir)", a
     assert.match(agents, /<!--\s*spar-kit:start\s*-->/);
     assert.match(agents, /spar-specify/);
 
-    const payloadJf = await readPayload("justfile");
-    const targetJf = await readFile(join(dir, "justfile"), "utf8");
-    assert.equal(targetJf, payloadJf);
+    assert.equal(await pathExists(join(dir, "justfile")), false);
 
     const v = await readFile(join(dir, ".spar-kit", "VERSION"), "utf8");
     const payloadV = await readPayload(join(".spar-kit", "VERSION"));
     assert.equal(v.trim(), payloadV.trim());
 
-    await readFile(join(dir, ".spar-kit", ".local", "tools.yaml"), "utf8");
+    const tools = await readFile(join(dir, ".spar-kit", ".local", "tools.yaml"), "utf8");
+    assert.match(tools, /core_cli:/);
+    const coreTools = tools.slice(tools.indexOf("core_cli:"), tools.indexOf("optional_cli:"));
+    assert.doesNotMatch(coreTools, /name: just/);
+    assert.match(tools, /optional_cli:/);
+    assert.match(tools, /name: just/);
+    assert.match(tools, /name: rg/);
+    assert.match(tools, /name: jq/);
 
     await readFile(join(dir, "specs", "README.md"), "utf8");
     assert.ok(await pathExists(join(dir, "specs", "active", ".gitkeep")));
@@ -76,6 +81,7 @@ test("clean install: repo-root layout matches payload (no install-root/ dir)", a
       assert(skills.includes(name), `missing managed skill ${name}`);
       await readFile(join(dir, ".agents", "skills", name, "SKILL.md"), "utf8");
     }
+    assert.equal(skills.includes("just"), false);
 
     const root = await readdir(dir);
     assert(!root.includes("install-root"), "must not create install-root/ at repo root");
@@ -100,6 +106,7 @@ test("clean Claude install: native Claude layout is installed without general .a
       assert(skills.includes(name), `missing Claude skill ${name}`);
       await readFile(join(dir, ".claude", "skills", name, "SKILL.md"), "utf8");
     }
+    assert.equal(skills.includes("just"), false);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
@@ -118,6 +125,7 @@ test("clean Codex install: explicit Codex target matches .agents layout", async 
     for (const name of ["spar-init", "spar-specify", "spar-plan", "spar-act", "spar-retain"]) {
       assert(skills.includes(name), `missing Codex skill ${name}`);
     }
+    assert.equal(skills.includes("just"), false);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
@@ -152,15 +160,12 @@ test("reinstall: AGENTS.md SPAR block is idempotent (no duplicate markers)", asy
   }
 });
 
-test("reinstall: existing justfile is preserved; managed VERSION still updates", async () => {
+test("reinstall: existing justfile is ignored by SPAR-kit; managed VERSION still updates", async () => {
   const dir = await mktemp("spar-just-");
   try {
     await writeFile(join(dir, "justfile"), "user-just:\n  @echo ok\n", "utf8");
     const { warnings } = await runInstall({ targetDir: dir });
-    assert.ok(
-      warnings.some((w) => w.includes("justfile") && w.includes("preserved")),
-      "expected justfile warning",
-    );
+    assert.equal(warnings.some((w) => w.includes("justfile")), false);
     const jf = await readFile(join(dir, "justfile"), "utf8");
     assert.ok(jf.includes("user-just"), "justfile must not be overwritten");
 
@@ -253,16 +258,18 @@ test("CLI stdout: success without warnings matches install-report layout", async
   }
 });
 
-test("CLI stdout: success with preserved justfile includes Notes section", async () => {
-  const dir = await mktemp("spar-cli-warn-");
+test("CLI stdout: existing justfile does not produce SPAR-kit notes", async () => {
+  const dir = await mktemp("spar-cli-just-");
   try {
     await writeFile(join(dir, "justfile"), "x:\n", "utf8");
     const { stdout } = await execFileP(process.execPath, [binCli, dir], {
       encoding: "utf8",
     });
-    assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: general\r?\n\r?\nNotes:\r?\n/);
-    assert.ok(stdout.includes("justfile"));
+    assert.match(stdout, /^Outcome: Success\r?\n\r?\nInstalled targets: general\r?\n/);
+    assert.equal(stdout.includes("Notes:"), false);
+    assert.equal(stdout.includes("justfile"), false);
     assert.ok(stdout.includes("To finalize setup") && stdout.includes("spar-init"));
+    assert.equal((await readFile(join(dir, "justfile"), "utf8")), "x:\n");
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

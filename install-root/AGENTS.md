@@ -1,7 +1,7 @@
 # Agent instructions
 
 <!-- spar-kit:start -->
-- Be aware of tools in `.spar-kit/.local/tools.yaml` and commands in `justfile`/repo scripts (read them if not already in context). Use repo-defined tools and commands as the default approach.
+Check `.spar-kit/.local/tools.yaml` for available local tools (if not already in context). Prefer available tools when applicable.
 
 SPAR workflow:
 - This repo uses the SPAR workflow for non-trivial changes.

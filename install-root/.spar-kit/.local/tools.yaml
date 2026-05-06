@@ -14,12 +14,6 @@ core_cli:
     installed: false
     reason: "not yet checked"
 
-  - name: just
-    purpose: task runner (see repo justfile)
-    check: "just --version"
-    installed: false
-    reason: "not yet checked"
-
   - name: npm
     purpose: Node package manager (required for spar-kit install path)
     check: "npm --version"
@@ -78,3 +72,23 @@ installers:
       when: "repo uses Python tooling"
       installed: false
       reason: "not yet checked"
+
+# Optional recommended tools can improve agent speed and repo ergonomics, but are not required for SPAR readiness.
+optional_cli:
+  - name: just
+    purpose: optional task runner for repo-defined commands
+    check: "just --version"
+    installed: false
+    reason: "not yet checked"
+
+  - name: rg
+    purpose: optional fast code and text search (ripgrep)
+    check: "rg --version"
+    installed: false
+    reason: "not yet checked"
+
+  - name: jq
+    purpose: optional JSON processor for command-line workflows
+    check: "jq --version"
+    installed: false
+    reason: "not yet checked"

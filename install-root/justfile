@@ -1,5 +1,0 @@
-# A justfile lists named recipes (commands) for this directory; run them with `just <recipe>`.
-# Add tasks here when you want repeatable shortcuts instead of shell one-liners.
-
-default:
-  @just --list
