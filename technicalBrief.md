@@ -55,6 +55,12 @@ Publishing is driven from the root `VERSION` file. The repo treats that file as 
 
 `npm pack` creates the tarball exactly as npm would publish it. That gives us a local checkpoint to inspect the final artifact and confirm the package contains the expected installer and payload directories, especially `install-root/`, `bin/`, and `lib/`.
 
+For one-shot local testing of the packed tarball without adding it to a repo as a dependency, run the CLI from the tarball package directly:
+
+`npx --yes --package .\spar-kit-install-0.2.0.tgz spar-kit`
+
+This is the local tarball equivalent of `npx @spar-kit/install`.
+
 `npm publish --access=public` is the final release step and should only happen after the pack output has been checked for the scoped package.
 
 In practice, the publish flow is:

@@ -1,6 +1,6 @@
 {
   "name": "@spar-kit/install",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Lightweight SPAR workflow installer for AI-assisted software development",
   "type": "module",
   "bin": {
